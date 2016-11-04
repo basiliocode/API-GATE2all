@@ -1,1 +1,1 @@
-**Webservice Gate2All v1**
+#Guia de Integração API-GATE2all
