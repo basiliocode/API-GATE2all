@@ -2296,6 +2296,120 @@ maiores informações consulte o site https://www.pcisecuritystandards.org</p>
 </tr>
 </tbody></table>
 
+<h1 id="lightbox">LightBox</h1>
+
+<p>O gate2All disponibiliza uma biblioteca javascript para facilitar a integração com o seu site.</p>
+
+<p><img src="images/lightBox.png" /></p>
+
+<ul>
+<li><p>Primeiro o usuário deve acessar o seguinte endereço: <a href='http://192.168.20.79:9191' target='_blank'>clicar aqui</a></p></li>
+<li><p>Depois que logar com suas credenciais, ele deve acessar o menu clientes, depois ir em configuração.</p></li>
+</ul>
+
+<p><img src="images/lightBoxp1.png" /></p>
+
+<ul>
+<li>Clicar no botão &ldquo;Visualizar&rdquo;. Copiar o usuario e o token.</li>
+</ul>
+
+<p><img src="images/lightBoxp2.png" /></p>
+
+<blockquote>
+<p>Em sua página web você deve importar os seguintes scripts.</p>
+</blockquote>
+<pre class="highlight javascript"><code><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">src</span><span class="o">=</span><span class="s2">"path/jquery.min.js"</span> <span class="o">/&gt;</span>
+<span class="o">&lt;</span><span class="nx">script</span><span class="o">&gt;</span>
+ <span class="nx">id</span><span class="o">=</span><span class="s2">"gate2all-payment"</span>
+ <span class="nx">src</span><span class="o">=</span><span class="s2">"js/lightBoxGate2all.js"</span>
+ <span class="nx">data</span><span class="o">-</span><span class="nx">company</span><span class="o">=</span><span class="s2">"Setis"</span>
+ <span class="nx">data</span><span class="o">-</span><span class="nx">button</span><span class="o">=</span><span class="s2">"Enviar doação"</span>
+ <span class="nx">data</span><span class="o">-</span><span class="nx">user</span><span class="o">=</span><span class="s2">"sdfsfsdfdf345453"</span>
+ <span class="nx">data</span><span class="o">-</span><span class="nx">password</span><span class="o">=</span><span class="s2">"klkljkljkl45jk45"</span>
+ <span class="nx">data</span><span class="o">-</span><span class="nx">fixedinstallments</span><span class="o">=</span><span class="s2">"true"</span>
+ <span class="nx">data</span><span class="o">-</span><span class="nx">operationtype</span><span class="o">=</span><span class="s2">"3"</span>
+ <span class="nx">data</span><span class="o">-</span><span class="nx">installments</span><span class="o">=</span><span class="s2">"6"</span>
+ <span class="nx">data</span><span class="o">-</span><span class="nx">capture</span><span class="o">=</span><span class="s2">"false"</span>
+<span class="o">&lt;</span><span class="sr">/script</span><span class="err">&gt;
+</span></code></pre>
+
+<table><thead>
+<tr>
+<th>Propriedade</th>
+<th>Tipo</th>
+<th>Tamanho</th>
+<th>Descrição</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">data-company</code></td>
+<td>Texto</td>
+<td>150</td>
+<td>Nome da sua empresa</td>
+</tr>
+<tr>
+<td><code class="prettyprint">data-button</code></td>
+<td>Texto</td>
+<td>150</td>
+<td>Texto do botão de enviar transação</td>
+</tr>
+<tr>
+<td><code class="prettyprint">data-user</code></td>
+<td>Texto</td>
+<td>150</td>
+<td>Usuário copiado do site</td>
+</tr>
+<tr>
+<td><code class="prettyprint">data-password</code></td>
+<td>Texto</td>
+<td>150</td>
+<td>Token copiado do site</td>
+</tr>
+<tr>
+<td><code class="prettyprint">data-fixedinstallments</code></td>
+<td>Booleano</td>
+<td>-</td>
+<td>Flag utilizada para indicar se a parcela é fixa</td>
+</tr>
+<tr>
+<td><code class="prettyprint">data-operationtype</code></td>
+<td>Número</td>
+<td>2</td>
+<td>Tipo de parcelamento. ADM: 2 ou Loja: 3</td>
+</tr>
+<tr>
+<td><code class="prettyprint">data-installments</code></td>
+<td>Número</td>
+<td>16</td>
+<td>Valor do numero de parcelas fixa</td>
+</tr>
+<tr>
+<td><code class="prettyprint">data-capture</code></td>
+<td>Booleano</td>
+<td>-</td>
+<td>Flag para capturar suas transações depois de completas</td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p>Nos campos de valor da compra e número do documento devem ter os seguintes id&rsquo;s:
+     <em>id=&ldquo;valor&rdquo;; id=&ldquo;pedido&rdquo;;</em></p>
+</blockquote>
+
+<p><br /></p>
+
+<blockquote>
+<p>Segue a chamada do botão para chamar a tela lightBox de pagamento:</p>
+</blockquote>
+<pre class="highlight javascript"><code><span class="o">&lt;</span><span class="nx">button</span> <span class="nx">type</span><span class="o">=</span><span class="s2">"button"</span> <span class="nx">name</span><span class="o">=</span><span class="s2">"chamaPag"</span> <span class="nx">data</span><span class="o">-</span><span class="nx">toggle</span><span class="o">=</span><span class="s2">"modal"</span> <span class="nx">data</span><span class="o">-</span><span class="nx">target</span><span class="o">=</span><span class="s2">"#modalPag"</span><span class="o">&gt;</span><span class="nx">Dados</span> <span class="nx">de</span> <span class="nx">Pagamento</span><span class="o">&lt;</span><span class="sr">/button</span><span class="err">&gt;
+</span></code></pre>
+
+<blockquote>
+<p>Deve colocar essa div dentro do body onde está o &ldquo;button&rdquo;:</p>
+</blockquote>
+<pre class="highlight javascript"><code><span class="o">&lt;</span><span class="nx">div</span> <span class="nx">id</span><span class="o">=</span><span class="s2">"payment-form"</span><span class="o">&gt;&lt;</span><span class="sr">/div</span><span class="err">&gt;
+</span></code></pre>
+
           <h1 id="status">STATUS</h1>
 
 <p>Status retornados pela API</p>
