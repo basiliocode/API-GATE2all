@@ -1148,3 +1148,67 @@ Para realizar uma consulta é necessário enviar um GET para o seguinte recurso:
 |`tid`|Texto|100|Identificador da transação retornado pela rede adquirente.|
 |`status`|Número|2|Status da transação retornado pelo gateway.|
 |`authorizationCode`|Texto|2|Código de autorização retornado pela rede adquirente.|
+
+
+# LightBox
+
+O gate2All disponibiliza uma biblioteca javascript para facilitar a integração com o seu site.
+
+<img src="images/lightBox.png" />
+
+* Primeiro o usuário deve acessar o seguinte endereço: <a href='http://192.168.20.79:9191' target='_blank'>clicar aqui</a>
+
+* Depois que logar com suas credenciais, ele deve acessar o menu clientes, depois ir em configuração.
+  
+<img src="images/lightBoxp1.png" />
+
+* Clicar no botão "Visualizar". Copiar o usuario e o token.
+
+<img src="images/lightBoxp2.png" />
+
+     
+> Em sua página web você deve importar os seguintes scripts.
+
+```js
+<script src="path/jquery.min.js" />
+<script>
+ id="gate2all-payment"
+ src="js/lightBoxGate2all.js"
+ data-company="Setis"
+ data-button="Enviar doação"
+ data-user="sdfsfsdfdf345453"
+ data-password="klkljkljkl45jk45"
+ data-fixedinstallments="true"
+ data-operationtype="3"
+ data-installments="6"
+ data-capture="false"
+</script>
+```
+            
+|Propriedade|Tipo|Tamanho|Descrição|
+|-----------|----|-------|-----------|---------|
+|`data-company`|Texto|150|Nome da sua empresa| 
+|`data-button`|Texto|150|Texto do botão de enviar transação| 
+|`data-user`|Texto|150|Usuário copiado do site| 
+|`data-password`|Texto|150|Token copiado do site| 
+|`data-fixedinstallments`|Booleano|-|Flag utilizada para indicar se a parcela é fixa| 
+|`data-operationtype`|Número|2|Tipo de parcelamento. ADM: 2 ou Loja: 3| 
+|`data-installments`|Número|16|Valor do numero de parcelas fixa| 
+|`data-capture`|Booleano|-|Flag para capturar suas transações depois de completas| 
+
+> Nos campos de valor da compra e número do documento devem ter os seguintes id's:
+     *id="valor"; id="pedido";*
+
+<br />
+     
+> Segue a chamada do botão para chamar a tela lightBox de pagamento:
+
+```js    
+<button type="button" name="chamaPag" data-toggle="modal" data-target="#modalPag">Dados de Pagamento</button>
+``` 
+ 
+> Deve colocar essa div dentro do body onde está o "button":
+
+```js    
+<div id="payment-form"></div>
+```
