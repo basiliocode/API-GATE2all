@@ -111,7 +111,7 @@
       <div id="toc">
       </div>
         <ul class="toc-footer">
-            <li><a href='http://cert.gate2all.com.br'>Painel de Controle do GATE2all</a></li>
+            <li><a href='https://gate.2all.com.br'>Painel de Controle do GATE2all</a></li>
             <li><a href='http://cert.gate2all.com.br'>Painel de Controle do SandBox</a></li>
             <li><a href='https://github.com/orgs/NTKSolutions'>GitHub</a></li>
         </ul>
@@ -121,7 +121,7 @@
       <div class="content">
         <h1 id="introdu-o">Introdução</h1>
 
-<p>Olá! Bem vindo a API do <strong>GATE2all.</strong></p>
+<p>Olá! Bem vindo a API REST do <strong>GATE2all.</strong></p>
 
 <p>Aqui você irá encontrar informações de como integrar seu sistema ao gateway de pagamentos <strong>GATE2all.</strong></p>
 
@@ -137,15 +137,15 @@
 
 <p>Este documento constitui a especificação técnica para integração de sistemas que desejam operar com o gateway de pagamento <strong>GATE2all</strong>.</p>
 
-<p>Aqui serão listadas todas as funcionalidades da plataforma <strong>GATE2all</strong> especificando os endereços de requisição, parametros da requisição, formato e exemplos.</p>
+<p>Aqui serão listadas todas as funcionalidades da plataforma <strong>GATE2all</strong> especificando os endereços de requisição, parâmetros da requisição, formato e exemplos.</p>
 
 <p>Disponibilizamos as coleções no client REST Postman. </p>
 
-<p>Para instalar o client Postman, basta acessar <a href='https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop' target='_blank'>Install Postman</a> </p>
+<p>Para instalar o client Postman, basta acessar <a href='https://www.getpostman.com/' target='_blank'>https://www.getpostman.com</a> </p>
 
 <p>Para importar uma coleção contendo os endpoints e mensagens de exemplos, basta clicar no botão abaixo.</p>
 
-<p><a href="https://app.getpostman.com/run-collection/a6fc46e6eb8e53800b3e"><img alt="Run in Postman" src="https://run.pstmn.io/button.svg" /></a></p>
+<p><a href="https://app.getpostman.com/run-collection/0b67f050f9260847ce82" target="_blank"><img alt="Run in Postman" src="https://run.pstmn.io/button.svg" /></a></p>
 
 <aside class="warning">
 As informações contidas neste documento estão sujeitas a alteração sem prévio aviso.
@@ -210,7 +210,7 @@ Nossa equipe de suporte a desenvolvedores não provê suporte para linguagens de
 
 <p><strong>Cielo</strong> API 1.5 e 3.0</p>
 
-<p><strong>REDE</strong> (Komerci)</p>
+<p><strong>REDE</strong> Komerci e e-Rede Adquirencia</p>
 
 <p><strong>GetNet</strong></p>
 
@@ -301,20 +301,20 @@ Nossa equipe de suporte a desenvolvedores não provê suporte para linguagens de
 <aside class="warning">
 As transações de cartão de débito (Visa Electron e Mastercard Maestro) só são processadas se houver autenticação pelo mecanismo Verified by Visa ou Mastercard Secure Code.
 
-Não são todos os bancos emissores destas bandeiras que suportam transações autenticadas no e-commerce.
+Não são todos os bancos emissores da Mastercard Maestro que suportam transações autenticadas no e-commerce.
 
 </aside>
 
 <h2 id="bancos-integrados">Bancos integrados</h2>
 
-<p><img src="images/logo-bradesco.jpg" /></p>
+<p><img src="images/logo-bradesco.jpg" /> Comércio Eletrônico Bradesco</p>
 
 <ul>
 <li>Emissão de boleto</li>
 <li>Transferência entre contas</li>
 </ul>
 
-<p><img src="images/itau-logo.jpg" /></p>
+<p><img src="images/itau-logo.jpg" /> Itaú Shopline</p>
 
 <ul>
 <li>Emissão de boleto</li>
@@ -368,7 +368,7 @@ O valor do resultante da divisão do valor do pedido pelo número de parcelas n�
 <p>Para utilizar nosso ambiente de testes envie um e-mail informando os dados abaixo para <a href="mailto:suporte@2all.com.br">suporte@2all.com.br</a> onde realizaremos o cadastro do desenvolvedor ou empresa responsável pelo desenvolvimento. </p>
 
 <ul>
-<li><code class="prettyprint">RAZAO SOLCIAL</code></li>
+<li><code class="prettyprint">RAZAO SOCIAL</code></li>
 <li><code class="prettyprint">NOME FANTASIA</code></li>
 <li><code class="prettyprint">CNPJ</code></li>
 <li><code class="prettyprint">Nome do desenvolvedor</code></li>
@@ -384,9 +384,63 @@ O valor do resultante da divisão do valor do pedido pelo número de parcelas n�
 
 <p><strong>Requisição de transação</strong>: https://api.cert.gate.2all.com.br/</p>
 
+<h2 id="cart-es-de-testes">Cartões de Testes</h2>
+
+<p>Disponibilizamos os seguintes cartões de testes para simular os status das transações.</p>
+
+<table><thead>
+<tr>
+<th>Status</th>
+<th>Cartão</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>AUTORIZADA</td>
+<td>4556326359707410</td>
+</tr>
+<tr>
+<td>FALHA_NA_COMUNICACAO_COM_FORNECEDOR</td>
+<td>4676674786512068</td>
+</tr>
+<tr>
+<td>PENDENTE_DE_CONFIRMACAO</td>
+<td>4532365531093678</td>
+</tr>
+<tr>
+<td>TRANSACAO_INICIADA</td>
+<td>4490861761911670</td>
+</tr>
+<tr>
+<td>CRIADA</td>
+<td>4490861761911670</td>
+</tr>
+<tr>
+<td>NAO_AUTORIZADA</td>
+<td>4035943194824415</td>
+</tr>
+<tr>
+<td>NEGADO</td>
+<td>4035943194824415</td>
+</tr>
+<tr>
+<td>TIMEOUT</td>
+<td>4539591924980550</td>
+</tr>
+</tbody></table>
+
 <h1 id="autentica-o">Autenticação</h1>
 
-<p>As requisições são autenticadas, pelas credenciais obtidas, passados pelo headers. <strong>Exemplo:</strong></p>
+<p>Todas as requisições são autenticadas através das credenciais de acesso (USUÁRIO E CHAVE) fornecidos após o cadastro. Os dados de acesso são enviados pelo header.</p>
+
+<ul>
+<li><code class="prettyprint">Content-Type: application/json</code></li>
+<li><code class="prettyprint">authenticationApi: USUÁRIO</code></li>
+<li><code class="prettyprint">authenticarionKey: CHAVE</code></li>
+</ul>
+<pre class="highlight plaintext"><code>curl -X POST -H "authenticationApi: USUÁRIO" -H "authenticationKey: CHAVE" -H "Content-Type: application/json"
+</code></pre>
+
+<p><strong>Exemplo de configuração no POSTMAN:</strong></p>
 
 <p><img src='images/authenticationApi.png' /></p>
 
@@ -402,21 +456,23 @@ O valor do resultante da divisão do valor do pedido pelo número de parcelas n�
 
 <h3 id="requisi-o">Requisição</h3>
 
-<aside class="request"><span class="method post">POST</span> <span class="endpoint">/v1/intention/sale/</span></aside>
+<aside class="request"><span class="method post">POST</span> <span class="endpoint">/v1/intention</span></aside>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
     </span><span class="nt">"orderId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"19893211234"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"100"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Mouse sem fio"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"postBackUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://url-notificacao"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"redirectUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://url-redirect"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"dhExpiration"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-08-25T18:10:53"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"customer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Comprador Teste"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"document"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12345678909"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"compradorteste@gmail.com"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"address"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nt">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rua Fidencio Ramos 100"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Endereco"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"100"</span><span class="p">,</span><span class="w">
             </span><span class="nt">"district"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Vila Olimpia"</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"zipcode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"09878-675"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"zipcode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"09878675"</span><span class="p">,</span><span class="w">
             </span><span class="nt">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sao Paulo"</span><span class="p">,</span><span class="w">
             </span><span class="nt">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SP"</span><span class="w">
         </span><span class="p">}</span><span class="w">
@@ -432,11 +488,11 @@ O valor do resultante da divisão do valor do pedido pelo número de parcelas n�
             </span><span class="nt">"softDescriptor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Gate2@all"</span><span class="p">,</span><span class="w">
             </span><span class="nt">"saveCard"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
         </span><span class="p">},</span><span class="w">
-        </span><span class="nt">"eletronicTransfer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"electronicTransfer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
             </span><span class="nt">"provider"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Bradesco"</span><span class="w">
         </span><span class="p">},</span><span class="w">
         </span><span class="nt">"bankSlip"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nt">"expirationDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-06-30"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"expirationDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-06-30"</span><span class="p">,</span><span class="w">
             </span><span class="nt">"instructions"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Aceitar somente até a data de vencimento, após essa data juros de 1% dia"</span><span class="p">,</span><span class="w">
             </span><span class="nt">"guarantor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Comprador Teste"</span><span class="p">,</span><span class="w">
             </span><span class="nt">"provider"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Bradesco"</span><span class="w">
@@ -444,52 +500,6 @@ O valor do resultante da divisão do valor do pedido pelo número de parcelas n�
     </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<pre class="highlight shell"><code>curl --request POST
-  --url /v1/intention/sale
-  --header <span class="s1">'authorization: Basic bnRrOjEyMzQ='</span>
-  --header <span class="s1">'content-type: application/json'</span>
-  --data-binary
-  <span class="o">{</span>
-      <span class="s2">"orderId"</span>: <span class="s2">"19893211234"</span>,
-      <span class="s2">"amount"</span>: <span class="s2">"100"</span>,
-      <span class="s2">"description"</span>: <span class="s2">"Mouse sem fio"</span>,
-      <span class="s2">"postBackUrl"</span>: <span class="s2">"http://url-notificacao"</span>,
-      <span class="s2">"dhExpiration"</span>: <span class="s2">"2017-08-25T18:10:53"</span>,
-      <span class="s2">"customer"</span>: <span class="o">{</span>
-          <span class="s2">"name"</span>: <span class="s2">"Comprador Teste"</span>,
-          <span class="s2">"document"</span>: <span class="s2">"12345678909"</span>,
-          <span class="s2">"email"</span>: <span class="s2">"compradorteste@gmail.com"</span>,
-          <span class="s2">"address"</span>: <span class="o">{</span>
-              <span class="s2">"address"</span>: <span class="s2">"Rua Fidencio Ramos 100"</span>,
-              <span class="s2">"district"</span>: <span class="s2">"Vila Olimpia"</span>,
-              <span class="s2">"zipcode"</span>: <span class="s2">"09878-675"</span>,
-              <span class="s2">"city"</span>: <span class="s2">"Sao Paulo"</span>,
-              <span class="s2">"state"</span>: <span class="s2">"SP"</span>
-          <span class="o">}</span>
-      <span class="o">}</span>,
-      <span class="s2">"payment"</span>: <span class="o">{</span>
-          <span class="s2">"card"</span>: <span class="o">{</span>
-              <span class="s2">"type"</span>: 0,
-              <span class="s2">"capture"</span>: <span class="nb">false</span>,
-              <span class="s2">"installments"</span>: <span class="s2">"1"</span>,
-              <span class="s2">"fixedInstallments"</span>: <span class="nb">false</span>,
-              <span class="s2">"operationType"</span>: <span class="s2">"4"</span>,
-              <span class="s2">"authenticate"</span>: <span class="s2">"3"</span>,
-              <span class="s2">"softDescriptor"</span>: <span class="s2">"Gate2@all"</span>,
-              <span class="s2">"saveCard"</span>: <span class="nb">true</span>
-          <span class="o">}</span>,
-          <span class="s2">"eletronicTransfer"</span>: <span class="o">{</span>
-              <span class="s2">"provider"</span>: <span class="s2">"Bradesco"</span>
-          <span class="o">}</span>,
-          <span class="s2">"bankSlip"</span>: <span class="o">{</span>
-              <span class="s2">"expirationDate"</span>: <span class="s2">"2016-06-30"</span>,
-              <span class="s2">"instructions"</span>: <span class="s2">"Aceitar somente até a data de vencimento, após essa data juros de 1% dia"</span>,
-              <span class="s2">"guarantor"</span>: <span class="s2">"Comprador Teste"</span>,
-              <span class="s2">"provider"</span>: <span class="s2">"Bradesco"</span>
-          <span class="o">}</span>
-      <span class="o">}</span>
-  <span class="o">}</span>
-</code></pre>
 
 <table><thead>
 <tr>
@@ -505,35 +515,42 @@ O valor do resultante da divisão do valor do pedido pelo número de parcelas n�
 <td>Texto</td>
 <td>100</td>
 <td>Sim</td>
-<td>Numero de identificação da loja.</td>
+<td>Número de identificação da loja.</td>
 </tr>
 <tr>
 <td><code class="prettyprint">amount</code></td>
 <td>Número</td>
 <td>16</td>
 <td>Sim</td>
-<td>Valor da transação.</td>
+<td>Valor da transação sem pontuação. Os dois últimos dígitos são os centavos. (Ex: amount: 100 = R$ 1,00)</td>
 </tr>
 <tr>
 <td><code class="prettyprint">description</code></td>
 <td>Texto</td>
 <td>300</td>
 <td>Não</td>
-<td>Descrição da venda.</td>
+<td>Descrição da transação.</td>
 </tr>
 <tr>
 <td><code class="prettyprint">postBackUrl</code></td>
 <td>Texto</td>
 <td>—</td>
+<td>Sim</td>
+<td>URL onde o GATE2all notificará eventuais status da trancação para o lojista.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">redirectUrl</code></td>
+<td>Texto</td>
+<td>—</td>
 <td>Não</td>
-<td>URL a qual o gate2all notificará eventuais status da trancação a loja.</td>
+<td>URL onde o GATE2all redirecionará o comprador após o processamento da transação.</td>
 </tr>
 <tr>
 <td><code class="prettyprint">dhExpiration</code></td>
 <td>Texto</td>
 <td>20</td>
 <td>Não</td>
-<td>Data da expiração da intenção. Formato <strong>2016-10-16T18:10:53</strong></td>
+<td>Data da expiração da intenção. Formato <strong>2017-08-25T18:10:53</strong></td>
 </tr>
 <tr>
 <td><code class="prettyprint">customer.name</code></td>
@@ -564,6 +581,13 @@ O valor do resultante da divisão do valor do pedido pelo número de parcelas n�
 <td>Endereço do comprador.</td>
 </tr>
 <tr>
+<td><code class="prettyprint">address.number</code></td>
+<td>Texto</td>
+<td>10</td>
+<td>Sim</td>
+<td>Número do endereço do comprador.</td>
+</tr>
+<tr>
 <td><code class="prettyprint">address.district</code></td>
 <td>Texto</td>
 <td>80</td>
@@ -572,8 +596,8 @@ O valor do resultante da divisão do valor do pedido pelo número de parcelas n�
 </tr>
 <tr>
 <td><code class="prettyprint">address.zipcode</code></td>
-<td>Texto</td>
-<td>10</td>
+<td>Número</td>
+<td>8</td>
 <td>Sim</td>
 <td>CEP do comprador.</td>
 </tr>
@@ -603,7 +627,7 @@ O valor do resultante da divisão do valor do pedido pelo número de parcelas n�
 <td>Booleano</td>
 <td>—</td>
 <td>Sim</td>
-<td>Identifica que a autorização deve ser efetuada com captura automática.</td>
+<td><strong>true</strong> = Autoriza e confirma a transação. <strong>false</strong> = Autorização, mas não confirma a transação, necessitando realizar a confirmação (<a href="#captura">Captura</a>) noutra requisição.</td>
 </tr>
 <tr>
 <td><code class="prettyprint">card.installments</code></td>
@@ -617,21 +641,21 @@ O valor do resultante da divisão do valor do pedido pelo número de parcelas n�
 <td>Booleano</td>
 <td>—</td>
 <td>Não</td>
-<td>Configura parcela fixa.</td>
+<td><strong>True</strong> = não permite que o comprador selecione a quantidade de parcelas no formulário de pagamento.</td>
 </tr>
 <tr>
 <td><code class="prettyprint">card.operationType</code></td>
 <td>Número</td>
-<td>20</td>
+<td>1</td>
 <td>Sim</td>
-<td>Operações disponíveis: 1. Cartão de Crédito 2. Cartão de Débito 3. Parcelado Loja 4. Parcelado Administrador.</td>
+<td>Operações disponíveis: <BR /> 1. Cartão de Crédito<BR /> 2. Cartão de Débito <BR /> 3. Parcelado Loja <BR /> 4. Parcelado Administrador</td>
 </tr>
 <tr>
 <td><code class="prettyprint">card.authenticate</code></td>
 <td>Texto</td>
 <td>20</td>
-<td>Sim</td>
-<td>(1. para transaação autenticada OBS: rever&hellip;)</td>
+<td>Não</td>
+<td>Opções disponíveis: <BR /> 1. Autorizar só transações autenticadas <BR /> 2. Autorizar transações autenticadas ou não autenticadas <BR /> 3. Autorizar sem autenticação <BR /></td>
 </tr>
 <tr>
 <td><code class="prettyprint">card.softDescriptor</code></td>
@@ -648,7 +672,7 @@ O valor do resultante da divisão do valor do pedido pelo número de parcelas n�
 <td>Configura salvar o cartão (tokenização).</td>
 </tr>
 <tr>
-<td><code class="prettyprint">eletronicTransfer.provider</code></td>
+<td><code class="prettyprint">electronicTransfer.provider</code></td>
 <td>Texto</td>
 <td>20</td>
 <td>Sim</td>
@@ -659,7 +683,7 @@ O valor do resultante da divisão do valor do pedido pelo número de parcelas n�
 <td>Texto</td>
 <td>20</td>
 <td>Sim</td>
-<td>Data de vencimento do boleto. formato <strong>YYYY/MM/DD</strong></td>
+<td>Data de vencimento do boleto. formato <strong>YYYY-MM-DD</strong></td>
 </tr>
 <tr>
 <td><code class="prettyprint">boleto.instructions</code></td>
@@ -680,21 +704,28 @@ O valor do resultante da divisão do valor do pedido pelo número de parcelas n�
 <td>Texto</td>
 <td>20</td>
 <td>Sim</td>
-<td>Nome da instituição responsável pela emissão.</td>
+<td>Nome da instituição financeira :<ul><li><strong>BRADESCO</strong></li><li><strong>ITAU</strong></li></ul></td>
 </tr>
 </tbody></table>
 
-<h3 id="resposta">RESPOSTA</h3>
+<h3 id="resposta-sucesso">RESPOSTA SUCESSO</h3>
+
+<p>Status : 201</p>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"transactionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"b9bb32a8-401e-41a0-a9ee-af9e8ab0de92"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://gate.2all.com.br/v1/url-payment/b9bb32a8-401e-41a0-a9ee-af9e8ab0de92"</span><span class="w">
+  </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.gate.2all.com.br/v1/payment/b9bb32a8-401e-41a0-a9ee-af9e8ab0de92"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<pre class="highlight shell"><code>  <span class="o">{</span>
-    <span class="s2">"transactionId"</span>: <span class="s2">"b9bb32a8-401e-41a0-a9ee-af9e8ab0de92"</span>,
-    <span class="s2">"url"</span>: <span class="s2">"https://gate.2all.com.br/v1/url-payment/b9bb32a8-401e-41a0-a9ee-af9e8ab0de92"</span>
-  <span class="o">}</span>
-</code></pre>
+
+<blockquote>
+<p>Falha</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"error"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"amount O campo amount e obrigatorio."</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
 
 <table><thead>
 <tr>
@@ -708,7 +739,7 @@ O valor do resultante da divisão do valor do pedido pelo número de parcelas n�
 <td><code class="prettyprint">transactionId</code></td>
 <td>Texto</td>
 <td>36</td>
-<td>Identificador da transação retornado pelo gateway.</td>
+<td>Identificador da transação do GATE2all.</td>
 </tr>
 <tr>
 <td><code class="prettyprint">url</code></td>
@@ -718,11 +749,11 @@ O valor do resultante da divisão do valor do pedido pelo número de parcelas n�
 </tr>
 </tbody></table>
 
-<h2 id="submiss-o-do-token">Submissão do token</h2>
+<aside class="success">
+Redirecione o comprador para a URL da resposta.
+</aside>
 
-<p>URL para pagamento: <a href="https://gate.2all.com.br/gateway/intencao/pagamento?token={{token}}">https://gate.2all.com.br/gateway/intencao/pagamento?token={{token}}</a></p>
-
-<p><strong>Obs.:</strong> {{token}}: Código do token recebido do retorno positivo da aprovação da intenção de venda.</p>
+<h2 id="acessando-uma-inten-o-de-venda">Acessando uma intenção de venda</h2>
 
 <p>Após o usuario acessar a URL gerada, aparecerá a seguinte tela de pagamento:</p>
 
@@ -731,6 +762,8 @@ O valor do resultante da divisão do valor do pedido pelo número de parcelas n�
 <p>Caso a forma de pagamento escolhida pelo usuário for cartão de crédito, aparecerá a seguinte tela:</p>
 
 <p><img src="images/intencao02.png" /></p>
+
+<p>Após a conclusão do preenchimento do formulário o GATE2all enviará uma notificação contendo o <code class="prettyprint">transactionId</code> e o <code class="prettyprint">orderId</code> para o sistema do lojista realizar a <a href="#consulta">consulta</a> da transação notificada.</p>
 
 <p>Caso a forma de pagamento escolhida pelo usuário for boleto, aparecerá a seguinte tela:</p>
 
@@ -743,6 +776,12 @@ O valor do resultante da divisão do valor do pedido pelo número de parcelas n�
 <p>Em caso de erro ou token incorreto aparecerá a seguinte tela:</p>
 
 <p><img src="images/intencao05.png" /></p>
+
+<h2 id="customizar-tema-dos-formul-rios">Customizar tema dos formulários</h2>
+
+<p>Utilizando nossos formulários que capturam os dados do cartão é possível customizar logo, cor de fundo, cor do formulário, cor das fontes, botão do envio e a cor do rodapé. </p>
+
+<p>Para customizar os formulários acesse o <a href="https://gate.2all.com.br">painel de controle</a> e clique no menu <a href="https://gate.2all.com.br/ntk/configuracao-cliente"><strong>&ldquo;Configurações&gt;Formulário de pagamento&rdquo;</strong></a>.</p>
 
 <h1 id="gate2all-integrado">GATE2all Integrado</h1>
 
@@ -758,16 +797,20 @@ maiores informações consulte o site https://www.pcisecuritystandards.org</p>
 
 <p>Para criar uma autorização é necessário enviar um POST para o seguinte recurso:</p>
 
+<aside class="notice">
+Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendamos a consulta pelo número do pedido `orderId` ou criando uma [intenção](#inteno-de-venda) e informando o mesmo `transactionId` na requisição com os dados do cartão. Desta maneira é possível realizar uma consulta para verificar o status da transação. 
+</aside>
+
 <h3 id="requisi-o">REQUISIÇÃO</h3>
 
-<aside class="request"><span class="method post">POST</span> <span class="endpoint">/v1/transactions/authorization/</span></aside>
+<aside class="request"><span class="method post">POST</span> <span class="endpoint">/v1/transactions</span></aside>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
    </span><span class="nt">"orderId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"19893211234"</span><span class="p">,</span><span class="w">
    </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"100"</span><span class="p">,</span><span class="w">
    </span><span class="nt">"softDescriptor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Pagamento Gate2all"</span><span class="p">,</span><span class="w">
    </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Mouse sem fio"</span><span class="p">,</span><span class="w">
    </span><span class="nt">"capture"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-   </span><span class="nt">"installments"</span><span class="p">:</span><span class="w"> </span><span class="mi">01</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"installments"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
    </span><span class="nt">"operationType"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
    </span><span class="nt">"authenticate"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
    </span><span class="nt">"customer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -778,48 +821,16 @@ maiores informações consulte o site https://www.pcisecuritystandards.org</p>
        </span><span class="nt">"card"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
           </span><span class="nt">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4539708473330561"</span><span class="p">,</span><span class="w">
           </span><span class="nt">"expirationMonth"</span><span class="p">:</span><span class="w"> </span><span class="s2">"04"</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"expirationYear"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"expirationYear"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019"</span><span class="p">,</span><span class="w">
           </span><span class="nt">"cvv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"234"</span><span class="p">,</span><span class="w">
           </span><span class="nt">"brand"</span><span class="p">:</span><span class="w"> </span><span class="s2">"VISA"</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"holderName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LUIS A R ROMERO"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"holderName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"HOLDER NAME"</span><span class="p">,</span><span class="w">
           </span><span class="nt">"saveCard"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
         </span><span class="p">}</span><span class="w">
    </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<pre class="highlight shell"><code>curl --request POST
-  --url /v1/transactions/authorization
-  --header <span class="s1">'authorization: Basic bnRrOjEyMzQ='</span>
-  --header <span class="s1">'content-type: application/json'</span>
-  --data-binary
-  <span class="o">{</span>
-     <span class="s2">"orderId"</span>: <span class="s2">"19893211234"</span>,
-     <span class="s2">"amount"</span>: <span class="s2">"100"</span>,
-     <span class="s2">"softDescriptor"</span>: <span class="s2">"Pagamento Gate2all"</span>,
-     <span class="s2">"description"</span>: <span class="s2">"Mouse sem fio"</span>,
-     <span class="s2">"capture"</span>: <span class="nb">false</span>,
-     <span class="s2">"installments"</span>: 01,
-     <span class="s2">"operationType"</span>: 1,
-     <span class="s2">"authenticate"</span>: 3,
-     <span class="s2">"customer"</span>: <span class="o">{</span>
-        <span class="s2">"name"</span>: <span class="s2">"Comprador Teste"</span>,
-        <span class="s2">"document"</span>: <span class="s2">"12345678909"</span>,
-        <span class="s2">"birthDate"</span>: <span class="s2">"16/08/1986"</span>
-     <span class="o">}</span>,
-     <span class="s2">"payment"</span>: <span class="o">{</span>
-         <span class="s2">"card"</span>: <span class="o">{</span>
-            <span class="s2">"number"</span>: <span class="s2">"4539708473330561"</span>,
-            <span class="s2">"expirationMonth"</span>: <span class="s2">"04"</span>,
-            <span class="s2">"expirationYear"</span>: <span class="s2">"2017"</span>,
-            <span class="s2">"cvv"</span>: <span class="s2">"234"</span>,
-            <span class="s2">"brand"</span>: <span class="s2">"VISA"</span>,
-            <span class="s2">"holderName"</span>: <span class="s2">"LUIS A R ROMERO"</span>,
-            <span class="s2">"saveCard"</span>: <span class="nb">false</span>
-        <span class="o">}</span>
-     <span class="o">}</span>
-  <span class="o">}</span>
---verbose
-</code></pre>
+<pre class="highlight shell"><code></code></pre>
 
 <table><thead>
 <tr>
@@ -831,18 +842,25 @@ maiores informações consulte o site https://www.pcisecuritystandards.org</p>
 </tr>
 </thead><tbody>
 <tr>
+<td><code class="prettyprint">transactionId</code></td>
+<td>Texto</td>
+<td>150</td>
+<td>Não</td>
+<td>Identificador da transação do GATE2all.</td>
+</tr>
+<tr>
 <td><code class="prettyprint">orderId</code></td>
 <td>Texto</td>
 <td>100</td>
 <td>Sim</td>
-<td>Numero de identificação da loja.</td>
+<td>Número de identificação da loja.</td>
 </tr>
 <tr>
 <td><code class="prettyprint">amount</code></td>
 <td>Número</td>
 <td>16</td>
 <td>Sim</td>
-<td>Valor da transação.</td>
+<td>Valor da transação sem pontuação. Os dois últimos dígitos são os centavos. (Ex: amount: 100 = R$ 1,00)</td>
 </tr>
 <tr>
 <td><code class="prettyprint">softDescriptor</code></td>
@@ -856,21 +874,21 @@ maiores informações consulte o site https://www.pcisecuritystandards.org</p>
 <td>Texto</td>
 <td>300</td>
 <td>Não</td>
-<td>Descrição da venda.</td>
+<td>Descrição da transação.</td>
 </tr>
 <tr>
 <td><code class="prettyprint">postBackUrl</code></td>
 <td>Texto</td>
 <td>—</td>
 <td>Não</td>
-<td>URL a qual o gate2all notificará eventuais status da trancação a loja.</td>
+<td>URL onde o GATE2all notificará eventuais status da trancação para o lojista.</td>
 </tr>
 <tr>
 <td><code class="prettyprint">capture</code></td>
 <td>Booleano</td>
 <td>—</td>
 <td>Sim</td>
-<td>Identifica que a autorização deve ser efetuada com captura automática.</td>
+<td><strong>true</strong> = Autoriza e confirma a transação . <strong>false</strong> = Autorização, mas não confirma a transação, necessitando realizar a confirmação (<a href="#captura">Captura</a>) noutra requisição.</td>
 </tr>
 <tr>
 <td><code class="prettyprint">installments</code></td>
@@ -891,7 +909,14 @@ maiores informações consulte o site https://www.pcisecuritystandards.org</p>
 <td>Número</td>
 <td>1</td>
 <td>Não</td>
-<td>Opções disponíveis: <BR /> 1. Autorizar só transações autenticadas <BR /> 2. Autorizar transações autenticadas ou não autenticadas <BR /> 3. Autorizar sem autenticação <BR /> 4. Parcelado Administrador</td>
+<td>Opções disponíveis: <BR /> 1. Autorizar só transações autenticadas <BR /> 2. Autorizar transações autenticadas ou não autenticadas <BR /> 3. Autorizar sem autenticação <BR /></td>
+</tr>
+<tr>
+<td><code class="prettyprint">provider</code></td>
+<td>Número</td>
+<td>—</td>
+<td>Não</td>
+<td>Nome do Meio de Pagamento - (OBS: funcionalidade ainda não disponível)</td>
 </tr>
 <tr>
 <td><code class="prettyprint">customer.name</code></td>
@@ -936,18 +961,18 @@ maiores informações consulte o site https://www.pcisecuritystandards.org</p>
 <td>Código de segurança do cartão.</td>
 </tr>
 <tr>
-<td><code class="prettyprint">card.holderName</code></td>
-<td>Texto</td>
-<td>20</td>
-<td>Não</td>
-<td>Nome do portador do cartão.</td>
-</tr>
-<tr>
 <td><code class="prettyprint">card.brand</code></td>
 <td>Texto</td>
 <td>20</td>
 <td>Sim</td>
 <td>Bandeira do cartão.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">card.holderName</code></td>
+<td>Texto</td>
+<td>20</td>
+<td>Não</td>
+<td>Nome do portador do cartão.</td>
 </tr>
 <tr>
 <td><code class="prettyprint">card.saveCard</code></td>
@@ -975,60 +1000,31 @@ maiores informações consulte o site https://www.pcisecuritystandards.org</p>
   </span><span class="nt">"capture"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
   </span><span class="nt">"authenticate"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
   </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"dtTransaction"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-19T12:04:20"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"dtTransaction"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-03-05T12:04:20"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"payment"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"provider"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Cielo"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"authenticationECI"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w">
     </span><span class="nt">"codAuthorization"</span><span class="p">:</span><span class="w"> </span><span class="s2">"123456"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"providerReference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1006993069000834928A"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"providerCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"providerMessage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Transação autorizada"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"card"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"453970******0561"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"expirationMonth"</span><span class="p">:</span><span class="w"> </span><span class="s2">"04"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"expirationYear"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"cvv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"***"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"brand"</span><span class="p">:</span><span class="w"> </span><span class="s2">"VISA"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"holderName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LUIS A R ROMERO"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"holderName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"HOLDER NAME"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"saveCard"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="nt">"customer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LUIS A R ROMERO"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"HOLDER NAME"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"document"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12345678909"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<pre class="highlight shell"><code> <span class="o">{</span>
-   <span class="s2">"transactionId"</span>: <span class="s2">"92d50ba4-5d93-4ee5-90e8-9884b250310a"</span>,
-   <span class="s2">"orderId"</span>: <span class="s2">"1463697571584"</span>,
-   <span class="s2">"description"</span>: <span class="s2">"TV LG 42"</span>,
-   <span class="s2">"softDescriptor"</span>: <span class="s2">"EC02"</span>,
-   <span class="s2">"operationType"</span>: 1,
-   <span class="s2">"integrationType"</span>: 1,
-   <span class="s2">"amount"</span>: <span class="s2">"100"</span>,
-   <span class="s2">"installments"</span>: 1,
-   <span class="s2">"capture"</span>: <span class="nb">false</span>,
-   <span class="s2">"authenticate"</span>: 3,
-   <span class="s2">"status"</span>: 5,
-   <span class="s2">"dtTransaction"</span>: <span class="s2">"2016-10-19T12:04:20"</span>,
-   <span class="s2">"payment"</span>: <span class="o">{</span>
-     <span class="s2">"authenticationECI"</span>: 7,
-     <span class="s2">"codAuthorization"</span>: <span class="s2">"123456"</span>,
-     <span class="s2">"providerReference"</span>: <span class="s2">"1006993069000834928A"</span>,
-     <span class="s2">"card"</span>: <span class="o">{</span>
-       <span class="s2">"number"</span>: <span class="s2">"453970******0561"</span>,
-       <span class="s2">"expirationMonth"</span>: <span class="s2">"04"</span>,
-       <span class="s2">"expirationYear"</span>: <span class="s2">"2017"</span>,
-       <span class="s2">"cvv"</span>: <span class="s2">"***"</span>,
-       <span class="s2">"brand"</span>: <span class="s2">"VISA"</span>,
-       <span class="s2">"holderName"</span>: <span class="s2">"LUIS A R ROMERO"</span>,
-       <span class="s2">"saveCard"</span>: <span class="nb">false</span>
-     <span class="o">}</span>
-   <span class="o">}</span>,
-   <span class="s2">"customer"</span>: <span class="o">{</span>
-     <span class="s2">"name"</span>: <span class="s2">"LUIS A R ROMERO"</span>,
-     <span class="s2">"document"</span>: <span class="s2">"12345678909"</span>
-   <span class="o">}</span>
- <span class="o">}</span>
-</code></pre>
+<pre class="highlight shell"><code></code></pre>
 
 <blockquote>
 <p>Falha</p>
@@ -1039,12 +1035,7 @@ maiores informações consulte o site https://www.pcisecuritystandards.org</p>
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<pre class="highlight shell"><code>  <span class="o">{</span>
-    <span class="s2">"error"</span>: <span class="o">{</span>
-      <span class="s2">"message"</span>: <span class="s2">"O campo amount e obrigatorio."</span>
-    <span class="o">}</span>
-  <span class="o">}</span>
-</code></pre>
+<pre class="highlight shell"><code></code></pre>
 
 <table><thead>
 <tr>
@@ -1058,49 +1049,61 @@ maiores informações consulte o site https://www.pcisecuritystandards.org</p>
 <td><code class="prettyprint">transactionId</code></td>
 <td>Texto</td>
 <td>150</td>
-<td>Identificador da transação retornado pelo gateway.</td>
+<td>Identificador da transação do GATE2all.</td>
 </tr>
 <tr>
-<td><code class="prettyprint">message</code></td>
+<td><code class="prettyprint">dtTransaction</code></td>
+<td>DataHora</td>
+<td>19</td>
+<td>Data e hora da transação.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">payment.provider</code></td>
 <td>Texto</td>
 <td>100</td>
-<td>Mensagem de retorno da transação.</td>
+<td>Nome da instituição financeira.</td>
 </tr>
 <tr>
-<td><code class="prettyprint">orderId</code></td>
+<td><code class="prettyprint">payment.providerReference</code></td>
 <td>Texto</td>
 <td>100</td>
-<td>Número de identificação da loja.</td>
+<td>Referência da instituição.</td>
 </tr>
 <tr>
-<td><code class="prettyprint">amount</code></td>
-<td>Número</td>
-<td>16</td>
-<td>alor da transação.</td>
-</tr>
-<tr>
-<td><code class="prettyprint">tid</code></td>
+<td><code class="prettyprint">payment.providerMessage</code></td>
 <td>Texto</td>
 <td>100</td>
-<td>Identificador da transação retornado pela rede adquirente.</td>
+<td>Mensagem da instituição.</td>
 </tr>
 <tr>
-<td><code class="prettyprint">authorizationCode</code></td>
+<td><code class="prettyprint">payment.providerCode</code></td>
 <td>Texto</td>
-<td>20</td>
-<td>Código da autorização retornado pela rede adquirente.</td>
+<td>100</td>
+<td>Codigo de resposta da instituição.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">payment.codAuthorization</code></td>
+<td>Texto</td>
+<td>100</td>
+<td>Codigo de autorização da instituição.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">payment.authenticationECI</code></td>
+<td>Texto</td>
+<td>100</td>
+<td>Indicador de autenticação da transação.<a href="#status-eci">Códigos ECI</a></td>
 </tr>
 <tr>
 <td><code class="prettyprint">status</code></td>
 <td>Número</td>
 <td>2</td>
-<td>Status da transação retornado pelo gateway.</td>
+<td>Status da transação retornado pelo GATE2all <a href="#status">catálogo</a>.</td>
 </tr>
 </tbody></table>
 
 <h2 id="boleto">Boleto</h2>
 
-<p>O boleto bancário ou bloqueto é um instrumento de pagamento de produtos ou serviços. É amplamente utilizado por empresas no Brasil.</p>
+<p>O boleto bancário ou bloqueto é um método de pagamento de produtos ou serviços. É amplamente utilizado por empresas no Brasil.</p>
 
 <p>Entidades envolvidas: “Banco” que são as instituições financeiras responsáveis pela emissão, recebimento e pagamento do boleto, “Cedente” é quem solicita a emissão do documento de cobrança e o que receberá o valor do pagamento e o “Sacado” que é consumidor do produto ou serviço, ou seja, quem paga o boleto.</p>
 
@@ -1115,7 +1118,7 @@ maiores informações consulte o site https://www.pcisecuritystandards.org</p>
 
 <h3 id="requisi-o">Requisição</h3>
 
-<aside class="request"><span class="method post">POST</span> <span class="endpoint">/v1/transactions/bankslip/</span></aside>
+<aside class="request"><span class="method post">POST</span> <span class="endpoint">/v1/transactions</span></aside>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
    </span><span class="nt">"orderId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"19893211234"</span><span class="p">,</span><span class="w">
    </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"100"</span><span class="p">,</span><span class="w">
@@ -1125,16 +1128,17 @@ maiores informações consulte o site https://www.pcisecuritystandards.org</p>
       </span><span class="nt">"document"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12345678909"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"email"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"comprador@email.com"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"address"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="nt">"address"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Rua Fidencio Ramos 100"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"address"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Endereco"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"number"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"100"</span><span class="p">,</span><span class="w">
           </span><span class="nt">"district"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Vila Olimpia"</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"zipcode"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"09878-675"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"zipcode"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"09878675"</span><span class="p">,</span><span class="w">
           </span><span class="nt">"city"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Sao Paulo"</span><span class="p">,</span><span class="w">
           </span><span class="nt">"state"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"SP"</span><span class="w">
       </span><span class="p">}</span><span class="w">
    </span><span class="p">},</span><span class="w">
    </span><span class="nt">"payment"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
        </span><span class="nt">"bankSlip"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nt">"expirationDate"</span><span class="w"> </span><span class="p">:</span><span class="s2">"1970-01-01"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"expirationDate"</span><span class="w"> </span><span class="p">:</span><span class="s2">"2017-03-01"</span><span class="p">,</span><span class="w">
             </span><span class="nt">"instructions"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Aceitar somente até a data de vencimento, após essa data juros de 1% dia"</span><span class="p">,</span><span class="w">
             </span><span class="nt">"guarantor"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Comprador"</span><span class="p">,</span><span class="w">
             </span><span class="nt">"provider"</span><span class="p">:</span><span class="s2">"Itau"</span><span class="w">
@@ -1165,21 +1169,21 @@ maiores informações consulte o site https://www.pcisecuritystandards.org</p>
 <td style="text-align: center">Texto</td>
 <td style="text-align: center">100</td>
 <td style="text-align: center">Sim</td>
-<td>Numero de identificação da loja.</td>
+<td>Número de identificação da loja.</td>
 </tr>
 <tr>
 <td><code class="prettyprint">amount</code></td>
 <td style="text-align: center">Número</td>
 <td style="text-align: center">16</td>
 <td style="text-align: center">Sim</td>
-<td>Valor da transação.</td>
+<td>Valor da transação sem pontuação. Os dois últimos dígitos são os centavos. (Ex: amount: 100 = R$ 1,00)</td>
 </tr>
 <tr>
 <td><code class="prettyprint">description</code></td>
 <td style="text-align: center">Texto</td>
 <td style="text-align: center">300</td>
 <td style="text-align: center">Não</td>
-<td>Descrição da venda.</td>
+<td>Descrição da transação.</td>
 </tr>
 <tr>
 <td><code class="prettyprint">customer.name</code></td>
@@ -1210,6 +1214,13 @@ maiores informações consulte o site https://www.pcisecuritystandards.org</p>
 <td>Endereço do comprador.</td>
 </tr>
 <tr>
+<td><code class="prettyprint">address.number</code></td>
+<td style="text-align: center">Texto</td>
+<td style="text-align: center">10</td>
+<td style="text-align: center">Sim</td>
+<td>Número do comprador.</td>
+</tr>
+<tr>
 <td><code class="prettyprint">address.district</code></td>
 <td style="text-align: center">Texto</td>
 <td style="text-align: center">80</td>
@@ -1218,8 +1229,8 @@ maiores informações consulte o site https://www.pcisecuritystandards.org</p>
 </tr>
 <tr>
 <td><code class="prettyprint">address.zipcode</code></td>
-<td style="text-align: center">Texto</td>
-<td style="text-align: center">10</td>
+<td style="text-align: center">Número</td>
+<td style="text-align: center">8</td>
 <td style="text-align: center">Sim</td>
 <td>CEP do comprador.</td>
 </tr>
@@ -1269,34 +1280,37 @@ maiores informações consulte o site https://www.pcisecuritystandards.org</p>
 
 <h3 id="resposta">RESPOSTA</h3>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"transactionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"62d02f48-ef2c-4518-9e6f-68ca5cbc4231"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"transactionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7365ca65-70d4-4d7c-ac3d-a20f5730c241"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"orderId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"19893211234"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"100"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Produto ou serviço"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"dtTransaction"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1970-01-01T00:00:00"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"dtTransaction"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-03-08T10:46:31-0300"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"customer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Comprador"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"document"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12345678909"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"comprador@email.com"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"address"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rua Fidencio Ramos 100"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Endereco"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"100"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"district"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Vila Olimpia"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"zipcode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"05890090"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"zipcode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"09878675"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sao Paulo"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SP"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="nt">"payment"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"providerReference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0987654321"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"providerReference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"20575112"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"providerCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"providerMessage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Transação iniciada"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"bankSlip"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"emissionDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1970-01-01"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"expirationDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1970-01-01"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"emissionDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-03-08"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"expirationDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-03-10"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"instructions"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Aceitar somente até a data de vencimento, após essa data juros de 1% dia"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"guarantor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Comprador"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"provider"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Itau"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"paymentDate"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"paymentAmount"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;%= url_gateway %&gt;/v1/url-payment/62d02f48-ef2c-4518-9e6f-68ca5cbc4231"</span><span class="w">
+      </span><span class="nt">"provider"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ITAU"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"paymentDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-03-10"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"paymentAmount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"100"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.gate.2all.com.br/v1/url-payment/6400d988-cc4b-4084-80ee-d5575dbbed4d"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
@@ -1316,25 +1330,7 @@ maiores informações consulte o site https://www.pcisecuritystandards.org</p>
 <td><code class="prettyprint">transactionId</code></td>
 <td style="text-align: center">Texto</td>
 <td style="text-align: center">150</td>
-<td>Identificador da transação retornado pelo gateway.</td>
-</tr>
-<tr>
-<td><code class="prettyprint">orderId</code></td>
-<td style="text-align: center">Texto</td>
-<td style="text-align: center">100</td>
-<td>Numero de identificação da loja.</td>
-</tr>
-<tr>
-<td><code class="prettyprint">amount</code></td>
-<td style="text-align: center">Número</td>
-<td style="text-align: center">16</td>
-<td>Valor da transação.</td>
-</tr>
-<tr>
-<td><code class="prettyprint">description</code></td>
-<td style="text-align: center">Texto</td>
-<td style="text-align: center">300</td>
-<td>Descrição da transação.</td>
+<td>Identificador da transação do GATE2all.</td>
 </tr>
 <tr>
 <td><code class="prettyprint">dtTransaction</code></td>
@@ -1343,88 +1339,28 @@ maiores informações consulte o site https://www.pcisecuritystandards.org</p>
 <td>Data e hora da transação.</td>
 </tr>
 <tr>
-<td><code class="prettyprint">customer.name</code></td>
-<td style="text-align: center">Texto</td>
-<td style="text-align: center">100</td>
-<td>Nome do portador do cartão.</td>
-</tr>
-<tr>
-<td><code class="prettyprint">customer.document</code></td>
-<td style="text-align: center">Texto</td>
-<td style="text-align: center">18</td>
-<td>Número do CPF/CNPJ do portador do cartão.</td>
-</tr>
-<tr>
-<td><code class="prettyprint">customer.email</code></td>
-<td style="text-align: center">Texto</td>
-<td style="text-align: center">100</td>
-<td>Email do portador do cartão.</td>
-</tr>
-<tr>
-<td><code class="prettyprint">address.address</code></td>
-<td style="text-align: center">Texto</td>
-<td style="text-align: center">60</td>
-<td>Endereço do comprador.</td>
-</tr>
-<tr>
-<td><code class="prettyprint">address.district</code></td>
-<td style="text-align: center">Texto</td>
-<td style="text-align: center">80</td>
-<td>Bairro do comprador.</td>
-</tr>
-<tr>
-<td><code class="prettyprint">address.zipcode</code></td>
-<td style="text-align: center">Texto</td>
-<td style="text-align: center">10</td>
-<td>CEP do comprador.</td>
-</tr>
-<tr>
-<td><code class="prettyprint">address.city</code></td>
-<td style="text-align: center">Texto</td>
-<td style="text-align: center">30</td>
-<td>Cidade do comprador.</td>
-</tr>
-<tr>
-<td><code class="prettyprint">address.state</code></td>
-<td style="text-align: center">Texto</td>
-<td style="text-align: center">2</td>
-<td>Sigla do estado do comprador.</td>
-</tr>
-<tr>
 <td><code class="prettyprint">payment.providerReference</code></td>
 <td style="text-align: center">Texto</td>
 <td style="text-align: center">100</td>
-<td>Referencia da instituição.</td>
+<td>Referência da instituição.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">payment.providerCode</code></td>
+<td style="text-align: center">Texto</td>
+<td style="text-align: center">100</td>
+<td>Codigo de resposta da instituição.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">payment.providerMessage</code></td>
+<td style="text-align: center">Texto</td>
+<td style="text-align: center">100</td>
+<td>Mensagem da instituição.</td>
 </tr>
 <tr>
 <td><code class="prettyprint">payment.bankSlip.emissionDate</code></td>
 <td style="text-align: center">Texto</td>
 <td style="text-align: center">20</td>
 <td>Data de emissão do boleto. formato <strong>YYYY-MM-DD</strong></td>
-</tr>
-<tr>
-<td><code class="prettyprint">payment.bankSlip.expirationDate</code></td>
-<td style="text-align: center">Texto</td>
-<td style="text-align: center">20</td>
-<td>Data de vencimento do boleto. formato <strong>YYYY-MM-DD</strong></td>
-</tr>
-<tr>
-<td><code class="prettyprint">payment.bankSlip..instructions</code></td>
-<td style="text-align: center">Texto</td>
-<td style="text-align: center">300</td>
-<td>Instruções do boleto.</td>
-</tr>
-<tr>
-<td><code class="prettyprint">payment.bankSlip..guarantor</code></td>
-<td style="text-align: center">Texto</td>
-<td style="text-align: center">45</td>
-<td>Nome do avalista.</td>
-</tr>
-<tr>
-<td><code class="prettyprint">payment.bankSlip..provider</code></td>
-<td style="text-align: center">Texto</td>
-<td style="text-align: center">20</td>
-<td>Nome da instituição financeira :<ul><li><strong>BRADESCO</strong></li><li><strong>ITAU</strong></li></ul></td>
 </tr>
 <tr>
 <td><code class="prettyprint">payment.bankSlip.paymentDate</code></td>
@@ -1436,7 +1372,7 @@ maiores informações consulte o site https://www.pcisecuritystandards.org</p>
 <td><code class="prettyprint">payment.bankSlip.paymentAmount</code></td>
 <td style="text-align: center">Número</td>
 <td style="text-align: center">16</td>
-<td>Valor de pagamento do boleto.</td>
+<td>Valor de pagamento do boleto sem pontuação. Os dois últimos dígitos são os centavos. (Ex: amount: 100 = R$ 1,00)</td>
 </tr>
 <tr>
 <td><code class="prettyprint">payment.bankSlip.url</code></td>
@@ -1446,7 +1382,7 @@ maiores informações consulte o site https://www.pcisecuritystandards.org</p>
 </tr>
 <tr>
 <td><code class="prettyprint">status</code></td>
-<td style="text-align: center">Numero</td>
+<td style="text-align: center">Número</td>
 <td style="text-align: center">2</td>
 <td><a href="#status">tabela de Status</a></td>
 </tr>
@@ -1454,13 +1390,13 @@ maiores informações consulte o site https://www.pcisecuritystandards.org</p>
 
 <h2 id="transfer-ncia-entre-contas-banc-rias">Transferência entre contas bancárias</h2>
 
-<p>Este tipo de transação permite a transferência de valores entre contas do banco Bradesco, a compensação é realizada no mesmo dia. Esse meio de pagamento é integrado ao Internet Banking.</p>
+<p>Este tipo de transação permite a transferência de valores entre contas do bancos Bradesco e Itaú, a compensação é realizada no mesmo dia. Esse meio de pagamento direciona o comprador para o Internet Bank para realizar o processo de autenticação.</p>
 
-<p>No momento do pagamento, o cliente comprador informa os dados da agência, informa os dados da conta, como senha de 4 dígitos e do dispositivo de segurança (Cartão Chave de Segurança Bradesco ou Chave de Segurança Bradesco - versão Eletrônica ou no Celular.</p>
+<p>No momento do pagamento, o cliente comprador informa os dados da agência, informa os dados da conta, como senha de 4 dígitos e do dispositivo de segurança (Cartão Chave de Segurança, token ou - versão Eletrônica ou no Celular.</p>
 
 <h3 id="requisi-o">Requisição</h3>
 
-<aside class="request"><span class="method post">POST</span> <span class="endpoint">/v1/transactions/eletronictransfer/</span></aside>
+<aside class="request"><span class="method post">POST</span> <span class="endpoint">/v1/transactions</span></aside>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
     </span><span class="nt">"orderId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"19893211234"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"100"</span><span class="p">,</span><span class="w">
@@ -1470,7 +1406,8 @@ maiores informações consulte o site https://www.pcisecuritystandards.org</p>
       </span><span class="nt">"document"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12345678909"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"comprador@email.com"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"address"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rua Fidencio Ramos 100"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Endereco 100"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"number"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"100"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"district"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Vila Olimpia"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"zipcode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"05890090"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sao Paulo"</span><span class="p">,</span><span class="w">
@@ -1507,21 +1444,21 @@ maiores informações consulte o site https://www.pcisecuritystandards.org</p>
 <td style="text-align: center">Texto</td>
 <td style="text-align: center">100</td>
 <td style="text-align: center">Sim</td>
-<td>Numero de identificação da loja.</td>
+<td>Número de identificação da loja.</td>
 </tr>
 <tr>
 <td><code class="prettyprint">amount</code></td>
 <td style="text-align: center">Número</td>
 <td style="text-align: center">16</td>
 <td style="text-align: center">Sim</td>
-<td>Valor da transação.</td>
+<td>Valor da transação sem pontuação. Os dois últimos dígitos são os centavos. (Ex: amount: 100 = R$ 1,00)</td>
 </tr>
 <tr>
 <td><code class="prettyprint">description</code></td>
 <td style="text-align: center">Texto</td>
 <td style="text-align: center">300</td>
 <td style="text-align: center">Não</td>
-<td>Descrição da venda.</td>
+<td>Descrição da transação.</td>
 </tr>
 <tr>
 <td><code class="prettyprint">customer.name</code></td>
@@ -1552,6 +1489,13 @@ maiores informações consulte o site https://www.pcisecuritystandards.org</p>
 <td>Endereço do comprador.</td>
 </tr>
 <tr>
+<td><code class="prettyprint">address.number</code></td>
+<td style="text-align: center">Texto</td>
+<td style="text-align: center">10</td>
+<td style="text-align: center">Sim</td>
+<td>Número do comprador.</td>
+</tr>
+<tr>
 <td><code class="prettyprint">address.district</code></td>
 <td style="text-align: center">Texto</td>
 <td style="text-align: center">80</td>
@@ -1560,8 +1504,8 @@ maiores informações consulte o site https://www.pcisecuritystandards.org</p>
 </tr>
 <tr>
 <td><code class="prettyprint">address.zipcode</code></td>
-<td style="text-align: center">Texto</td>
-<td style="text-align: center">10</td>
+<td style="text-align: center">Número</td>
+<td style="text-align: center">8</td>
 <td style="text-align: center">Sim</td>
 <td>CEP do comprador.</td>
 </tr>
@@ -1594,13 +1538,14 @@ maiores informações consulte o site https://www.pcisecuritystandards.org</p>
     </span><span class="nt">"orderId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"19893211234"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"100"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Produto ou serviço"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"dtTransaction"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-30T16:16:14-0200"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"dtTransaction"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-03-05T16:16:14-0200"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"customer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Comprador"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"document"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12345678909"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"comprador@email.com"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"address"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rua Fidencio Ramos 100"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Endereco 100"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"number"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"100"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"district"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Vila Olimpia"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"zipcode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"05890090"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sao Paulo"</span><span class="p">,</span><span class="w">
@@ -1611,7 +1556,7 @@ maiores informações consulte o site https://www.pcisecuritystandards.org</p>
         </span><span class="nt">"providerReference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"20518839"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"electronicTransfer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
             </span><span class="nt">"provider"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Itau"</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;%= url_gateway %&gt;/v1/url-payment/6400d988-cc4b-4084-80ee-d5575dbbed4d"</span><span class="w">
+            </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.gate.2all.com.br/v1/url-payment/6400d988-cc4b-4084-80ee-d5575dbbed4d"</span><span class="w">
         </span><span class="p">}</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
@@ -1631,25 +1576,7 @@ maiores informações consulte o site https://www.pcisecuritystandards.org</p>
 <td><code class="prettyprint">transactionId</code></td>
 <td style="text-align: center">Texto</td>
 <td style="text-align: center">150</td>
-<td>Identificador da transação retornado pelo gateway.</td>
-</tr>
-<tr>
-<td><code class="prettyprint">orderId</code></td>
-<td style="text-align: center">Texto</td>
-<td style="text-align: center">100</td>
-<td>Numero de identificação da loja.</td>
-</tr>
-<tr>
-<td><code class="prettyprint">amount</code></td>
-<td style="text-align: center">Número</td>
-<td style="text-align: center">16</td>
-<td>Valor da transação.</td>
-</tr>
-<tr>
-<td><code class="prettyprint">description</code></td>
-<td style="text-align: center">Texto</td>
-<td style="text-align: center">300</td>
-<td>Descrição da transação.</td>
+<td>Identificador da transação do GATE2all.</td>
 </tr>
 <tr>
 <td><code class="prettyprint">dtTransaction</code></td>
@@ -1658,58 +1585,10 @@ maiores informações consulte o site https://www.pcisecuritystandards.org</p>
 <td>Data e hora da transação.</td>
 </tr>
 <tr>
-<td><code class="prettyprint">customer.name</code></td>
-<td style="text-align: center">Texto</td>
-<td style="text-align: center">100</td>
-<td>Nome do portador do cartão.</td>
-</tr>
-<tr>
-<td><code class="prettyprint">customer.document</code></td>
-<td style="text-align: center">Texto</td>
-<td style="text-align: center">18</td>
-<td>Número do CPF/CNPJ do portador do cartão.</td>
-</tr>
-<tr>
-<td><code class="prettyprint">customer.email</code></td>
-<td style="text-align: center">Texto</td>
-<td style="text-align: center">100</td>
-<td>Email do portador do cartão.</td>
-</tr>
-<tr>
-<td><code class="prettyprint">address.address</code></td>
-<td style="text-align: center">Texto</td>
-<td style="text-align: center">60</td>
-<td>Endereço do comprador.</td>
-</tr>
-<tr>
-<td><code class="prettyprint">address.district</code></td>
-<td style="text-align: center">Texto</td>
-<td style="text-align: center">80</td>
-<td>Bairro do comprador.</td>
-</tr>
-<tr>
-<td><code class="prettyprint">address.zipcode</code></td>
-<td style="text-align: center">Texto</td>
-<td style="text-align: center">10</td>
-<td>CEP do comprador.</td>
-</tr>
-<tr>
-<td><code class="prettyprint">address.city</code></td>
-<td style="text-align: center">Texto</td>
-<td style="text-align: center">30</td>
-<td>Cidade do comprador.</td>
-</tr>
-<tr>
-<td><code class="prettyprint">address.state</code></td>
-<td style="text-align: center">Texto</td>
-<td style="text-align: center">2</td>
-<td>Sigla do estado do comprador.</td>
-</tr>
-<tr>
 <td><code class="prettyprint">payment.providerReference</code></td>
 <td style="text-align: center">Texto</td>
 <td style="text-align: center">100</td>
-<td>Referencia da instituição.</td>
+<td>Referência da instituição.</td>
 </tr>
 <tr>
 <td><code class="prettyprint">payment.electronicTransfer.provider</code></td>
@@ -1725,13 +1604,13 @@ maiores informações consulte o site https://www.pcisecuritystandards.org</p>
 </tr>
 <tr>
 <td><code class="prettyprint">status</code></td>
-<td style="text-align: center">Numero</td>
+<td style="text-align: center">Número</td>
 <td style="text-align: center">2</td>
 <td><a href="#status">tabela de Status</a></td>
 </tr>
 </tbody></table>
 
-<h2 id="captura">Captura</h2>
+<h1 id="captura">Captura</h1>
 
 <p>Captura é a confirmação de uma transação autorizada, após a captura que é confirmada a transação entre lojista e comprador, gerando o crédito para o lojista e o lançamento do débito na fatura do portador do cartão.</p>
 
@@ -1768,7 +1647,7 @@ maiores informações consulte o site https://www.pcisecuritystandards.org</p>
 
 <h3 id="requisi-o">Requisição</h3>
 
-<aside class="request"><span class="method put">PUT</span> <span class="endpoint">/v1/transactions/{{transactionId}}/capture/</span></aside>
+<aside class="request"><span class="method put">PUT</span> <span class="endpoint">/v1/transactions/{{transactionId}}/capture</span></aside>
 
 <table><thead>
 <tr>
@@ -1784,7 +1663,7 @@ maiores informações consulte o site https://www.pcisecuritystandards.org</p>
 <td>Texto</td>
 <td>150</td>
 <td>Sim</td>
-<td>Identificador da transação retornado pelo gateway.</td>
+<td>Identificador da transação do GATE2all.</td>
 </tr>
 </tbody></table>
 
@@ -1794,82 +1673,44 @@ maiores informações consulte o site https://www.pcisecuritystandards.org</p>
 <p>Transação autorizada e capturada</p>
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"retorno"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"transactionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"e8e7c437-3cbf-4108-a482-2b870e0d8ead"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Transacao capturada com sucesso"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"transactionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"62f5a0b2-c632-4e4e-bc51-3b6681a54a3c"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"orderId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1488917347840"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"operationType"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"integrationType"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
     </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"100"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"tid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10069930690006A8C0CA"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AUTORIZADA_E_CAPTURADA"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"responseCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00"</span><span class="w">
-  </span><span class="p">}</span><span class="w">
+    </span><span class="nt">"installments"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"capture"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"authenticate"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"dtTransaction"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-03-07T17:09:07"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"payment"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"provider"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Cielo"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"authenticationECI"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"codAuthorization"</span><span class="p">:</span><span class="w"> </span><span class="s2">"123456"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"providerReference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"100699306900094D905A"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"providerCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"providerMessage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Transacao capturada com sucesso"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"card"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"421847******1234"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"brand"</span><span class="p">:</span><span class="w"> </span><span class="s2">"VISA"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"saveCard"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"customer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"HOLDER NAME"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"document"</span><span class="p">:</span><span class="w"> </span><span class="s2">"23650403811"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<pre class="highlight shell"><code>  <span class="o">{</span>
-    <span class="s2">"retorno"</span>: <span class="o">{</span>
-      <span class="s2">"transactionId"</span>: <span class="s2">"e8e7c437-3cbf-4108-a482-2b870e0d8ead"</span>,
-      <span class="s2">"message"</span>: <span class="s2">"Transacao capturada com sucesso"</span>,
-      <span class="s2">"amount"</span>: <span class="s2">"100"</span>,
-      <span class="s2">"tid"</span>: <span class="s2">"10069930690006A8C0CA"</span>,
-      <span class="s2">"status"</span>: <span class="s2">"AUTORIZADA_E_CAPTURADA"</span>,
-      <span class="s2">"responseCode"</span>: <span class="s2">"00"</span>
-    <span class="o">}</span>
-  <span class="o">}</span>
-
-</code></pre>
-
-<table><thead>
-<tr>
-<th>Propriedade</th>
-<th>Tipo</th>
-<th>Tamanho</th>
-<th>Descrição</th>
-</tr>
-</thead><tbody>
-<tr>
-<td><code class="prettyprint">transactionId</code></td>
-<td>Texto</td>
-<td>150</td>
-<td>Identificador da transação retornado pelo gateway.</td>
-</tr>
-<tr>
-<td><code class="prettyprint">message</code></td>
-<td>Texto</td>
-<td>100</td>
-<td>Mensagem de retorno da transação.</td>
-</tr>
-<tr>
-<td><code class="prettyprint">amount</code></td>
-<td>Número</td>
-<td>16</td>
-<td>alor da transação.</td>
-</tr>
-<tr>
-<td><code class="prettyprint">tid</code></td>
-<td>Texto</td>
-<td>100</td>
-<td>Identificador da transação retornado pela rede adquirente.</td>
-</tr>
-<tr>
-<td><code class="prettyprint">status</code></td>
-<td>Número</td>
-<td>2</td>
-<td>Status da transação retornado pelo gateway.</td>
-</tr>
-<tr>
-<td><code class="prettyprint">responseCode</code></td>
-<td>Texto</td>
-<td>2</td>
-<td>Código de resposta retornado pela rede adquirente.</td>
-</tr>
-</tbody></table>
+<pre class="highlight shell"><code></code></pre>
 
 <h2 id="captura-parcial">Captura Parcial</h2>
 
-<p>Para efetuar uma captura parcial, é necessário enviar um POST passando como parametro o valor a ser capturado.</p>
+<p>Para efetuar uma captura parcial, é necessário enviar um POST passando como parâmetro o valor a ser capturado.</p>
 
 <h3 id="requisi-o">Requisição</h3>
 
-<aside class="request"><span class="method put">PUT</span> <span class="endpoint">/v1/transaction/{{transactionId}}/capture?amount=100</span></aside>
+<aside class="request"><span class="method put">PUT</span> <span class="endpoint">/v1/transactions/{{transactionId}}/capture?amount=100</span></aside>
 
 <table><thead>
 <tr>
@@ -1885,14 +1726,14 @@ maiores informações consulte o site https://www.pcisecuritystandards.org</p>
 <td>Texto</td>
 <td>150</td>
 <td>Sim</td>
-<td>Identificador da transação retornado pelo gateway.</td>
+<td>Identificador da transação do GATE2all.</td>
 </tr>
 <tr>
 <td><code class="prettyprint">amount</code></td>
 <td>Número</td>
 <td>16</td>
 <td>Sim</td>
-<td>Valor da transação a ser capturado.</td>
+<td>Valor da transação a ser capturado sem pontuação. Os dois últimos dígitos são os centavos. (Ex: amount: 100 = R$ 1,00)</td>
 </tr>
 </tbody></table>
 
@@ -1902,75 +1743,38 @@ maiores informações consulte o site https://www.pcisecuritystandards.org</p>
 <p>Transação autorizada e capturada</p>
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"retorno"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"transactionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"e8e7c437-3cbf-4108-a482-2b870e0d8ead"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Transacao capturada com sucesso"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"transactionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"62f5a0b2-c632-4e4e-bc51-3b6681a54a3c"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"orderId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1488917347840"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"operationType"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"integrationType"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
     </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"100"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"tid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10069930690006A8C0CA"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AUTORIZADA_E_CAPTURADA"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"responseCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00"</span><span class="w">
-  </span><span class="p">}</span><span class="w">
+    </span><span class="nt">"installments"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"capture"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"authenticate"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"dtTransaction"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-03-07T17:09:07"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"payment"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"provider"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Cielo"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"authenticationECI"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"codAuthorization"</span><span class="p">:</span><span class="w"> </span><span class="s2">"123456"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"providerReference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"100699306900094D905A"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"providerCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"providerMessage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Transacao capturada com sucesso"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"card"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"421847******1234"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"brand"</span><span class="p">:</span><span class="w"> </span><span class="s2">"VISA"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"saveCard"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"customer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"HOLDER NAME"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"document"</span><span class="p">:</span><span class="w"> </span><span class="s2">"23650403811"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<pre class="highlight shell"><code>    <span class="o">{</span>
-      <span class="s2">"retorno"</span>: <span class="o">{</span>
-        <span class="s2">"transactionId"</span>: <span class="s2">"e8e7c437-3cbf-4108-a482-2b870e0d8ead"</span>,
-        <span class="s2">"message"</span>: <span class="s2">"Transacao capturada com sucesso"</span>,
-        <span class="s2">"amount"</span>: <span class="s2">"100"</span>,
-        <span class="s2">"tid"</span>: <span class="s2">"10069930690006A8C0CA"</span>,
-        <span class="s2">"status"</span>: <span class="s2">"AUTORIZADA_E_CAPTURADA"</span>,
-        <span class="s2">"responseCode"</span>: <span class="s2">"00"</span>
-      <span class="o">}</span>
-    <span class="o">}</span>
-</code></pre>
+<pre class="highlight shell"><code></code></pre>
 
-<table><thead>
-<tr>
-<th>Propriedade</th>
-<th>Tipo</th>
-<th>Tamanho</th>
-<th>Descrição</th>
-</tr>
-</thead><tbody>
-<tr>
-<td><code class="prettyprint">transactionId</code></td>
-<td>Texto</td>
-<td>150</td>
-<td>Identificador da transação retornado pelo gateway.</td>
-</tr>
-<tr>
-<td><code class="prettyprint">message</code></td>
-<td>Texto</td>
-<td>100</td>
-<td>Mensagem de retorno da transação.</td>
-</tr>
-<tr>
-<td><code class="prettyprint">amount</code></td>
-<td>Número</td>
-<td>16</td>
-<td>Valor da transação.</td>
-</tr>
-<tr>
-<td><code class="prettyprint">tid</code></td>
-<td>Texto</td>
-<td>100</td>
-<td>Identificador da transação retornado pela rede adquirente.</td>
-</tr>
-<tr>
-<td><code class="prettyprint">status</code></td>
-<td>Número</td>
-<td>2</td>
-<td>Status da transação retornado pelo gateway.</td>
-</tr>
-<tr>
-<td><code class="prettyprint">responseCode</code></td>
-<td>Texto</td>
-<td>2</td>
-<td>Código de resposta retornado pela rede adquirente.</td>
-</tr>
-</tbody></table>
-
-<h2 id="cancelamento">Cancelamento</h2>
+<h1 id="cancelamento">Cancelamento</h1>
 
 <p>Para realizar um cancelamento &ldquo;estorno&rdquo;, deve-se observar as seguintes condições:</p>
 
@@ -1998,7 +1802,7 @@ maiores informações consulte o site https://www.pcisecuritystandards.org</p>
 
 <h3 id="requisi-o">Requisição</h3>
 
-<aside class="request"><span class="method put">PUT</span> <span class="endpoint">/v1/transaction/{{transactionId}}/void</span></aside>
+<aside class="request"><span class="method put">PUT</span> <span class="endpoint">/v1/transactions/{{transactionId}}/void</span></aside>
 
 <table><thead>
 <tr>
@@ -2014,7 +1818,7 @@ maiores informações consulte o site https://www.pcisecuritystandards.org</p>
 <td>Texto</td>
 <td>150</td>
 <td>Sim</td>
-<td>Identificador da transação retornado pelo gateway.</td>
+<td>Identificador da transação do GATE2all.</td>
 </tr>
 </tbody></table>
 
@@ -2024,188 +1828,447 @@ maiores informações consulte o site https://www.pcisecuritystandards.org</p>
 <p>Transação cancelada</p>
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"retorno"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"transactionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"e8e7c437-3cbf-4108-a482-2b870e0d8ead"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Transacao cancelada com sucesso"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"transactionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"62f5a0b2-c632-4e4e-bc51-3b6681a54a3c"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"orderId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1488917347840"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"operationType"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"integrationType"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
     </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"100"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"tid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10069930690006A8C0CA"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CANCELADA"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"responseCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00"</span><span class="w">
-  </span><span class="p">}</span><span class="w">
+    </span><span class="nt">"installments"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"capture"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"authenticate"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"dtTransaction"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-03-07T17:09:07"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"payment"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"provider"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Cielo"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"authenticationECI"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"codAuthorization"</span><span class="p">:</span><span class="w"> </span><span class="s2">"123456"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"providerReference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"100699306900094D905A"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"providerCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"providerMessage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Transacao cancelada com sucesso"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"card"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"421847******1234"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"brand"</span><span class="p">:</span><span class="w"> </span><span class="s2">"VISA"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"saveCard"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"customer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"HOLDER NAME"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"document"</span><span class="p">:</span><span class="w"> </span><span class="s2">"23650403811"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<pre class="highlight shell"><code>   <span class="o">{</span>
-     <span class="s2">"retorno"</span>: <span class="o">{</span>
-       <span class="s2">"transactionId"</span>: <span class="s2">"e8e7c437-3cbf-4108-a482-2b870e0d8ead"</span>,
-       <span class="s2">"message"</span>: <span class="s2">"Transacao cancelada com sucesso"</span>,
-       <span class="s2">"amount"</span>: <span class="s2">"100"</span>,
-       <span class="s2">"tid"</span>: <span class="s2">"10069930690006A8C0CA"</span>,
-       <span class="s2">"status"</span>: <span class="s2">"CANCELADA"</span>,
-       <span class="s2">"responseCode"</span>: <span class="s2">"00"</span>
-     <span class="o">}</span>
-   <span class="o">}</span>
-</code></pre>
+<pre class="highlight shell"><code></code></pre>
 
-<table><thead>
-<tr>
-<th>Propriedade</th>
-<th>Tipo</th>
-<th>Tamanho</th>
-<th>Descrição</th>
-</tr>
-</thead><tbody>
-<tr>
-<td><code class="prettyprint">transactionId</code></td>
-<td>Texto</td>
-<td>150</td>
-<td>Identificador da transação retornado pelo gateway.</td>
-</tr>
-<tr>
-<td><code class="prettyprint">message</code></td>
-<td>Texto</td>
-<td>100</td>
-<td>Mensagem de retorno da transação.</td>
-</tr>
-<tr>
-<td><code class="prettyprint">amount</code></td>
-<td>Número</td>
-<td>16</td>
-<td>Valor da transação.</td>
-</tr>
-<tr>
-<td><code class="prettyprint">tid</code></td>
-<td>Texto</td>
-<td>100</td>
-<td>Identificador da transação retornado pela rede adquirente.</td>
-</tr>
-<tr>
-<td><code class="prettyprint">status</code></td>
-<td>Número</td>
-<td>2</td>
-<td>Status da transação retornado pelo gateway.</td>
-</tr>
-<tr>
-<td><code class="prettyprint">responseCode</code></td>
-<td>Texto</td>
-<td>2</td>
-<td>Código de resposta retornado pela rede adquirente.</td>
-</tr>
-</tbody></table>
-
-<h2 id="cancelamento-parcial">Cancelamento Parcial</h2>
-
-<p>Para efetuar um cancelamento parcial é necessário enviar um POST passando como parametro o valor a ser cancelado.</p>
-
-<h3 id="requisi-o">Requisição</h3>
-
-<aside class="request"><span class="method put">PUT</span> <span class="endpoint">/v1/transaction/{{transactionId}}/void?amount=100</span></aside>
-
-<table><thead>
-<tr>
-<th>Propriedade</th>
-<th>Tipo</th>
-<th>Tamanho</th>
-<th>Obrigatório</th>
-<th>Descrição</th>
-</tr>
-</thead><tbody>
-<tr>
-<td><code class="prettyprint">transactionId</code></td>
-<td>Texto</td>
-<td>150</td>
-<td>Sim</td>
-<td>Identificador da transação retornado pelo gateway.</td>
-</tr>
-<tr>
-<td><code class="prettyprint">amount</code></td>
-<td>Número</td>
-<td>16</td>
-<td>Sim</td>
-<td>Valor da transação.</td>
-</tr>
-</tbody></table>
-
-<h3 id="resposta">RESPOSTA</h3>
-
-<blockquote>
-<p>Transação cancelada</p>
-</blockquote>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"retorno"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"transactionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"e8e7c437-3cbf-4108-a482-2b870e0d8ead"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Transacao cancelada com sucesso"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"100"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"tid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10069930690006A8C0CA"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CANCELADA"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"responseCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00"</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-<pre class="highlight shell"><code>    <span class="o">{</span>
-       <span class="s2">"retorno"</span>: <span class="o">{</span>
-         <span class="s2">"transactionId"</span>: <span class="s2">"e8e7c437-3cbf-4108-a482-2b870e0d8ead"</span>,
-         <span class="s2">"message"</span>: <span class="s2">"Transacao cancelada com sucesso"</span>,
-         <span class="s2">"amount"</span>: <span class="s2">"100"</span>,
-         <span class="s2">"tid"</span>: <span class="s2">"10069930690006A8C0CA"</span>,
-         <span class="s2">"status"</span>: <span class="s2">"CANCELADA"</span>,
-         <span class="s2">"responseCode"</span>: <span class="s2">"00"</span>
-       <span class="o">}</span>
-     <span class="o">}</span>
-</code></pre>
-
-<table><thead>
-<tr>
-<th>Propriedade</th>
-<th>Tipo</th>
-<th>Tamanho</th>
-<th>Descrição</th>
-</tr>
-</thead><tbody>
-<tr>
-<td><code class="prettyprint">transactionId</code></td>
-<td>Texto</td>
-<td>150</td>
-<td>Identificador da transação retornado pelo gateway.</td>
-</tr>
-<tr>
-<td><code class="prettyprint">message</code></td>
-<td>Texto</td>
-<td>100</td>
-<td>Mensagem de retorno da transação.</td>
-</tr>
-<tr>
-<td><code class="prettyprint">amount</code></td>
-<td>Número</td>
-<td>16</td>
-<td>Valor da transação.</td>
-</tr>
-<tr>
-<td><code class="prettyprint">tid</code></td>
-<td>Texto</td>
-<td>100</td>
-<td>Identificador da transação retornado pela rede adquirente.</td>
-</tr>
-<tr>
-<td><code class="prettyprint">status</code></td>
-<td>Número</td>
-<td>2</td>
-<td>Status da transação retornado pelo gateway.</td>
-</tr>
-<tr>
-<td><code class="prettyprint">responseCode</code></td>
-<td>Texto</td>
-<td>2</td>
-<td>Código de resposta retornado pela rede adquirente.</td>
-</tr>
-</tbody></table>
-
-<h2 id="consulta">Consulta</h2>
+<h1 id="consulta">Consulta</h1>
 
 <p>Para realizar uma consulta é necessário enviar um GET para o seguinte recurso:</p>
 
 <h3 id="requisi-o">Requisição</h3>
 
-<aside class="request"><span class="method get">GET</span> <span class="endpoint">/v1/transaction/{{transactionId}}/</span></aside>
+<aside class="request"><span class="method get">GET</span> <span class="endpoint">/v1/transactions/{{transactionId}}</span></aside>
+
+<table><thead>
+<tr>
+<th>Propriedade</th>
+<th>Tipo</th>
+<th>Tamanho</th>
+<th>Obrigatório</th>
+<th>Descrição</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">transactionId</code></td>
+<td>Texto</td>
+<td>150</td>
+<td>Sim</td>
+<td>Identificador da transação do GATE2all.</td>
+</tr>
+</tbody></table>
+
+<h3 id="resposta">RESPOSTA</h3>
+
+<blockquote>
+<p>Retorno Transação de Crédito.</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"transactionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"62f5a0b2-c632-4e4e-bc51-3b6681a54a3c"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"orderId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1488917347840"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"operationType"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"integrationType"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"100"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"installments"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"capture"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"authenticate"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"dtTransaction"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-03-07T17:09:07"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"payment"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"codAuthorization"</span><span class="p">:</span><span class="w"> </span><span class="s2">"123456"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"providerReference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"100699306900094D905A"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"card"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"421847******1234"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"brand"</span><span class="p">:</span><span class="w"> </span><span class="s2">"VISA"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"saveCard"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"customer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"HOLDER NAME"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"document"</span><span class="p">:</span><span class="w"> </span><span class="s2">"23650403811"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<blockquote>
+<p>Retorno Transação com Boleto</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"transactionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7365ca65-70d4-4d7c-ac3d-a20f5730c241"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"orderId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"19893211234"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"100"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Produto ou serviço"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"dtTransaction"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-03-08T10:46:31-0300"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"customer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Comprador"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"document"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12345678909"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"comprador@email.com"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"address"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Endereco"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"100"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"district"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Vila Olimpia"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"zipcode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"09878675"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sao Paulo"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SP"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"payment"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"providerReference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"20575112"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"bankSlip"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"emissionDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-03-08"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"expirationDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-03-10"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"instructions"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Aceitar somente até a data de vencimento, após essa data juros de 1% dia"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"guarantor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Comprador"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"provider"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ITAU"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"paymentDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-03-10"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"paymentAmount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"100"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.gate.2all.com.br/v1/url-payment/6400d988-cc4b-4084-80ee-d5575dbbed4d"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<blockquote>
+<p>Retorno Transação com Transferência</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"transactionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6400d988-cc4b-4084-80ee-d5575dbbed4d"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"orderId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"19893211234"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"100"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Produto ou serviço"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"dtTransaction"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-03-05T16:16:14-0200"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"customer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Comprador"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"document"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12345678909"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"comprador@email.com"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"address"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Endereco 100"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"number"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"100"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"district"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Vila Olimpia"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"zipcode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"05890090"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sao Paulo"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SP"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"payment"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"providerReference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"20518839"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"electronicTransfer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"provider"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Itau"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.gate.2all.com.br/v1/url-payment/6400d988-cc4b-4084-80ee-d5575dbbed4d"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<pre class="highlight shell"><code></code></pre>
+
+<table><thead>
+<tr>
+<th>Propriedade</th>
+<th>Tipo</th>
+<th>Tamanho</th>
+<th>Obrigatório</th>
+<th>Descrição</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">orderId</code></td>
+<td>Texto</td>
+<td>100</td>
+<td>Sim</td>
+<td>Número de identificação da loja.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">operationType</code></td>
+<td>Número</td>
+<td>1</td>
+<td>Sim</td>
+<td>Operações disponíveis: <BR /> 1. Cartão de Crédito<BR /> 2. Cartão de Débito <BR /> 3. Parcelado Loja <BR /> 4. Parcelado Administrador</td>
+</tr>
+<tr>
+<td><code class="prettyprint">integrationType</code></td>
+<td>Número</td>
+<td>1</td>
+<td>Sim</td>
+<td>Tipo de integração disponível pelo Gate2All: <BR /> 1. Integrado<BR /> 2. Loja <BR /> 3. Direto</td>
+</tr>
+<tr>
+<td><code class="prettyprint">amount</code></td>
+<td>Número</td>
+<td>16</td>
+<td>Sim</td>
+<td>Valor da transação sem pontuação. Os dois últimos dígitos são os centavos. (Ex: amount: 100 = R$ 1,00)</td>
+</tr>
+<tr>
+<td><code class="prettyprint">installments</code></td>
+<td>Número</td>
+<td>2</td>
+<td>Sim</td>
+<td>Número de parcelas.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">capture</code></td>
+<td>Booleano</td>
+<td>—</td>
+<td>Sim</td>
+<td><strong>true</strong> = Autoriza e confirma a transação . <strong>false</strong> = Autorização, mas não confirma a transação, necessitando realizar a confirmação (<a href="#captura">Captura</a>) noutra requisição.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">authenticate</code></td>
+<td>Número</td>
+<td>1</td>
+<td>Não</td>
+<td>Opções disponíveis: <BR /> 1. Autorizar só transações autenticadas <BR /> 2. Autorizar transações autenticadas ou não autenticadas <BR /> 3. Autorizar sem autenticação <BR /></td>
+</tr>
+<tr>
+<td><code class="prettyprint">status</code></td>
+<td>Número</td>
+<td>2</td>
+<td>Não</td>
+<td>Status da transação retornado pelo gateway. <a href="#status">catálogo</a></td>
+</tr>
+<tr>
+<td><code class="prettyprint">payment.codAuthorization</code></td>
+<td>Texto</td>
+<td>100</td>
+<td>Codigo de autorização da instituição.</td>
+<td></td>
+</tr>
+<tr>
+<td><code class="prettyprint">payment.providerReference</code></td>
+<td>Texto</td>
+<td>100</td>
+<td>Referência da instituição.</td>
+<td></td>
+</tr>
+<tr>
+<td><code class="prettyprint">card.number</code></td>
+<td>Texto</td>
+<td>19</td>
+<td>Sim</td>
+<td>Número do cartão.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">card.brand</code></td>
+<td>Texto</td>
+<td>20</td>
+<td>Sim</td>
+<td>Bandeira do cartão.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">card.saveCard</code></td>
+<td>Booleano</td>
+<td>—</td>
+<td>Sim</td>
+<td>Configura salvar o cartão (tokenização).</td>
+</tr>
+<tr>
+<td><code class="prettyprint">customer.name</code></td>
+<td>Texto</td>
+<td>100</td>
+<td>Sim</td>
+<td>Nome do portador do cartão.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">customer.document</code></td>
+<td>Texto</td>
+<td>18</td>
+<td>Não</td>
+<td>Número do CPF/CNPJ do portador do cartão.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">customer.mail</code></td>
+<td>Texto</td>
+<td>40</td>
+<td>Não</td>
+<td>E-mail do portador do cartão.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">address.address</code></td>
+<td>Texto</td>
+<td>60</td>
+<td>Sim</td>
+<td>Endereço do comprador.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">address.number</code></td>
+<td>Texto</td>
+<td>10</td>
+<td>Sim</td>
+<td>Número do comprador.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">address.district</code></td>
+<td>Texto</td>
+<td>80</td>
+<td>Sim</td>
+<td>Bairro do comprador.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">address.zipcode</code></td>
+<td>Número</td>
+<td>8</td>
+<td>Sim</td>
+<td>CEP do comprador.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">address.city</code></td>
+<td>Texto</td>
+<td>30</td>
+<td>Sim</td>
+<td>Cidade do comprador.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">address.state</code></td>
+<td>Texto</td>
+<td>2</td>
+<td>Sim</td>
+<td>Sigla do estado do comprador.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">payment.bankSlip.emissionDate</code></td>
+<td>Texto</td>
+<td>20</td>
+<td>Sim</td>
+<td>Data de emissão do boleto. formato <strong>YYYY-MM-DD</strong></td>
+</tr>
+<tr>
+<td><code class="prettyprint">payment.bankSlip.expirationDate</code></td>
+<td>Texto</td>
+<td>20</td>
+<td>Sim</td>
+<td>Data de vencimento do boleto. formato <strong>YYYY-MM-DD</strong></td>
+</tr>
+<tr>
+<td><code class="prettyprint">payment.bankSlip.instructions</code></td>
+<td>Texto</td>
+<td>300</td>
+<td>Sim</td>
+<td>Instruções do boleto.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">payment.bankSlip.guarantor</code></td>
+<td>Texto</td>
+<td>45</td>
+<td>Sim</td>
+<td>Nome do avalista.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">payment.bankSlip.provider</code></td>
+<td>Texto</td>
+<td>20</td>
+<td>Sim</td>
+<td>Nome da instituição financeira :<ul><li><strong>BRADESCO</strong></li><li><strong>ITAU</strong></li></ul></td>
+</tr>
+<tr>
+<td><code class="prettyprint">payment.bankSlip.paymentDate</code></td>
+<td>Texto</td>
+<td>20</td>
+<td>Data de pagamento do boleto. formato <strong>YYYY-MM-DD</strong></td>
+<td></td>
+</tr>
+<tr>
+<td><code class="prettyprint">payment.bankSlip.paymentAmount</code></td>
+<td>Número</td>
+<td>16</td>
+<td>Valor de pagamento do boleto sem pontuação. Os dois últimos dígitos são os centavos. (Ex: amount: 100 = R$ 1,00)</td>
+<td></td>
+</tr>
+<tr>
+<td><code class="prettyprint">payment.bankSlip.url</code></td>
+<td>Texto</td>
+<td>300</td>
+<td>Endereço de acesso da transação.</td>
+<td></td>
+</tr>
+<tr>
+<td><code class="prettyprint">payment.electronicTransfer.provider</code></td>
+<td>Texto</td>
+<td>20</td>
+<td>Nome da instituição financeira :<ul><li><strong>BRADESCO</strong></li><li><strong>ITAU</strong></li></ul></td>
+<td></td>
+</tr>
+<tr>
+<td><code class="prettyprint">payment.electronicTransfer.url</code></td>
+<td>Texto</td>
+<td>300</td>
+<td>Endereço de acesso da transação.</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h2 id="consulta-pelo-n-mero-do-pedido">Consulta pelo número do Pedido</h2>
+
+<p>É possível realizar uma consulta pelo número do pedido através do seguinte recurso:</p>
+
+<h3 id="requisi-o">Requisição</h3>
+
+<aside class="request"><span class="method get">GET</span> <span class="endpoint">/v1/transactions/?orderId={{orderId}}</span></aside>
+
+<table><thead>
+<tr>
+<th>Propriedade</th>
+<th>Tipo</th>
+<th>Tamanho</th>
+<th>Obrigatório</th>
+<th>Descrição</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">orderId</code></td>
+<td>Texto</td>
+<td>100</td>
+<td>Sim</td>
+<td>Número de identificação da loja.</td>
+</tr>
+</tbody></table>
+
+<h3 id="resposta">RESPOSTA</h3>
+
+<blockquote>
+<p>Retorno da Transação.</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"transactionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"b9a37a7b-5ffe-4993-82ab-a26b6f332afe"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"100"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"dtTransaction"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-03-15T11:17:40"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"payment"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"provider"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Cielo"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+<pre class="highlight shell"><code></code></pre>
 
 <table><thead>
 <tr>
@@ -2223,32 +2286,228 @@ maiores informações consulte o site https://www.pcisecuritystandards.org</p>
 <td>Sim</td>
 <td>Identificador da transação retornado pelo gateway.</td>
 </tr>
+<tr>
+<td><code class="prettyprint">amount</code></td>
+<td>Número</td>
+<td>16</td>
+<td>Sim</td>
+<td>Valor da transação sem pontuação. Os dois últimos dígitos são os centavos. (Ex: amount: 100 = R$ 1,00)</td>
+</tr>
+<tr>
+<td><code class="prettyprint">status</code></td>
+<td>Número</td>
+<td>2</td>
+<td>Não</td>
+<td>Status da transação retornado pelo gateway. <a href="#status">catálogo</a></td>
+</tr>
+<tr>
+<td><code class="prettyprint">dtTransaction</code></td>
+<td>DataHora</td>
+<td>19</td>
+<td>Data e hora da transação.</td>
+<td></td>
+</tr>
+<tr>
+<td><code class="prettyprint">payment.provider</code></td>
+<td>Texto</td>
+<td>100</td>
+<td>Nome da instituição financeira.</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h2 id="consulta-pelo-n-mero-do-pedido-com-limite">Consulta pelo número do Pedido com Limite</h2>
+
+<p>Também é possível realizar uma consulta pelo número do pedido passando um limite.</p>
+
+<h3 id="requisi-o">Requisição</h3>
+
+<aside class="request"><span class="method get">GET</span> <span class="endpoint">/v1/transactions/?orderId={{orderId}}&limit=2</span></aside>
+
+<table><thead>
+<tr>
+<th>Propriedade</th>
+<th>Tipo</th>
+<th>Tamanho</th>
+<th>Obrigatório</th>
+<th>Descrição</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">orderId</code></td>
+<td>Texto</td>
+<td>100</td>
+<td>Sim</td>
+<td>Número de identificação da loja.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">limit</code></td>
+<td>Número</td>
+<td>10</td>
+<td>Não</td>
+<td>Limite Máximo de pedidos 10.</td>
+</tr>
+</tbody></table>
+
+<h3 id="resposta">RESPOSTA</h3>
+
+<blockquote>
+<p>Retorno da Transação.</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"transactionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"894aa0ad-517a-435c-b95d-8f60f1a2b9f5"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"100"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"dtTransaction"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-03-16T07:37:23"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"payment"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"provider"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Cielo"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"transactionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5dbc102d-2b4b-4755-9f14-1b4c3d8a6716"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"100"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"dtTransaction"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-03-16T07:37:00"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"payment"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"provider"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Cielo"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+<pre class="highlight shell"><code></code></pre>
+
+<table><thead>
+<tr>
+<th>Propriedade</th>
+<th>Tipo</th>
+<th>Tamanho</th>
+<th>Obrigatório</th>
+<th>Descrição</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">transactionId</code></td>
+<td>Texto</td>
+<td>150</td>
+<td>Sim</td>
+<td>Identificador da transação retornado pelo gateway.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">amount</code></td>
+<td>Número</td>
+<td>16</td>
+<td>Sim</td>
+<td>Valor da transação sem pontuação. Os dois últimos dígitos são os centavos. (Ex: amount: 100 = R$ 1,00)</td>
+</tr>
+<tr>
+<td><code class="prettyprint">status</code></td>
+<td>Número</td>
+<td>2</td>
+<td>Não</td>
+<td>Status da transação retornado pelo gateway. <a href="#status">catálogo</a></td>
+</tr>
+<tr>
+<td><code class="prettyprint">dtTransaction</code></td>
+<td>DataHora</td>
+<td>19</td>
+<td>Data e hora da transação.</td>
+<td></td>
+</tr>
+<tr>
+<td><code class="prettyprint">payment.provider</code></td>
+<td>Texto</td>
+<td>100</td>
+<td>Nome da instituição financeira.</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h1 id="tokeniza-o">Tokenização</h1>
+
+<p>O método de tokenização permite a realização de transações sem o envio dos dados do cartão de crédito pela loja virtual. Os dados do cartão são armazenados na rede adquirente que retorna um código associado ao número do cartão e o estabelecimento que solicitou o armazenamento.</p>
+
+<p>Os dados do cartão poderão ser salvos de três formas:</p>
+
+<ol>
+<li><p>Configurando o parâmetro <code class="prettyprint">&quot;saveCard&quot;: true</code> nas requisições de transação de cartão de crédito.</p></li>
+<li><p>Acionando o formulário do GATE2all para capturar os dados do cartão (desta forma seu sistema não manipula os dados sensíveis do cartão).</p></li>
+<li><p>Enviando os dados do cartão via POST.</p></li>
+</ol>
+
+<p><strong>REGRAS DA TOKENIZAÇÃO:</strong></p>
+
+<ul>
+<li><strong>Disponível somente para adquirente Cielo.</strong></li>
+<li>Cada código de token é único por estabelecimento comercial. Se o mesmo cartão for “tokenizado” para outro estabelecimento, este terá um token diferente.</li>
+<li>Caso um estabelecimento envie duas ou mais vezes para gravar os mesmos dados de cartão, será retornado sempre o mesmo token.</li>
+<li>Não há garantia que o cartão gravado terá todas as suas transações autorizadas, pois são processos independentes e distintos.</li>
+<li>Um token não utilizado poderá ser removido do banco de dados da adquirente, conforme politica própria.</li>
+</ul>
+
+<aside class="warning">A adquirente poderá cobrar valores pelo serviço de armazenamento de dados de cartões de crédito.</aside>
+
+<p>Esta integração permite que o desenvolvedor da loja virtual implemente:</p>
+
+<ul>
+<li>Transação em um click ou “one step checkout”.</li>
+<li>Recorrência de transações sem o armazenamento dos dados dos cartões.</li>
+</ul>
+
+<h2 id="tokeniza-o-com-formul-rio">Tokenização com Formulário</h2>
+
+<p>Para criar um formulário que capturá os dados do cartão para gerar um token é necessário enviar um POST para o seguinte recurso:</p>
+
+<h3 id="requisi-o">REQUISIÇÃO</h3>
+
+<aside class="request"><span class="method post">POST</span> <span class="endpoint">/v1/tokenization/intention</span></aside>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"postBackUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://url-notificacao"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"redirectUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://url-redirect"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"brand"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"VISA"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<pre class="highlight shell"><code></code></pre>
+
+<table><thead>
+<tr>
+<th>Propriedade</th>
+<th>Tipo</th>
+<th>Tamanho</th>
+<th>Obrigatório</th>
+<th>Descrição</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">postBackUrl</code></td>
+<td>Texto</td>
+<td>—</td>
+<td>Sim</td>
+<td>URL onde o GATE2all notificará eventuais status da tokenização para o lojista.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">redirectUrl</code></td>
+<td>Texto</td>
+<td>—</td>
+<td>Sim</td>
+<td>URL onde o GATE2all redirecionará o comprador após o processamento da tokenização.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">brand</code></td>
+<td>Texto</td>
+<td>20</td>
+<td>Não</td>
+<td>Bandeira do cartão.</td>
+</tr>
 </tbody></table>
 
 <h3 id="resposta">RESPOSTA</h3>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"retorno"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"transactionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"e8e7c437-3cbf-4108-a482-2b870e0d8ead"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"orderId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1463697571584"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"100"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"tid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10069930690006A8C0CA"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"authorizationCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"123456"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CANCELADA"</span><span class="w">
-  </span><span class="p">}</span><span class="w">
+  </span><span class="nt">"transactionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9477f767-f037-45f4-93ce-a40d10b49e86"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.gate.2all.com.br/v1/save-card/9477f767-f037-45f4-93ce-a40d10b49e86"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<pre class="highlight shell"><code>  <span class="o">{</span>
-    <span class="s2">"retorno"</span>: <span class="o">{</span>
-      <span class="s2">"transactionId"</span>: <span class="s2">"e8e7c437-3cbf-4108-a482-2b870e0d8ead"</span>,
-      <span class="s2">"orderId"</span>: <span class="s2">"1463697571584"</span>,
-      <span class="s2">"amount"</span>: <span class="s2">"100"</span>,
-      <span class="s2">"tid"</span>: <span class="s2">"10069930690006A8C0CA"</span>,
-      <span class="s2">"authorizationCode"</span>: <span class="s2">"123456"</span>,
-      <span class="s2">"status"</span>: <span class="s2">"CANCELADA"</span>
-    <span class="o">}</span>
-  <span class="o">}</span>
-
-</code></pre>
+<pre class="highlight shell"><code></code></pre>
 
 <table><thead>
 <tr>
@@ -2262,76 +2521,393 @@ maiores informações consulte o site https://www.pcisecuritystandards.org</p>
 <td><code class="prettyprint">transactionId</code></td>
 <td>Texto</td>
 <td>150</td>
-<td>Identificador da transação retornado pelo gateway.</td>
+<td>Identificador da transação do GATE2all.</td>
 </tr>
+<tr>
+<td><code class="prettyprint">url</code></td>
+<td>Texto</td>
+<td>150</td>
+<td>URL disponível para acesso a tokenização.</td>
+</tr>
+</tbody></table>
+
+<aside class="success">
+Redirecione o comprador para a URL da resposta.
+</aside>
+
+<p><BR></p>
+
+<aside class="notice">
+Caso a bandeira seja passado como paramêtro, será disponibilizado a seguinte tela de acesso.
+</aside>
+
+<p><BR></p>
+
+<p><img src="images/img-intention-01.png" /></p>
+
+<p><BR>
+<aside class="notice">
+Caso não seja seja passado nenhuma bandeira como paramêtro, será disponibilizado a seguinte tela de acesso com as bandeiras configuradas.
+</aside></p>
+
+<p><BR>
+<img src="images/img-intention-02.png" /></p>
+
+<h2 id="tokeniza-o-direta">Tokenização Direta</h2>
+
+<p>Para realizar uma tokenização direta é necessário enviar um POST para o seguinte recurso:</p>
+
+<h3 id="requisi-o">Requisição</h3>
+
+<aside class="request"><span class="method post">POST</span> <span class="endpoint">/v1/tokenization</span></aside>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+   </span><span class="nt">"payment"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+       </span><span class="nt">"card"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4024007148992927"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"expirationMonth"</span><span class="p">:</span><span class="w"> </span><span class="s2">"04"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"expirationYear"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"brand"</span><span class="p">:</span><span class="w"> </span><span class="s2">"VISA"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"holderName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Comprador"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+   </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<pre class="highlight shell"><code>curl --request POST
+  --url /v1/transactions/tokenization
+  --header <span class="s1">'content-type: application/json'</span>
+  --header <span class="s1">'authenticationApi: XXXXXX'</span>
+  --header <span class="s1">'authenticationKey: XXXXXX'</span>
+
+  --data-binary
+  <span class="o">{</span>
+   <span class="s2">"payment"</span>: <span class="o">{</span>
+       <span class="s2">"card"</span>: <span class="o">{</span>
+          <span class="s2">"number"</span>: <span class="s2">"4024007148992927"</span>,
+          <span class="s2">"expirationMonth"</span>: <span class="s2">"04"</span>,
+          <span class="s2">"expirationYear"</span>: <span class="s2">"2017"</span>,
+          <span class="s2">"brand"</span>: <span class="s2">"VISA"</span>,
+          <span class="s2">"holderName"</span>: <span class="s2">"Comprador"</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+  <span class="o">}</span>
+--verbose
+</code></pre>
+
+<table><thead>
+<tr>
+<th>Propriedade</th>
+<th style="text-align: center">Tipo</th>
+<th style="text-align: center">Tamanho</th>
+<th>Descrição</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">payment.card.number</code></td>
+<td style="text-align: center">Texto</td>
+<td style="text-align: center">20</td>
+<td>Número do cartão truncado.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">payment.card.expirationMonth</code></td>
+<td style="text-align: center">Número</td>
+<td style="text-align: center">2</td>
+<td>Mês da validade do cartão.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">payment.card.expirationYear</code></td>
+<td style="text-align: center">Número</td>
+<td style="text-align: center">4</td>
+<td>Ano da validade do cartão.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">payment.card.brand</code></td>
+<td style="text-align: center">Texto</td>
+<td style="text-align: center">20</td>
+<td>Bandeira do cartão.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">payment.card.holderName</code></td>
+<td style="text-align: center">Texto</td>
+<td style="text-align: center">100</td>
+<td>Nome do portador do cartão.</td>
+</tr>
+</tbody></table>
+
+<h3 id="resposta">RESPOSTA</h3>
+
+<blockquote>
+<p>Tokenização gerada</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"integrationType"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"payment"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"provider"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Cielo"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"card"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"402400******2927"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"expirationMonth"</span><span class="p">:</span><span class="w"> </span><span class="s2">"04"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"expirationYear"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"brand"</span><span class="p">:</span><span class="w"> </span><span class="s2">"VISA"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"be4cbeb1-abb2-4913-8165-f86962143fa021"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"holderName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Comprador"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"saveCard"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<pre class="highlight shell"><code> <span class="o">{</span>
+  <span class="s2">"integrationType"</span>: 1,
+  <span class="s2">"status"</span>: 0,
+  <span class="s2">"payment"</span>: <span class="o">{</span>
+    <span class="s2">"provider"</span>: <span class="s2">"Cielo"</span>,
+    <span class="s2">"card"</span>: <span class="o">{</span>
+      <span class="s2">"number"</span>: <span class="s2">"402400******2927"</span>,
+      <span class="s2">"expirationMonth"</span>: <span class="s2">"04"</span>,
+      <span class="s2">"expirationYear"</span>: <span class="s2">"2017"</span>,
+      <span class="s2">"brand"</span>: <span class="s2">"VISA"</span>,
+      <span class="s2">"token"</span>: <span class="s2">"be4cbeb1-abb2-4913-8165-f86962143fa021"</span>,
+      <span class="s2">"holderName"</span>: <span class="s2">"USUARIO TESTE"</span>,
+      <span class="s2">"saveCard"</span>: <span class="nb">true</span>
+    <span class="o">}</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre>
+
+<table><thead>
+<tr>
+<th>Propriedade</th>
+<th style="text-align: center">Tipo</th>
+<th style="text-align: center">Tamanho</th>
+<th>Descrição</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">integrationType</code></td>
+<td style="text-align: center">Número</td>
+<td style="text-align: center">1</td>
+<td>Sim</td>
+</tr>
+<tr>
+<td><code class="prettyprint">status</code></td>
+<td style="text-align: center">Número</td>
+<td style="text-align: center">2</td>
+<td>Status da transação retornado pelo GATE2all <a href="#status">catálogo</a>.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">payment.provider</code></td>
+<td style="text-align: center">Texto</td>
+<td style="text-align: center">100</td>
+<td>Nome da Rede Adquirente.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">payment.card.number</code></td>
+<td style="text-align: center">Texto</td>
+<td style="text-align: center">20</td>
+<td>Número do cartão truncado.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">payment.card.expirationMonth</code></td>
+<td style="text-align: center">Número</td>
+<td style="text-align: center">2</td>
+<td>Mês da validade do cartão.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">payment.card.expirationYear</code></td>
+<td style="text-align: center">Número</td>
+<td style="text-align: center">4</td>
+<td>Ano da validade do cartão.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">payment.card.brand</code></td>
+<td style="text-align: center">Texto</td>
+<td style="text-align: center">20</td>
+<td>Bandeira do cartão.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">payment.card.token</code></td>
+<td style="text-align: center">Texto</td>
+<td style="text-align: center">100</td>
+<td>Token do cartão.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">payment.card.holderName</code></td>
+<td style="text-align: center">Texto</td>
+<td style="text-align: center">100</td>
+<td>Nome do portador do cartão.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">payment.card.saveCard</code></td>
+<td style="text-align: center">Booleano</td>
+<td style="text-align: center">Sim</td>
+<td>Configura salvar o cartão (tokenização).</td>
+</tr>
+</tbody></table>
+
+<h2 id="transa-o-com-token">Transação com Token</h2>
+
+<p>Para criar uma transação com token é necessário enviar um POST para o seguinte recurso:</p>
+
+<h3 id="requisi-o">REQUISIÇÃO</h3>
+
+<aside class="request"><span class="method post">POST</span> <span class="endpoint">/v1/transactions</span></aside>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+   </span><span class="nt">"orderId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"19893211234"</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"100"</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"softDescriptor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Pagamento Gate2all"</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Mouse sem fio"</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"capture"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"installments"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"operationType"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"authenticate"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"customer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Comprador Teste"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"document"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12345678909"</span><span class="w">
+   </span><span class="p">},</span><span class="w">
+   </span><span class="nt">"payment"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+       </span><span class="nt">"card"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4b6a2aa5-de91-4d52-a4d1-f265f208e5a321"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"cvv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"234"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+   </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<pre class="highlight shell"><code></code></pre>
+
+<table><thead>
+<tr>
+<th>Propriedade</th>
+<th>Tipo</th>
+<th>Tamanho</th>
+<th>Obrigatório</th>
+<th>Descrição</th>
+</tr>
+</thead><tbody>
 <tr>
 <td><code class="prettyprint">orderId</code></td>
 <td>Texto</td>
 <td>100</td>
 <td>Sim</td>
+<td>Número de identificação da loja.</td>
 </tr>
 <tr>
 <td><code class="prettyprint">amount</code></td>
 <td>Número</td>
 <td>16</td>
-<td>Valor da transação.</td>
+<td>Sim</td>
+<td>Valor da transação sem pontuação. Os dois últimos dígitos são os centavos. (Ex: amount: 100 = R$ 1,00)</td>
 </tr>
 <tr>
-<td><code class="prettyprint">tid</code></td>
+<td><code class="prettyprint">description</code></td>
 <td>Texto</td>
-<td>100</td>
-<td>Identificador da transação retornado pela rede adquirente.</td>
+<td>300</td>
+<td>Não</td>
+<td>Descrição da transação.</td>
 </tr>
 <tr>
-<td><code class="prettyprint">status</code></td>
+<td><code class="prettyprint">softDescriptor</code></td>
+<td>Texto</td>
+<td>22</td>
+<td>Não</td>
+<td>Texto a ser exibido na fatura do portador do cartão.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">capture</code></td>
+<td>Booleano</td>
+<td>—</td>
+<td>Sim</td>
+<td><strong>true</strong> = Autoriza e confirma a transação . <strong>false</strong> = Autorização, mas não confirma a transação, necessitando realizar a confirmação (<a href="#captura">Captura</a>) noutra requisição.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">installments</code></td>
 <td>Número</td>
 <td>2</td>
-<td>Status da transação retornado pelo gateway.</td>
+<td>Sim</td>
+<td>Número de parcelas.</td>
 </tr>
 <tr>
-<td><code class="prettyprint">authorizationCode</code></td>
+<td><code class="prettyprint">operationType</code></td>
+<td>Número</td>
+<td>1</td>
+<td>Sim</td>
+<td>Operações disponíveis: <BR /> 1. Cartão de Crédito<BR /> 2. Cartão de Débito <BR /> 3. Parcelado Loja <BR /> 4. Parcelado Administrador</td>
+</tr>
+<tr>
+<td><code class="prettyprint">authenticate</code></td>
+<td>Número</td>
+<td>1</td>
+<td>Não</td>
+<td>Opções disponíveis: <BR /> 1. Autorizar só transações autenticadas <BR /> 2. Autorizar transações autenticadas ou não autenticadas <BR /> 3. Autorizar sem autenticação <BR /></td>
+</tr>
+<tr>
+<td><code class="prettyprint">customer.name</code></td>
 <td>Texto</td>
-<td>2</td>
-<td>Código de autorização retornado pela rede adquirente.</td>
+<td>100</td>
+<td>Sim</td>
+<td>Nome do portador do cartão.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">customer.document</code></td>
+<td>Texto</td>
+<td>18</td>
+<td>Não</td>
+<td>Número do CPF/CNPJ do portador do cartão.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">card.token</code></td>
+<td>Texto</td>
+<td>100</td>
+<td>Sim</td>
+<td>Token gerado anteriormente pela operação de Tokenização.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">card.cvv</code></td>
+<td>Número</td>
+<td>4</td>
+<td>Não</td>
+<td>Código de segurança do cartão.</td>
 </tr>
 </tbody></table>
 
-<h1 id="lightbox">LightBox</h1>
-
-<p>O gate2All disponibiliza uma biblioteca javascript para facilitar a integração com o seu site.</p>
-
-<p><img src="images/lightBox.png" /></p>
-
-<ul>
-<li><p>Primeiro o usuário deve acessar o seguinte endereço: <a href='http://192.168.20.79:9191' target='_blank'>clicar aqui</a></p></li>
-<li><p>Depois que logar com suas credenciais, ele deve acessar o menu clientes, depois ir em configuração.</p></li>
-</ul>
-
-<p><img src="images/lightBoxp1.png" /></p>
-
-<ul>
-<li>Clicar no botão &ldquo;Visualizar&rdquo;. Copiar o usuario e o token.</li>
-</ul>
-
-<p><img src="images/lightBoxp2.png" /></p>
+<h3 id="resposta">RESPOSTA</h3>
 
 <blockquote>
-<p>Em sua página web você deve importar os seguintes scripts.</p>
+<p>Transação autorizada e não capturada</p>
 </blockquote>
-<pre class="highlight javascript"><code><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">src</span><span class="o">=</span><span class="s2">"path/jquery.min.js"</span> <span class="o">/&gt;</span>
-<span class="o">&lt;</span><span class="nx">script</span><span class="o">&gt;</span>
- <span class="nx">id</span><span class="o">=</span><span class="s2">"gate2all-payment"</span>
- <span class="nx">src</span><span class="o">=</span><span class="s2">"js/lightBoxGate2all.js"</span>
- <span class="nx">data</span><span class="o">-</span><span class="nx">company</span><span class="o">=</span><span class="s2">"Setis"</span>
- <span class="nx">data</span><span class="o">-</span><span class="nx">button</span><span class="o">=</span><span class="s2">"Enviar doação"</span>
- <span class="nx">data</span><span class="o">-</span><span class="nx">user</span><span class="o">=</span><span class="s2">"sdfsfsdfdf345453"</span>
- <span class="nx">data</span><span class="o">-</span><span class="nx">password</span><span class="o">=</span><span class="s2">"klkljkljkl45jk45"</span>
- <span class="nx">data</span><span class="o">-</span><span class="nx">fixedinstallments</span><span class="o">=</span><span class="s2">"true"</span>
- <span class="nx">data</span><span class="o">-</span><span class="nx">operationtype</span><span class="o">=</span><span class="s2">"3"</span>
- <span class="nx">data</span><span class="o">-</span><span class="nx">installments</span><span class="o">=</span><span class="s2">"6"</span>
- <span class="nx">data</span><span class="o">-</span><span class="nx">capture</span><span class="o">=</span><span class="s2">"false"</span>
-<span class="o">&lt;</span><span class="sr">/script</span><span class="err">&gt;
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"transactionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5a51ae6b-e91e-4b38-b596-e2acb77dca43"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"orderId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1489093308860"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Mouse sem fio"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"softDescriptor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Pagamento Gate2all"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"operationType"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"integrationType"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"100"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"installments"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"capture"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"authenticate"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"dtTransaction"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-03-09T18:01:17"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"payment"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"provider"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Cielo"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"authenticationECI"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"codAuthorization"</span><span class="p">:</span><span class="w"> </span><span class="s2">"123456"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"providerReference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10069930690009510E9A"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"providerCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"providerMessage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Transação autorizada"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"card"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"402400******2927"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"cvv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"***"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"brand"</span><span class="p">:</span><span class="w"> </span><span class="s2">"VISA"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4b6a2aa5-de91-4d52-a4d1-f265f208e5a321"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"saveCard"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"customer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Comprador Teste"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"document"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12345678909"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
 </span></code></pre>
+<pre class="highlight shell"><code></code></pre>
 
 <table><thead>
 <tr>
@@ -2342,73 +2918,60 @@ maiores informações consulte o site https://www.pcisecuritystandards.org</p>
 </tr>
 </thead><tbody>
 <tr>
-<td><code class="prettyprint">data-company</code></td>
+<td><code class="prettyprint">transactionId</code></td>
 <td>Texto</td>
 <td>150</td>
-<td>Nome da sua empresa</td>
+<td>Identificador da transação do GATE2all.</td>
 </tr>
 <tr>
-<td><code class="prettyprint">data-button</code></td>
+<td><code class="prettyprint">dtTransaction</code></td>
+<td>DataHora</td>
+<td>19</td>
+<td>Data e hora da transação.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">payment.provider</code></td>
 <td>Texto</td>
-<td>150</td>
-<td>Texto do botão de enviar transação</td>
+<td>100</td>
+<td>Nome da instituição financeira.</td>
 </tr>
 <tr>
-<td><code class="prettyprint">data-user</code></td>
+<td><code class="prettyprint">payment.providerReference</code></td>
 <td>Texto</td>
-<td>150</td>
-<td>Usuário copiado do site</td>
+<td>100</td>
+<td>Referência da instituição.</td>
 </tr>
 <tr>
-<td><code class="prettyprint">data-password</code></td>
+<td><code class="prettyprint">payment.providerMessage</code></td>
 <td>Texto</td>
-<td>150</td>
-<td>Token copiado do site</td>
+<td>100</td>
+<td>Mensagem da instituição.</td>
 </tr>
 <tr>
-<td><code class="prettyprint">data-fixedinstallments</code></td>
-<td>Booleano</td>
-<td>-</td>
-<td>Flag utilizada para indicar se a parcela é fixa</td>
+<td><code class="prettyprint">payment.providerCode</code></td>
+<td>Texto</td>
+<td>100</td>
+<td>Codigo de resposta da instituição.</td>
 </tr>
 <tr>
-<td><code class="prettyprint">data-operationtype</code></td>
+<td><code class="prettyprint">payment.codAuthorization</code></td>
+<td>Texto</td>
+<td>100</td>
+<td>Codigo de autorização da instituição.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">payment.authenticationECI</code></td>
+<td>Texto</td>
+<td>100</td>
+<td>Indicador de autenticação da transação.<a href="#status-eci">Códigos ECI</a></td>
+</tr>
+<tr>
+<td><code class="prettyprint">status</code></td>
 <td>Número</td>
 <td>2</td>
-<td>Tipo de parcelamento. ADM: 2 ou Loja: 3</td>
-</tr>
-<tr>
-<td><code class="prettyprint">data-installments</code></td>
-<td>Número</td>
-<td>16</td>
-<td>Valor do numero de parcelas fixa</td>
-</tr>
-<tr>
-<td><code class="prettyprint">data-capture</code></td>
-<td>Booleano</td>
-<td>-</td>
-<td>Flag para capturar suas transações depois de completas</td>
+<td>Status da transação retornado pelo GATE2all <a href="#status">catálogo</a>.</td>
 </tr>
 </tbody></table>
-
-<blockquote>
-<p>Nos campos de valor da compra e número do documento devem ter os seguintes id&rsquo;s:
-     <em>id=&ldquo;valor&rdquo;; id=&ldquo;pedido&rdquo;;</em></p>
-</blockquote>
-
-<p><br /></p>
-
-<blockquote>
-<p>Segue a chamada do botão para chamar a tela lightBox de pagamento:</p>
-</blockquote>
-<pre class="highlight javascript"><code><span class="o">&lt;</span><span class="nx">button</span> <span class="nx">type</span><span class="o">=</span><span class="s2">"button"</span> <span class="nx">name</span><span class="o">=</span><span class="s2">"chamaPag"</span> <span class="nx">data</span><span class="o">-</span><span class="nx">toggle</span><span class="o">=</span><span class="s2">"modal"</span> <span class="nx">data</span><span class="o">-</span><span class="nx">target</span><span class="o">=</span><span class="s2">"#modalPag"</span><span class="o">&gt;</span><span class="nx">Dados</span> <span class="nx">de</span> <span class="nx">Pagamento</span><span class="o">&lt;</span><span class="sr">/button</span><span class="err">&gt;
-</span></code></pre>
-
-<blockquote>
-<p>Deve colocar essa div dentro do body onde está o &ldquo;button&rdquo;:</p>
-</blockquote>
-<pre class="highlight javascript"><code><span class="o">&lt;</span><span class="nx">div</span> <span class="nx">id</span><span class="o">=</span><span class="s2">"payment-form"</span><span class="o">&gt;&lt;</span><span class="sr">/div</span><span class="err">&gt;
-</span></code></pre>
 
           <h1 id="status">STATUS</h1>
 
@@ -2499,6 +3062,10 @@ maiores informações consulte o site https://www.pcisecuritystandards.org</p>
 <td>Resource Not Found</td>
 </tr>
 <tr>
+<td>405</td>
+<td>Method Not Allowed</td>
+</tr>
+<tr>
 <td>500</td>
 <td>Internal Server Error</td>
 </tr>
@@ -2533,6 +3100,54 @@ maiores informações consulte o site https://www.pcisecuritystandards.org</p>
 <tr>
 <td style="text-align: center"><code class="prettyprint">message</code></td>
 <td>Mensagem de erro retornado pelo Gate2all</td>
+</tr>
+</tbody></table>
+
+          <h1 id="status-eci">STATUS ECI</h1>
+
+<table><thead>
+<tr>
+<th>RESULTADO DA AUTENTICAÇÃO</th>
+<th>VISA</th>
+<th>MASTERCARD</th>
+<th>AURA</th>
+<th>DEMAIS</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Transação autenticada com sucesso</td>
+<td>5</td>
+<td>2</td>
+<td>N/D</td>
+<td>N/D</td>
+</tr>
+<tr>
+<td>Portador não fez autenticação, pois o emissor não forneceu mecanismos de autenticação.</td>
+<td>6</td>
+<td>1</td>
+<td>N/D</td>
+<td>N/D</td>
+</tr>
+<tr>
+<td>Portador não se autenticou com sucesso, pois ocorreu um erro técnico inesperado.</td>
+<td>7</td>
+<td>1</td>
+<td>N/D</td>
+<td>N/D</td>
+</tr>
+<tr>
+<td>Portador não se autenticou com sucesso.</td>
+<td>7</td>
+<td>0</td>
+<td>N/D</td>
+<td>N/D</td>
+</tr>
+<tr>
+<td>A loja optou por autorizar sem passar pela autenticação.</td>
+<td>7</td>
+<td>0</td>
+<td>0</td>
+<td>7</td>
 </tr>
 </tbody></table>
 
