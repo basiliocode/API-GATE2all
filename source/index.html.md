@@ -4,6 +4,7 @@ title: GATE2all Guia de Integração API V2
 language_tabs:
   - json: JSON
   - shell: cURL
+  - java: JAVA
 
 toc_footers:
   - <a href='https://gate.2all.com.br'>Painel de Controle do GATE2all</a>
@@ -258,11 +259,11 @@ Para realizar uma intenção de venda é necessário enviar um POST para o segui
 
 ```json
 {
-    "orderId": "19893211234",
+    "referenceId": "19893211234",
     "amount": "100",
     "description": "Mouse sem fio",
     "postBackUrl": "http://url-notificacao",
-  "redirectUrl": "http://url-redirect",
+    "redirectUrl": "http://url-redirect",
     "dhExpiration": "2017-08-25T18:10:53",
     "customer": {
         "name": "Comprador Teste",
@@ -283,7 +284,7 @@ Para realizar uma intenção de venda é necessário enviar um POST para o segui
             "capture": false,
             "installments": "2",
             "fixedInstallments": false,
-            "operationType": "4",
+            "interestType": "3",
             "authenticate": "3",
             "softDescriptor": "Gate2@all",
             "saveCard": true
@@ -301,9 +302,89 @@ Para realizar uma intenção de venda é necessário enviar um POST para o segui
 }
 ```
 
+```shell
+```
+
+
+```java
+
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.Scanner;
+
+URL obj = new URL("https://api.cert.gate.2all.com.br/v1/intention");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+
+con.setRequestMethod("POST");
+con.setRequestProperty("content-type", "application/json");
+con.setRequestProperty("authenticationapi", "demo");
+con.setRequestProperty("authenticationkey", "demo");
+
+String body = "{"
+        + "\"referenceId\": \"19893211234\","
+        + "\"amount\": \"100\","
+        + "\"description\": \"Mouse sem fio\","
+        + "\"postBackUrl\": \"http://url-notificacao\","
+        + "\"redirectUrl\": \"http://url-redirect\","
+        + "\"dhExpiration\": \"2017-08-25T18:10:53\","
+        + "    \"customer\": {"
+        + "       \"name\": \"Comprador Teste\","
+        + "       \"document\": \"12345678909\","
+        + "       \"email\": \"compradorteste@gmail.com\","
+        + "       \"address\": {"
+        + "           \"address\": \"Endereco\","
+        + "           \"number\": \"100\","
+        + "           \"district\": \"Vila Olimpia\","
+        + "           \"zipcode\": \"09878675\","
+        + "           \"city\": \"Sao Paulo\","
+        + "           \"state\": \"SP\""
+        + "        }"
+        + "    },"
+        + "   \"payment\": {"
+        + "        \"card\": {"
+        + "            \"type\": 0,"
+        + "            \"capture\": false,"
+        + "            \"installments\": \"2\","
+        + "            \"fixedInstallments\": false,"
+        + "            \"interestType\": \"4\","
+        + "            \"authenticate\": \"3\","
+        + "            \"softDescriptor\": \"Gate2@all\","
+        + "            \"saveCard\": true"
+        + "        },"
+        + "        \"electronicTransfer\": {"
+        + "            \"provider\": \"Bradesco\""
+        + "        },"
+        + "        \"bankSlip\": {"
+        + "            \"expirationDate\": \"2017-12-30\","
+        + "            \"instructions\": \"Aceitar somente ate a data de vencimento, apes essa data juros de 1% dia\","
+        + "            \"guarantor\": \"Comprador Teste\","
+        + "            \"provider\": \"Bradesco\""
+        + "        }"
+        + "    }"
+        + "}";
+
+con.setDoOutput(true);
+DataOutputStream dos = new DataOutputStream(con.getOutputStream());
+dos.writeBytes(body);
+dos.flush();
+dos.close();
+
+Scanner scanner = new Scanner(new BufferedReader(new InputStreamReader(con.getInputStream())));
+String response = scanner.nextLine();
+scanner.close();
+
+System.out.println(response);
+
+```
+
+
 |Propriedade|Tipo|Tamanho|Obrigatório|Descrição|
 |-----------|----|-------|-----------|---------|
-|`orderId`|Texto|100|Sim|Número de identificação da loja.|
+|`referenceId`|Texto|100|Sim|Número de identificação da loja.|
 |`amount`|Número|16|Sim|Valor da transação sem pontuação. Os dois últimos dígitos são os centavos. (Ex: amount: 100 = R$ 1,00)|
 |`description`|Texto|300|Não|Descrição da transação.|
 |`postBackUrl`|Texto|—|Sim|URL onde o GATE2all notificará eventuais status da trancação para o lojista.|
@@ -322,15 +403,15 @@ Para realizar uma intenção de venda é necessário enviar um POST para o segui
 |`card.capture`|Booleano|—|Sim|**true** = Autoriza e confirma a transação. **false** = Autorização, mas não confirma a transação, necessitando realizar a confirmação ([Captura](#captura)) noutra requisição.|
 |`card.installments`|Número|20|Sim|Número de parcelas.|
 |`card.fixedInstallments`|Booleano|—|Não|**True** = não permite que o comprador selecione a quantidade de parcelas no formulário de pagamento.|
-|`card.operationType`|Número|1|Sim|Operações disponíveis: <BR /> 1. Cartão de Crédito<BR /> 2. Cartão de Débito <BR /> 3. Parcelado Loja <BR /> 4. Parcelado Administrador|
+|`card.interestType`|Número|1|Sim|Operações disponíveis: <BR /> 3. Parcelado Loja <BR /> 4. Parcelado Administrador|
 |`card.authenticate`|Texto|20|Não|Opções disponíveis: <BR /> 1. Autorizar só transações autenticadas <BR /> 2. Autorizar transações autenticadas ou não autenticadas <BR /> 3. Autorizar sem autenticação <BR /> |
 |`card.softDescriptor`|Texto|22|Não|Texto a ser exibido na fatura do portador do cartão.|
 |`card.saveCard`|Booleano|—|Sim|Configura salvar o cartão (tokenização). |
 |`electronicTransfer.provider`|Texto|20|Sim|Nome da instituição responsável pela transferência.|
-|`boleto.expirationDate`|Texto|20|Sim|Data de vencimento do boleto. formato **YYYY-MM-DD**|
-|`boleto.instructions`|Texto|300|Sim|Instruções do boleto.|
-|`boleto.guarantor`|Texto|45|Sim|Nome do avalista.|
-|`boleto.provider`|Texto|20|Sim|Nome da instituição financeira :<ul><li>**BRADESCO**</li><li>**ITAU**</li></ul>|
+|`bankSlip.expirationDate`|Texto|20|Sim|Data de vencimento do boleto. formato **YYYY-MM-DD**|
+|`bankSlip.instructions`|Texto|300|Sim|Instruções do boleto.|
+|`bankSlip.guarantor`|Texto|45|Sim|Nome do avalista.|
+|`bankSlip.provider`|Texto|20|Sim|Nome da instituição financeira :<ul><li>**BRADESCO**</li><li>**ITAU**</li></ul>|
 
 ### RESPOSTA SUCESSO
 
@@ -359,6 +440,7 @@ Status : 201
 |`transactionId`|Texto|36|Identificador da transação do GATE2all.|
 |`url`|Texto|150|URL da intenção.|
 
+
 <aside class="success">
 Redirecione o comprador para a URL da resposta.
 </aside>
@@ -373,7 +455,7 @@ Caso a forma de pagamento escolhida pelo usuário for cartão de crédito, apare
 
 <img src="images/intencao02.png" />
 
-Após a conclusão do preenchimento do formulário o GATE2all enviará uma notificação contendo o `transactionId` e o `orderId` para o sistema do lojista realizar a [consulta](#consulta) da transação notificada.
+Após a conclusão do preenchimento do formulário o GATE2all enviará uma notificação contendo o `transactionId` e o `referenceId` para o sistema do lojista realizar a [consulta](#consulta) da transação notificada.
 
 Caso a forma de pagamento escolhida pelo usuário for boleto, aparecerá a seguinte tela:
 
@@ -409,7 +491,7 @@ A loja virtual deve fazer a captura de todos os dados necessários e submetê-lo
 Para criar uma autorização é necessário enviar um POST para o seguinte recurso:
 
 <aside class="notice">
-Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendamos a consulta pelo número do pedido `orderId` ou criando uma [intenção](#inteno-de-venda) e informando o mesmo `transactionId` na requisição com os dados do cartão. Desta maneira é possível realizar uma consulta para verificar o status da transação. 
+Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendamos a consulta pelo número do pedido `referenceId` ou criando uma [intenção](#inteno-de-venda) e informando o mesmo `transactionId` na requisição com os dados do cartão. Desta maneira é possível realizar uma consulta para verificar o status da transação. 
 </aside>
 ### REQUISIÇÃO
 
@@ -417,27 +499,30 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
 
 ```json
 {
-   "orderId": "19893211234",
+   "referenceId": "19893211234",
    "amount": "100",
-   "softDescriptor": "Pagamento Gate2all",
    "description": "Mouse sem fio",
-   "capture": false,
-   "installments": 1,
-   "operationType": 1,
-   "authenticate": 3,
    "customer": {
       "name": "Comprador Teste",
       "document": "12345678909"
    },
    "payment": {
        "card": {
-          "number": "4539708473330561",
-          "expirationMonth": "04",
-          "expirationYear": "2019",
-          "cvv": "234",
-          "brand": "VISA",
-          "holderName": "HOLDER NAME",
-          "saveCard": false
+          "type": "1",
+          "capture": false,
+          "installments": 1,
+          "interestType": 3,
+          "authenticate": 3,
+          "softDescriptor": "Pagamento Gate2all",
+          "saveCard": false,
+          "cardInfo": {
+              "number": "4539708473330561",
+              "expirationMonth": "04",
+              "expirationYear": "2019",
+              "cvv": "234",
+              "brand": "VISA",
+              "holderName": "HOLDER NAME"
+            }
         }
    }
 }
@@ -446,28 +531,88 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
 ```shell
 ```
 
+```java
+
+import java.io.*;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.Scanner;
+
+URL obj = new URL("https://api.cert.gate.2all.com.br/v1/transactions");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+
+con.setRequestMethod("POST");
+con.setRequestProperty("content-type", "application/json");
+con.setRequestProperty("authenticationapi", "demo");
+con.setRequestProperty("authenticationkey", "demo");
+
+String body = "{"
+        + "\"referenceId\": \"123456\","
+        + "\"amount\": \"100\","
+        + "\"description\": \"Venda Teste\","
+        + "\"postBackUrl\": \"http://url-notificacao\","
+        + "\"customer\": {"
+        + "    \"name\": \"COMPRADOR TESTE\","
+        + "     \"document\": \"23650403811\""
+        + "},"
+        + " \"payment\": {"
+        + "    \"card\": {"
+        + "        \"type\": 1,"
+        + "        \"capture\": false,"
+        + "        \"installments\": 1,"
+        + "        \"interestType\": 3,"
+        + "        \"authenticate\": 3,"
+        + "        \"saveCard\": false,"
+        + "        \"softDescriptor\": \"Gate2All\","
+        + "        \"cardInfo\": {"
+        + "           \"number\": \"4556326359707410\","
+        + "           \"expirationMonth\": \"04\","
+        + "           \"expirationYear\": \"2018\","
+        + "           \"cvv\": \"6434\","
+        + "           \"brand\": \"VISA\","
+        + "           \"holderName\": \"COMPRADOR TESTE\""
+        + "        }"
+        + "      }"
+        + "   }"
+        + "}";
+
+con.setDoOutput(true);
+DataOutputStream dos = new DataOutputStream(con.getOutputStream());
+dos.writeBytes(body);
+dos.flush();
+dos.close();
+
+Scanner scanner = new Scanner(new BufferedReader(new InputStreamReader(con.getInputStream())));
+String response = scanner.nextLine();
+scanner.close();
+
+System.out.println(response);
+
+```
+
 |Propriedade|Tipo|Tamanho|Obrigatório|Descrição|
 |-----------|----|-------|-----------|---------|
 |`transactionId`|Texto|150|Não|Identificador da transação do GATE2all.|
-|`orderId`|Texto|100|Sim|Número de identificação da loja.|
+|`referenceId`|Texto|100|Sim|Número de identificação da loja.|
 |`amount`|Número|16|Sim|Valor da transação sem pontuação. Os dois últimos dígitos são os centavos. (Ex: amount: 100 = R$ 1,00)|
-|`softDescriptor`|Texto|22|Não|Texto a ser exibido na fatura do portador do cartão.|
 |`description`|Texto|300|Não|Descrição da transação.|
 |`postBackUrl`|Texto|—|Não|URL onde o GATE2all notificará eventuais status da trancação para o lojista.|
-|`capture`|Booleano|—|Sim|**true** = Autoriza e confirma a transação . **false** = Autorização, mas não confirma a transação, necessitando realizar a confirmação ([Captura] (#captura)) noutra requisição.|
-|`installments`|Número|2|Sim|Número de parcelas.|
-|`operationType`|Número|1|Sim|Operações disponíveis: <BR /> 1. Cartão de Crédito<BR /> 2. Cartão de Débito <BR /> 3. Parcelado Loja <BR /> 4. Parcelado Administrador|
-|`authenticate`|Número|1|Não|Opções disponíveis: <BR /> 1. Autorizar só transações autenticadas <BR /> 2. Autorizar transações autenticadas ou não autenticadas <BR /> 3. Autorizar sem autenticação <BR /> |
-|`provider`|Número|—|Não|Nome do Meio de Pagamento - (OBS: funcionalidade ainda não disponível)|
 |`customer.name`|Texto|100|Sim|Nome do portador do cartão.|
 |`customer.document`|Texto|18|Não|Número do CPF/CNPJ do portador do cartão.|
-|`card.number`|Texto|19|Sim|Número do cartão.|
-|`card.expirationMonth`|Número|2|Sim|Mês da validade do cartão.|
-|`card.expirationYear`|Número|2|Sim|Ano da validade do cartão.|
-|`card.cvv`|Número|4|Não|Código de segurança do cartão.|
-|`card.brand`|Texto|20|Sim|Bandeira do cartão.|
-|`card.holderName`|Texto|20|Não|Nome do portador do cartão.|
+|`card.type`|Inteiro|—|Sim|Configura as opcões disponíveis. 1 Configura cartão de crédito. 2|
+|`card.softDescriptor`|Texto|22|Não|Texto a ser exibido na fatura do portador do cartão.|
+|`card.capture`|Booleano|—|Sim|**true** = Autoriza e confirma a transação . **false** = Autorização, mas não confirma a transação, necessitando realizar a confirmação ([Captura] (#captura)) noutra requisição.|
+|`card.installments`|Número|2|Sim|Número de parcelas.|
+|`card.interestType`|Número|1|Sim|Operações disponíveis: <BR /> 3. Parcelado Loja <BR /> 4. Parcelado Administrador|
+|`card.authenticate`|Número|1|Não|Opções disponíveis: <BR /> 1. Autorizar só transações autenticadas <BR /> 2. Autorizar transações autenticadas ou não autenticadas <BR /> 3. Autorizar sem autenticação <BR /> |
+|`card.provider`|Número|—|Não|Nome do Meio de Pagamento - (OBS: funcionalidade ainda não disponível)|
 |`card.saveCard`|Booleano|—|Sim|Configura salvar o cartão (tokenização). |
+|`cardInfo.number`|Texto|19|Sim|Número do cartão.|
+|`cardInfo.expirationMonth`|Número|2|Sim|Mês da validade do cartão.|
+|`cardInfo.expirationYear`|Número|2|Sim|Ano da validade do cartão.|
+|`cardInfo.cvv`|Número|4|Não|Código de segurança do cartão.|
+|`cardInfo.brand`|Texto|20|Sim|Bandeira do cartão.|
+|`cardInfo.holderName`|Texto|20|Não|Nome do portador do cartão.|
 
 ### RESPOSTA
 
@@ -476,32 +621,35 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
 ```json
 {
   "transactionId": "92d50ba4-5d93-4ee5-90e8-9884b250310a",
-  "orderId": "1463697571584",
+  "referenceId": "1463697571584",
   "description": "TV LG 42",
-  "softDescriptor": "EC02",
-  "operationType": 1,
-  "integrationType": 1,
   "amount": "100",
-  "installments": 1,
-  "capture": false,
-  "authenticate": 3,
   "status": 5,
   "dtTransaction": "2017-03-05T12:04:20",
   "payment": {
-    "provider": "Cielo",
-    "authenticationECI": 7,
-    "codAuthorization": "123456",
-    "providerReference": "1006993069000834928A",
-    "providerCode": "00",
-    "providerMessage": "Transação autorizada",
     "card": {
-      "number": "453970******0561",
-      "expirationMonth": "04",
-      "expirationYear": "2017",
-      "cvv": "***",
-      "brand": "VISA",
-      "holderName": "HOLDER NAME",
-      "saveCard": false
+      "provider": "Cielo",
+      "authenticationECI": 7,
+      "codAuthorization": "123456",
+      "providerReference": "1006993069000834928A",
+      "providerCode": "00",
+      "providerMessage": "Transação autorizada",
+      "type": "1",
+      "softDescriptor": "EC02",
+      "interestType": 3,
+      "integrationType": 1,
+      "installments": 1,
+      "capture": false,
+      "authenticate": 3,
+      "saveCard": false,
+      "cardInfo": {
+        "number": "453970******0561",
+        "expirationMonth": "04",
+        "expirationYear": "2017",
+        "cvv": "***",
+        "brand": "VISA",
+        "holderName": "HOLDER NAME"
+      }
     }
   },
   "customer": {
@@ -533,12 +681,12 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
 |-----------|----|-------|-----------|---------|
 |`transactionId`|Texto|150|Identificador da transação do GATE2all.|
 |`dtTransaction`|DataHora|19|Data e hora da transação.|
-|`payment.provider`|Texto|100|Nome da instituição financeira.|
-|`payment.providerReference`|Texto|100|Referência da instituição.|
-|`payment.providerMessage`|Texto|100|Mensagem da instituição.|
-|`payment.providerCode`|Texto|100|Codigo de resposta da instituição.|
-|`payment.codAuthorization`|Texto|100|Codigo de autorização da instituição.|
-|`payment.authenticationECI`|Texto|100|Indicador de autenticação da transação.[Códigos ECI](#status-eci)|
+|`card.provider`|Texto|100|Nome da instituição financeira.|
+|`card.providerReference`|Texto|100|Referência da instituição.|
+|`card.providerMessage`|Texto|100|Mensagem da instituição.|
+|`card.providerCode`|Texto|100|Codigo de resposta da instituição.|
+|`card.codAuthorization`|Texto|100|Codigo de autorização da instituição.|
+|`card.authenticationECI`|Texto|100|Indicador de autenticação da transação.[Códigos ECI](#status-eci)|
 |`status`|Número|2|Status da transação retornado pelo GATE2all [catálogo](#status).|
 
 ## Boleto
@@ -560,7 +708,7 @@ Como é o processo de pagamento com boleto bancário:
 
 ```json
 {
-   "orderId": "19893211234",
+   "referenceId": "19893211234",
    "amount": "100",
    "description": "Produto ou serviço",
    "customer": {
@@ -590,11 +738,72 @@ Como é o processo de pagamento com boleto bancário:
 ```shell
 ```
 
+```java
+
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.Scanner;
+
+URL obj = new URL("https://api.cert.gate.2all.com.br/v1/transactions");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+
+con.setRequestMethod("POST");
+con.setRequestProperty("content-type", "application/json");
+con.setRequestProperty("authenticationapi", "demo");
+con.setRequestProperty("authenticationkey", "demo");
+
+String body = "{"
+        + "\"referenceId\": \"123456789\","
+        + "\"amount\": \"100\","
+        + "\"description\": \"TV LG 42\","
+        + "\"postBackUrl\": \"http://url-notificacao\","
+        + "\"customer\": {"
+        + "    \"name\": \"COMPRADOR TEST\","
+        + "    \"document\": \"12345678909\","
+        + "    \"email\" : \"comprador@ntk.com\","
+        + "    \"address\" : {"
+        + "        \"address\" : \"Rua Fidencio Ramos\","
+        + "        \"number\": \" 100\","
+        + "        \"district\" : \"Vila Olimpia\","
+        + "        \"zipcode\" : \"05890090\","
+        + "        \"city\" : \"Sao Paulo\","
+        + "        \"state\" : \"SP\""
+        + "        }"
+        + "    },"
+        + "    \"payment\": {"
+        + "        \"bankSlip\" : {"
+        + "            \"expirationDate\" :\"2017-12-01\","
+        + "            \"instructions\" : \"Aceitar somente ate a data de vencimento, apos essa data juros de 1% dia\","
+        + "            \"guarantor\" : \"Joao da Silva\","
+        + "            \"provider\":\"Itau\""
+        + "        }"
+        + "    }"
+        + "}";
+
+con.setDoOutput(true);
+DataOutputStream dos = new DataOutputStream(con.getOutputStream());
+dos.writeBytes(body);
+dos.flush();
+dos.close();
+
+Scanner scanner = new Scanner(new BufferedReader(new InputStreamReader(con.getInputStream())));
+String response = scanner.nextLine();
+scanner.close();
+
+System.out.println(response);
+
+
+```
+
 
 |Propriedade|Tipo|Tamanho|Obrigatório|Descrição|
 |-----------|:----:|:-------:|:-----------:|---------|
 |`transactionId`|Texto|150|Não|Utilize somente para intenções de venda previamente configuradas|
-|`orderId`|Texto|100|Sim|Número de identificação da loja.|
+|`referenceId`|Texto|100|Sim|Número de identificação da loja.|
 |`amount`|Número|16|Sim|Valor da transação sem pontuação. Os dois últimos dígitos são os centavos. (Ex: amount: 100 = R$ 1,00)|
 |`description`|Texto|300|Não|Descrição da transação.|
 |`customer.name`|Texto|100|Sim|Nome do portador do cartão.|
@@ -606,17 +815,17 @@ Como é o processo de pagamento com boleto bancário:
 |`address.zipcode`|Número|8|Sim|CEP do comprador.|
 |`address.city`|Texto|30|Sim|Cidade do comprador.|
 |`address.state`|Texto|2|Sim|Sigla do estado do comprador.|
-|`payment.bankSlip.expirationDate`|Texto|20|Sim|Data de vencimento do boleto. formato **YYYY-MM-DD**|
-|`payment.bankSlip.instructions`|Texto|300|Sim|Instruções do boleto.|
-|`payment.bankSlip.guarantor`|Texto|45|Sim|Nome do avalista.|
-|`payment.bankSlip.provider`|Texto|20|Sim|Nome da instituição financeira :<ul><li>**BRADESCO**</li><li>**ITAU**</li></ul>|
+|`bankSlip.expirationDate`|Texto|20|Sim|Data de vencimento do boleto. formato **YYYY-MM-DD**|
+|`bankSlip.instructions`|Texto|300|Sim|Instruções do boleto.|
+|`bankSlip.guarantor`|Texto|45|Sim|Nome do avalista.|
+|`bankSlip.provider`|Texto|20|Sim|Nome da instituição financeira :<ul><li>**BRADESCO**</li><li>**ITAU**</li></ul>|
 
 ### RESPOSTA
 
 ```json
 {
   "transactionId": "7365ca65-70d4-4d7c-ac3d-a20f5730c241",
-  "orderId": "19893211234",
+  "referenceId": "19893211234",
   "amount": "100",
   "description": "Produto ou serviço",
   "dtTransaction": "2017-03-08T10:46:31-0300",
@@ -634,10 +843,10 @@ Como é o processo de pagamento com boleto bancário:
     }
   },
   "payment": {
-    "providerReference": "20575112",
-    "providerCode": "00",
-    "providerMessage": "Transação iniciada",
     "bankSlip": {
+      "providerReference": "20575112",
+      "providerCode": "00",
+      "providerMessage": "Transação iniciada",
       "emissionDate": "2017-03-08",
       "expirationDate": "2017-03-10",
       "instructions": "Aceitar somente até a data de vencimento, após essa data juros de 1% dia",
@@ -661,13 +870,13 @@ Como é o processo de pagamento com boleto bancário:
 |-----------|:----:|:-------:|---------|
 |`transactionId`|Texto|150|Identificador da transação do GATE2all.|
 |`dtTransaction`|DataHora|19|Data e hora da transação.|
-|`payment.providerReference`|Texto|100|Referência da instituição.|
-|`payment.providerCode`|Texto|100|Codigo de resposta da instituição.|
-|`payment.providerMessage`|Texto|100|Mensagem da instituição.|
-|`payment.bankSlip.emissionDate`|Texto|20|Data de emissão do boleto. formato **YYYY-MM-DD**|
-|`payment.bankSlip.paymentDate`|Texto|20|Data de pagamento do boleto. formato **YYYY-MM-DD**|
-|`payment.bankSlip.paymentAmount`|Número|16|Valor de pagamento do boleto sem pontuação. Os dois últimos dígitos são os centavos. (Ex: amount: 100 = R$ 1,00)|
-|`payment.bankSlip.url`|Texto|300|Endereço de acesso da transação.|
+|`bankSlip.emissionDate`|Texto|20|Data de emissão do boleto. formato **YYYY-MM-DD**|
+|`bankSlip.paymentDate`|Texto|20|Data de pagamento do boleto. formato **YYYY-MM-DD**|
+|`bankSlip.paymentAmount`|Número|16|Valor de pagamento do boleto sem pontuação. Os dois últimos dígitos são os centavos. (Ex: amount: 100 = R$ 1,00)|
+|`bankSlip.url`|Texto|300|Endereço de acesso da transação.|
+|`bankSlip.providerReference`|Texto|100|Referência da instituição.|
+|`bankSlip.providerCode`|Texto|100|Codigo de resposta da instituição.|
+|`bankSlip.providerMessage`|Texto|100|Mensagem da instituição.|
 |`status`|Número|2|[tabela de Status](#status)|
 
 
@@ -683,7 +892,7 @@ No momento do pagamento, o cliente comprador informa os dados da agência, infor
 
 ```json
 {
-    "orderId": "19893211234",
+    "referenceId": "19893211234",
     "amount": "100",
     "description": "Produto ou serviço",
     "customer": {
@@ -710,10 +919,66 @@ No momento do pagamento, o cliente comprador informa os dados da agência, infor
 ```shell
 ```
 
+```java
+
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.Scanner;
+
+URL obj = new URL("https://api.cert.gate.2all.com.br/v1/transactions");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+
+con.setRequestMethod("POST");
+con.setRequestProperty("content-type", "application/json");
+con.setRequestProperty("authenticationapi", "demo");
+con.setRequestProperty("authenticationkey", "demo");
+
+String body = "{"
+        + "\"referenceId\": \"123456789\","
+        + "\"amount\": \"100\","
+        + "\"description\": \"TV LG 42\","
+        + "    \"customer\": {"
+        + "       \"name\": \"COMPRADOR TESTE\","
+        + "       \"document\": \"12345678909\","
+        + "       \"email\" : \"comprador@ntk.com\","
+        + "           \"address\" : {"
+        + "               \"address\" : \"Rua Fidencio Ramos 100\","
+        + "               \"district\" : \"Vila Olimpia\","
+        + "               \"zipcode\" : \"05890090\","
+        + "               \"city\" : \"Sao Paulo\","
+        + "               \"state\" : \"SP\""
+        + "      }"
+        + "   },"
+        + "   \"payment\": {"
+        + "       \"electronicTransfer\" : {"
+        + "          \"provider\" : \"Itau\""
+        + "       }"
+        + "    }"
+        + "}";
+
+con.setDoOutput(true);
+DataOutputStream dos = new DataOutputStream(con.getOutputStream());
+dos.writeBytes(body);
+dos.flush();
+dos.close();
+
+Scanner scanner = new Scanner(new BufferedReader(new InputStreamReader(con.getInputStream())));
+String response = scanner.nextLine();
+scanner.close();
+
+System.out.println(response);
+
+
+```
+
 |Propriedade|Tipo|Tamanho|Obrigatório|Descrição|
 |-----------|:----:|:-------:|:-----------:|---------|
 |`transactionId`|Texto|150|Não|Utilize somente para intenções de venda previamente configuradas|
-|`orderId`|Texto|100|Sim|Número de identificação da loja.|
+|`referenceId`|Texto|100|Sim|Número de identificação da loja.|
 |`amount`|Número|16|Sim|Valor da transação sem pontuação. Os dois últimos dígitos são os centavos. (Ex: amount: 100 = R$ 1,00)|
 |`description`|Texto|300|Não|Descrição da transação.|
 |`customer.name`|Texto|100|Sim|Nome do portador do cartão.|
@@ -725,14 +990,14 @@ No momento do pagamento, o cliente comprador informa os dados da agência, infor
 |`address.zipcode`|Número|8|Sim|CEP do comprador.|
 |`address.city`|Texto|30|Sim|Cidade do comprador.|
 |`address.state`|Texto|2|Sim|Sigla do estado do comprador.|
-|`payment.electronicTransfer.provider`|Texto|20|Sim|Nome da instituição financeira :<ul><li>**BRADESCO**</li><li>**ITAU**</li></ul>|
+|`electronicTransfer.provider`|Texto|20|Sim|Nome da instituição financeira :<ul><li>**BRADESCO**</li><li>**ITAU**</li></ul>|
 
 ### RESPOSTA
 
 ```json
 {
     "transactionId": "6400d988-cc4b-4084-80ee-d5575dbbed4d",
-    "orderId": "19893211234",
+    "referenceId": "19893211234",
     "amount": "100",
     "description": "Produto ou serviço",
     "dtTransaction": "2017-03-05T16:16:14-0200",
@@ -750,8 +1015,8 @@ No momento do pagamento, o cliente comprador informa os dados da agência, infor
       }
     },
     "payment": {
-        "providerReference": "20518839",
         "electronicTransfer": {
+            "providerReference": "20518839",
             "provider": "Itau",
             "url": "https://api.gate.2all.com.br/v1/url-payment/6400d988-cc4b-4084-80ee-d5575dbbed4d"
         }
@@ -769,9 +1034,9 @@ No momento do pagamento, o cliente comprador informa os dados da agência, infor
 |-----------|:----:|:-------:|---------|
 |`transactionId`|Texto|150|Identificador da transação do GATE2all.|
 |`dtTransaction`|DataHora|19|Data e hora da transação.|
-|`payment.providerReference`|Texto|100|Referência da instituição.|
-|`payment.electronicTransfer.provider`|Texto|20|Nome da instituição financeira :<ul><li>**BRADESCO**</li><li>**ITAU**</li></ul>|
-|`payment.electronicTransfer.url`|Texto|300|Endereço de acesso da transação.|
+|`electronicTransfer.provider`|Texto|20|Nome da instituição financeira :<ul><li>**BRADESCO**</li><li>**ITAU**</li></ul>|
+|`electronicTransfer.url`|Texto|300|Endereço de acesso da transação.|
+|`electronicTransfer.providerReference`|Texto|100|Referência da instituição.|
 |`status`|Número|2|[tabela de Status](#status)|
 
 
@@ -795,6 +1060,28 @@ Captura é a confirmação de uma transação autorizada, após a captura que é
 
 <aside class="request"><span class="method put">PUT</span> <span class="endpoint">/v1/transactions/{{transactionId}}/capture</span></aside>
 
+```java
+
+import java.io.*;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.Scanner;
+
+URL obj = new URL("https://api.cert.gate.2all.com.br/v1/transactions/{{transactionId}}/capture");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("PUT");
+con.setRequestProperty("content-type", "application/json");
+con.setRequestProperty("authenticationapi", "demo");
+con.setRequestProperty("authenticationkey", "demo");
+
+Scanner scanner = new Scanner(new BufferedReader(new InputStreamReader(con.getInputStream())));
+String response = scanner.nextLine();
+scanner.close();
+
+System.out.println(response);
+
+```
+
 |Propriedade|Tipo|Tamanho|Obrigatório|Descrição|
 |-----------|----|-------|-----------|---------|
 |`transactionId`|Texto|150|Sim|Identificador da transação do GATE2all.|
@@ -806,26 +1093,29 @@ Captura é a confirmação de uma transação autorizada, após a captura que é
 ```json
 {
     "transactionId": "62f5a0b2-c632-4e4e-bc51-3b6681a54a3c",
-    "orderId": "1488917347840",
-    "operationType": 1,
-    "integrationType": 1,
+    "referenceId": "1488917347840",
     "amount": "100",
-    "installments": 1,
-    "capture": false,
-    "authenticate": 3,
     "status": 6,
     "dtTransaction": "2017-03-07T17:09:07",
     "payment": {
-        "provider": "Cielo",
-        "authenticationECI": 7,
-        "codAuthorization": "123456",
-        "providerReference": "100699306900094D905A",
-        "providerCode": "00",
-        "providerMessage": "Transacao capturada com sucesso",
         "card": {
-            "number": "421847******1234",
-            "brand": "VISA",
-            "saveCard": false
+          "provider": "Cielo",
+          "authenticationECI": 7,
+          "codAuthorization": "123456",
+          "providerReference": "100699306900094D905A",
+          "providerCode": "00",
+          "providerMessage": "Transacao capturada com sucesso",
+          "type": "1",
+          "installments": 1,
+          "capture": false,
+          "authenticate": 3,
+          "interestType": 1,
+          "integrationType": 1,
+          "saveCard": false,
+          "cardInfo": {
+              "number": "421847******1234",
+              "brand": "VISA"
+          }
         }
     },
     "customer": {
@@ -847,6 +1137,28 @@ Para efetuar uma captura parcial, é necessário enviar um POST passando como pa
 
 <aside class="request"><span class="method put">PUT</span> <span class="endpoint">/v1/transactions/{{transactionId}}/capture?amount=100</span></aside>
 
+```java
+
+import java.io.*;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.Scanner;
+
+URL obj = new URL("https://api.cert.gate.2all.com.br/v1/transactions/{{transactionId}}/capture?amount=100");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("PUT");
+con.setRequestProperty("content-type", "application/json");
+con.setRequestProperty("authenticationapi", "demo");
+con.setRequestProperty("authenticationkey", "demo");
+
+Scanner scanner = new Scanner(new BufferedReader(new InputStreamReader(con.getInputStream())));
+String response = scanner.nextLine();
+scanner.close();
+
+System.out.println(response);
+
+```
+
 |Propriedade|Tipo|Tamanho|Obrigatório|Descrição|
 |-----------|----|-------|-----------|---------|
 |`transactionId`|Texto|150|Sim|Identificador da transação do GATE2all.|
@@ -859,26 +1171,29 @@ Para efetuar uma captura parcial, é necessário enviar um POST passando como pa
 ```json
 {
     "transactionId": "62f5a0b2-c632-4e4e-bc51-3b6681a54a3c",
-    "orderId": "1488917347840",
-    "operationType": 1,
-    "integrationType": 1,
+    "referenceId": "1488917347840",
     "amount": "100",
-    "installments": 1,
-    "capture": false,
-    "authenticate": 3,
     "status": 6,
     "dtTransaction": "2017-03-07T17:09:07",
     "payment": {
-        "provider": "Cielo",
-        "authenticationECI": 7,
-        "codAuthorization": "123456",
-        "providerReference": "100699306900094D905A",
-        "providerCode": "00",
-        "providerMessage": "Transacao capturada com sucesso",
         "card": {
-            "number": "421847******1234",
-            "brand": "VISA",
-            "saveCard": false
+          "provider": "Cielo",
+          "authenticationECI": 7,
+          "codAuthorization": "123456",
+          "providerReference": "100699306900094D905A",
+          "providerCode": "00",
+          "providerMessage": "Transacao capturada com sucesso",
+          "type": "1",
+          "installments": 1,
+          "capture": false,
+          "authenticate": 3,
+          "interestType": 3,
+          "integrationType": 1,
+          "saveCard": false,
+          "cardInfo": {
+              "number": "421847******1234",
+              "brand": "VISA"
+          }
         }
     },
     "customer": {
@@ -908,6 +1223,28 @@ Para realizar um cancelamento "estorno", deve-se observar as seguintes condiçõ
 
 <aside class="request"><span class="method put">PUT</span> <span class="endpoint">/v1/transactions/{{transactionId}}/void</span></aside>
 
+```java
+
+import java.io.*;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.Scanner;
+
+URL obj = new URL("https://api.cert.gate.2all.com.br/v1/transactions/957221f5-d08b-4445-9896-52152f31b846/void");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("PUT");
+con.setRequestProperty("content-type", "application/json");
+con.setRequestProperty("authenticationapi", "demo");
+con.setRequestProperty("authenticationkey", "demo");
+
+Scanner scanner = new Scanner(new BufferedReader(new InputStreamReader(con.getInputStream())));
+String response = scanner.nextLine();
+scanner.close();
+
+System.out.println(response);
+
+```
+
 |Propriedade|Tipo|Tamanho|Obrigatório|Descrição|
 |-----------|----|-------|-----------|---------|
 |`transactionId`|Texto|150|Sim|Identificador da transação do GATE2all.|
@@ -919,26 +1256,29 @@ Para realizar um cancelamento "estorno", deve-se observar as seguintes condiçõ
 ```json
 {
     "transactionId": "62f5a0b2-c632-4e4e-bc51-3b6681a54a3c",
-    "orderId": "1488917347840",
-    "operationType": 1,
-    "integrationType": 1,
+    "referenceId": "1488917347840",
     "amount": "100",
-    "installments": 1,
-    "capture": false,
-    "authenticate": 3,
     "status": 9,
     "dtTransaction": "2017-03-07T17:09:07",
     "payment": {
-        "provider": "Cielo",
-        "authenticationECI": 7,
-        "codAuthorization": "123456",
-        "providerReference": "100699306900094D905A",
-        "providerCode": "00",
-        "providerMessage": "Transacao cancelada com sucesso",
         "card": {
-            "number": "421847******1234",
-            "brand": "VISA",
-            "saveCard": false
+            "type": "1",
+            "interestType": 3,
+            "integrationType": 1,
+            "installments": 1,
+            "capture": false,
+            "authenticate": 3,
+            "provider": "Cielo",
+            "authenticationECI": 7,
+            "codAuthorization": "123456",
+            "providerReference": "100699306900094D905A",
+            "providerCode": "00",
+            "providerMessage": "Transacao cancelada com sucesso",
+            "saveCard": false,
+            "cardInfo": {
+                "number": "421847******1234",
+                "brand": "VISA"
+            }
         }
     },
     "customer": {
@@ -960,6 +1300,28 @@ Para realizar uma consulta é necessário enviar um GET para o seguinte recurso:
 
 <aside class="request"><span class="method get">GET</span> <span class="endpoint">/v1/transactions/{{transactionId}}</span></aside>
 
+```java
+
+import java.io.*;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.Scanner;
+
+URL obj = new URL("https://api.cert.gate.2all.com.br/v1/transactions/d31dcd70-6666-40af-85ba-ed1ff23bc293");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+con.setRequestProperty("content-type", "application/json");
+con.setRequestProperty("authenticationapi", "demo");
+con.setRequestProperty("authenticationkey", "demo");
+
+Scanner scanner = new Scanner(new BufferedReader(new InputStreamReader(con.getInputStream())));
+String response = scanner.nextLine();
+scanner.close();
+
+System.out.println(response);
+
+```
+
 |Propriedade|Tipo|Tamanho|Obrigatório|Descrição|
 |-----------|----|-------|-----------|---------|
 |`transactionId`|Texto|150|Sim|Identificador da transação do GATE2all.|
@@ -972,22 +1334,25 @@ Para realizar uma consulta é necessário enviar um GET para o seguinte recurso:
 ```json
 {
   "transactionId": "62f5a0b2-c632-4e4e-bc51-3b6681a54a3c",
-  "orderId": "1488917347840",
-  "operationType": 1,
-  "integrationType": 1,
+  "referenceId": "1488917347840",
   "amount": "100",
-  "installments": 1,
-  "capture": false,
-  "authenticate": 3,
   "status": 9,
   "dtTransaction": "2017-03-07T17:09:07",
   "payment": {
-    "codAuthorization": "123456",
-    "providerReference": "100699306900094D905A",
     "card": {
-      "number": "421847******1234",
-      "brand": "VISA",
-      "saveCard": false
+      "type": "1",
+      "interestType": 3,
+      "integrationType": 1,
+      "installments": 1,
+      "capture": false,
+      "authenticate": 3,
+      "codAuthorization": "123456",
+      "providerReference": "100699306900094D905A",
+      "saveCard": false,
+      "cardInfo": {
+        "number": "421847******1234",
+        "brand": "VISA"
+      }
     }
   },
   "customer": {
@@ -1002,7 +1367,7 @@ Para realizar uma consulta é necessário enviar um GET para o seguinte recurso:
 ```json
 {
   "transactionId": "7365ca65-70d4-4d7c-ac3d-a20f5730c241",
-  "orderId": "19893211234",
+  "referenceId": "19893211234",
   "amount": "100",
   "description": "Produto ou serviço",
   "dtTransaction": "2017-03-08T10:46:31-0300",
@@ -1020,8 +1385,8 @@ Para realizar uma consulta é necessário enviar um GET para o seguinte recurso:
     }
   },
   "payment": {
-    "providerReference": "20575112",
     "bankSlip": {
+      "providerReference": "20575112",
       "emissionDate": "2017-03-08",
       "expirationDate": "2017-03-10",
       "instructions": "Aceitar somente até a data de vencimento, após essa data juros de 1% dia",
@@ -1041,7 +1406,7 @@ Para realizar uma consulta é necessário enviar um GET para o seguinte recurso:
 ```json
 {
     "transactionId": "6400d988-cc4b-4084-80ee-d5575dbbed4d",
-    "orderId": "19893211234",
+    "referenceId": "19893211234",
     "amount": "100",
     "description": "Produto ou serviço",
     "dtTransaction": "2017-03-05T16:16:14-0200",
@@ -1059,8 +1424,8 @@ Para realizar uma consulta é necessário enviar um GET para o seguinte recurso:
       }
     },
     "payment": {
-        "providerReference": "20518839",
         "electronicTransfer": {
+            "providerReference": "20518839",
             "provider": "Itau",
             "url": "https://api.gate.2all.com.br/v1/url-payment/6400d988-cc4b-4084-80ee-d5575dbbed4d"
         }
@@ -1074,19 +1439,9 @@ Para realizar uma consulta é necessário enviar um GET para o seguinte recurso:
 
 |Propriedade|Tipo|Tamanho|Obrigatório|Descrição|
 |-----------|----|-------|-----------|---------|
-|`orderId`|Texto|100|Sim|Número de identificação da loja.|
-|`operationType`|Número|1|Sim|Operações disponíveis: <BR /> 1. Cartão de Crédito<BR /> 2. Cartão de Débito <BR /> 3. Parcelado Loja <BR /> 4. Parcelado Administrador|
-|`integrationType`|Número|1|Sim|Tipo de integração disponível pelo Gate2All: <BR /> 1. Integrado<BR /> 2. Loja <BR /> 3. Direto|
+|`referenceId`|Texto|100|Sim|Número de identificação da loja.|
 |`amount`|Número|16|Sim|Valor da transação sem pontuação. Os dois últimos dígitos são os centavos. (Ex: amount: 100 = R$ 1,00)|
-|`installments`|Número|2|Sim|Número de parcelas.|
-|`capture`|Booleano|—|Sim|**true** = Autoriza e confirma a transação . **false** = Autorização, mas não confirma a transação, necessitando realizar a confirmação ([Captura] (#captura)) noutra requisição.|
-|`authenticate`|Número|1|Não|Opções disponíveis: <BR /> 1. Autorizar só transações autenticadas <BR /> 2. Autorizar transações autenticadas ou não autenticadas <BR /> 3. Autorizar sem autenticação <BR /> |
 |`status`|Número|2|Não|Status da transação retornado pelo gateway. [catálogo](#status)| 
-|`payment.codAuthorization`|Texto|100|Codigo de autorização da instituição.|
-|`payment.providerReference`|Texto|100|Referência da instituição.|
-|`card.number`|Texto|19|Sim|Número do cartão.|
-|`card.brand`|Texto|20|Sim|Bandeira do cartão.|
-|`card.saveCard`|Booleano|—|Sim|Configura salvar o cartão (tokenização). |
 |`customer.name`|Texto|100|Sim|Nome do portador do cartão.|
 |`customer.document`|Texto|18|Não|Número do CPF/CNPJ do portador do cartão.|
 |`customer.mail`|Texto|40|Não|E-mail do portador do cartão.|
@@ -1096,16 +1451,29 @@ Para realizar uma consulta é necessário enviar um GET para o seguinte recurso:
 |`address.zipcode`|Número|8|Sim|CEP do comprador.|
 |`address.city`|Texto|30|Sim|Cidade do comprador.|
 |`address.state`|Texto|2|Sim|Sigla do estado do comprador.|
-|`payment.bankSlip.emissionDate`|Texto|20|Sim|Data de emissão do boleto. formato **YYYY-MM-DD**|
-|`payment.bankSlip.expirationDate`|Texto|20|Sim|Data de vencimento do boleto. formato **YYYY-MM-DD**|
-|`payment.bankSlip.instructions`|Texto|300|Sim|Instruções do boleto.|
-|`payment.bankSlip.guarantor`|Texto|45|Sim|Nome do avalista.|
-|`payment.bankSlip.provider`|Texto|20|Sim|Nome da instituição financeira :<ul><li>**BRADESCO**</li><li>**ITAU**</li></ul>|
-|`payment.bankSlip.paymentDate`|Texto|20|Data de pagamento do boleto. formato **YYYY-MM-DD**|
-|`payment.bankSlip.paymentAmount`|Número|16|Valor de pagamento do boleto sem pontuação. Os dois últimos dígitos são os centavos. (Ex: amount: 100 = R$ 1,00)|
-|`payment.bankSlip.url`|Texto|300|Endereço de acesso da transação.|
-|`payment.electronicTransfer.provider`|Texto|20|Nome da instituição financeira :<ul><li>**BRADESCO**</li><li>**ITAU**</li></ul>|
-|`payment.electronicTransfer.url`|Texto|300|Endereço de acesso da transação.|
+|`card.type`|Inteiro|—|Não|Configura as opcões disponíveis. 1 Configura cartão de crédito. 2 Configura cartão de débito.|
+|`card.installments`|Número|2|Sim|Número de parcelas.|
+|`card.capture`|Booleano|—|Sim|**true** = Autoriza e confirma a transação . **false** = Autorização, mas não confirma a transação, necessitando realizar a confirmação ([Captura] (#captura)) noutra requisição.|
+|`card.authenticate`|Número|1|Não|Opções disponíveis: <BR /> 1. Autorizar só transações autenticadas <BR /> 2. Autorizar transações autenticadas ou não autenticadas <BR /> 3. Autorizar sem autenticação <BR /> |
+|`card.interestType`|Número|1|Sim|Operações disponíveis: <BR /> 3. Parcelado Loja <BR /> 4. Parcelado Administrador|
+|`card.integrationType`|Número|1|Sim|Tipo de integração disponível pelo Gate2All: <BR /> 1. Integrado<BR /> 2. Loja <BR /> 3. Direto|
+|`card.saveCard`|Booleano|—|Sim|Configura salvar o cartão (tokenização). |
+|`card.codAuthorization`|Texto|100|Codigo de autorização da instituição.|
+|`card.providerReference`|Texto|100|Referência da instituição.|
+|`cardInfo.number`|Texto|19|Sim|Número do cartão.|
+|`cardInfo.brand`|Texto|20|Sim|Bandeira do cartão.|
+|`bankSlip.emissionDate`|Texto|20|Sim|Data de emissão do boleto. formato **YYYY-MM-DD**|
+|`bankSlip.expirationDate`|Texto|20|Sim|Data de vencimento do boleto. formato **YYYY-MM-DD**|
+|`bankSlip.instructions`|Texto|300|Sim|Instruções do boleto.|
+|`bankSlip.guarantor`|Texto|45|Sim|Nome do avalista.|
+|`bankSlip.provider`|Texto|20|Sim|Nome da instituição financeira :<ul><li>**BRADESCO**</li><li>**ITAU**</li></ul>|
+|`bankSlip.paymentDate`|Texto|20|Data de pagamento do boleto. formato **YYYY-MM-DD**|
+|`bankSlip.paymentAmount`|Número|16|Valor de pagamento do boleto sem pontuação. Os dois últimos dígitos são os centavos. (Ex: amount: 100 = R$ 1,00)|
+|`bankSlip.url`|Texto|300|Endereço de acesso da transação.|
+|`bankSlip.providerReference`|Texto|100|Referência da instituição.|
+|`electronicTransfer.provider`|Texto|20|Nome da instituição financeira :<ul><li>**BRADESCO**</li><li>**ITAU**</li></ul>|
+|`electronicTransfer.url`|Texto|300|Endereço de acesso da transação.|
+|`electronicTransfer.providerReference`|Texto|100|Referência da instituição.|
 
 ## Consulta pelo número do Pedido
 
@@ -1113,11 +1481,33 @@ Para realizar uma consulta é necessário enviar um GET para o seguinte recurso:
 
 ### Requisição
 
-<aside class="request"><span class="method get">GET</span> <span class="endpoint">/v1/transactions/?orderId={{orderId}}</span></aside>
+<aside class="request"><span class="method get">GET</span> <span class="endpoint">/v1/transactions/?referenceId={{referenceId}}</span></aside>
+
+```java
+
+import java.io.*;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.Scanner;
+
+URL obj = new URL("https://api.cert.gate.2all.com.br/v1/transactions/?referenceId=1493321061725");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+con.setRequestProperty("content-type", "application/json");
+con.setRequestProperty("authenticationapi", "demo");
+con.setRequestProperty("authenticationkey", "demo");
+
+Scanner scanner = new Scanner(new BufferedReader(new InputStreamReader(con.getInputStream())));
+String response = scanner.nextLine();
+scanner.close();
+
+System.out.println(response);
+
+```
 
 |Propriedade|Tipo|Tamanho|Obrigatório|Descrição|
 |-----------|----|-------|-----------|---------|
-|`orderId`|Texto|100|Sim|Número de identificação da loja.|
+|`referenceId`|Texto|100|Sim|Número de identificação da loja.|
 
 
 ### RESPOSTA
@@ -1157,11 +1547,33 @@ Também é possível realizar uma consulta pelo número do pedido passando um li
 
 ### Requisição
 
-<aside class="request"><span class="method get">GET</span> <span class="endpoint">/v1/transactions/?orderId={{orderId}}&limit=2</span></aside>
+<aside class="request"><span class="method get">GET</span> <span class="endpoint">/v1/transactions/?referenceId={{referenceId}}&limit=2</span></aside>
+
+```java
+
+import java.io.*;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.Scanner;
+
+URL obj = new URL("https://api.cert.gate.2all.com.br/v1/transactions/?referenceId=1493321061725&limit=2");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+con.setRequestProperty("content-type", "application/json");
+con.setRequestProperty("authenticationapi", "demo");
+con.setRequestProperty("authenticationkey", "demo");
+
+Scanner scanner = new Scanner(new BufferedReader(new InputStreamReader(con.getInputStream())));
+String response = scanner.nextLine();
+scanner.close();
+
+System.out.println(response);
+
+```
 
 |Propriedade|Tipo|Tamanho|Obrigatório|Descrição|
 |-----------|----|-------|-----------|---------|
-|`orderId`|Texto|100|Sim|Número de identificação da loja.|
+|`referenceId`|Texto|100|Sim|Número de identificação da loja.|
 |`limit`|Número|10|Não|Limite Máximo de pedidos 10.|
 
 
@@ -1241,8 +1653,9 @@ Para criar um formulário que capturá os dados do cartão para gerar um token �
 
 ```json
 {
+    "referenceId": "19893211234",
     "postBackUrl": "http://url-notificacao",
-  "redirectUrl": "http://url-redirect",
+    "redirectUrl": "http://url-redirect",
     "brand" : "VISA"
 }
 ```
@@ -1250,8 +1663,47 @@ Para criar um formulário que capturá os dados do cartão para gerar um token �
 ```shell
 ```
 
+```java
+
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.Scanner;
+
+URL obj = new URL("https://api.cert.gate.2all.com.br/v1/tokenization/intention");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+
+con.setRequestMethod("POST");
+con.setRequestProperty("content-type", "application/json");
+con.setRequestProperty("authenticationapi", "demo");
+con.setRequestProperty("authenticationkey", "demo");
+
+String body = "{"
+        + "\"postBackUrl\": \"http://requestb.in/qkg1clqk\","
+        + "\"redirectUrl\": \"http://requestb.in/qkg1clqk\","
+        + "\"brand\" : \"VISA\""
+        + "}";
+
+con.setDoOutput(true);
+DataOutputStream dos = new DataOutputStream(con.getOutputStream());
+dos.writeBytes(body);
+dos.flush();
+dos.close();
+
+Scanner scanner = new Scanner(new BufferedReader(new InputStreamReader(con.getInputStream())));
+String response = scanner.nextLine();
+scanner.close();
+
+System.out.println(response);
+
+```
+
 |Propriedade|Tipo|Tamanho|Obrigatório|Descrição|
 |-----------|----|-------|-----------|---------|
+|`referenceId`|Texto|100|Sim|Número de identificação da loja.|
 |`postBackUrl`|Texto|—|Sim|URL onde o GATE2all notificará eventuais status da tokenização para o lojista.|
 |`redirectUrl`|Texto|—|Sim|URL onde o GATE2all redirecionará o comprador após o processamento da tokenização.|
 |`brand`|Texto|20|Não|Bandeira do cartão.|
@@ -1262,6 +1714,7 @@ Para criar um formulário que capturá os dados do cartão para gerar um token �
 
 ```json
 {
+  "referenceId": "19893211234",
   "transactionId": "9477f767-f037-45f4-93ce-a40d10b49e86",
   "url": "https://api.gate.2all.com.br/v1/save-card/9477f767-f037-45f4-93ce-a40d10b49e86"
 }
@@ -1309,47 +1762,74 @@ Para realizar uma tokenização direta é necessário enviar um POST para o segu
 
 ```json
 {
-   "payment": {
-       "card": {
-          "number": "4024007148992927",
-          "expirationMonth": "04",
-          "expirationYear": "2017",
-          "brand": "VISA",
-          "holderName": "Comprador"
-        }
-   }
+    "referenceId": "19893211234",
+    "postBackUrl": "http://url-notificacao",
+    "cardInfo": {
+      "number": "4024007148992927",
+      "expirationMonth": "04",
+      "expirationYear": "2017",
+      "brand": "VISA",
+      "holderName": "Comprador"
+    }
 }
 ```
 
 ```shell
-curl --request POST
-  --url /v1/transactions/tokenization
-  --header 'content-type: application/json'
-  --header 'authenticationApi: XXXXXX'
-  --header 'authenticationKey: XXXXXX'
-  
-  --data-binary
-  {
-   "payment": {
-       "card": {
-          "number": "4024007148992927",
-          "expirationMonth": "04",
-          "expirationYear": "2017",
-          "brand": "VISA",
-          "holderName": "Comprador"
-        }
-    }
-  }
---verbose
+```
+
+```java
+
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.Scanner;
+
+URL obj = new URL("https://api.cert.gate.2all.com.br/v1/tokenization");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+
+con.setRequestMethod("POST");
+con.setRequestProperty("content-type", "application/json");
+con.setRequestProperty("authenticationapi", "demo");
+con.setRequestProperty("authenticationkey", "demo");
+
+String body = "{"
+    + "\"referenceId\": \"123456789\","
+    + "\"postBackUrl\": \"http://url-notificacao\","
+    + "    \"cardInfo\": {"
+    + "        \"number\": \"4556326359707410\","
+    + "        \"expirationMonth\": \"04\","
+    + "        \"expirationYear\": \"2017\","
+    + "        \"brand\": \"VISA\","
+    + "        \"holderName\": \"Comprador\""
+    + "      }"
+    + "}";
+
+con.setDoOutput(true);
+DataOutputStream dos = new DataOutputStream(con.getOutputStream());
+dos.writeBytes(body);
+dos.flush();
+dos.close();
+
+Scanner scanner = new Scanner(new BufferedReader(new InputStreamReader(con.getInputStream())));
+String response = scanner.nextLine();
+scanner.close();
+
+System.out.println(response);
+
 ```
 
 |Propriedade|Tipo|Tamanho|Descrição|
 |-----------|:----:|:-------:|---------|
-|`payment.card.number`|Texto|20|Número do cartão truncado.|
-|`payment.card.expirationMonth`|Número|2|Mês da validade do cartão.|
-|`payment.card.expirationYear`|Número|4|Ano da validade do cartão.|
-|`payment.card.brand`|Texto|20|Bandeira do cartão.|
-|`payment.card.holderName`|Texto|100|Nome do portador do cartão.|
+|`referenceId`|Texto|100|Sim|Número de identificação da loja.|
+|`postBackUrl`|Texto|—|Sim|URL onde o GATE2all notificará eventuais status da trancação para o lojista.|
+|`cardInfo.number`|Texto|20|Número do cartão truncado.|
+|`cardInfo.expirationMonth`|Número|2|Mês da validade do cartão.|
+|`cardInfo.expirationYear`|Número|4|Ano da validade do cartão.|
+|`cardInfo.brand`|Texto|20|Bandeira do cartão.|
+|`cardInfo.holderName`|Texto|100|Nome do portador do cartão.|
 
 ### RESPOSTA
 
@@ -1357,56 +1837,33 @@ curl --request POST
 
 ```json
 {
-  "integrationType": 1,
-  "status": 0,
-  "payment": {
-    "provider": "Cielo",
-    "card": {
-      "number": "402400******2927",
-      "expirationMonth": "04",
-      "expirationYear": "2017",
-      "brand": "VISA",
-      "token": "be4cbeb1-abb2-4913-8165-f86962143fa021",
-      "holderName": "Comprador",
-      "saveCard": true
-    }
+  "tokenizationId": "f414a0b8-f5de-4245-aae5-733f10c1963d",
+  "referenceId": "19893211234",
+  "postBackUrl": "http://url-notificacao",
+  "provider": "CIELO",
+  "saveCard": true,
+  "cardInfo": {
+    "number": "402400******2927",
+    "expirationMonth": "04",
+    "expirationYear": "2017",
+    "brand": "VISA",
+    "token": "be4cbeb1-abb2-4913-8165-f86962143fa021",
+    "holderName": "Comprador"
   }
 }
 ```
 
 
 ```shell
- {
-  "integrationType": 1,
-  "status": 0,
-  "payment": {
-    "provider": "Cielo",
-    "card": {
-      "number": "402400******2927",
-      "expirationMonth": "04",
-      "expirationYear": "2017",
-      "brand": "VISA",
-      "token": "be4cbeb1-abb2-4913-8165-f86962143fa021",
-      "holderName": "USUARIO TESTE",
-      "saveCard": true
-    }
-  }
-}
 ```
 
 
 |Propriedade|Tipo|Tamanho|Descrição|
 |-----------|:----:|:-------:|---------|
-|`integrationType`|Número|1|Sim|Tipo de integração disponível pelo Gate2All: <BR /> 1. Integrado<BR /> 2. Loja <BR /> 3. Direto|
-|`status`|Número|2|Status da transação retornado pelo GATE2all [catálogo](#status).|
-|`payment.provider`|Texto|100|Nome da Rede Adquirente.|
-|`payment.card.number`|Texto|20|Número do cartão truncado.|
-|`payment.card.expirationMonth`|Número|2|Mês da validade do cartão.|
-|`payment.card.expirationYear`|Número|4|Ano da validade do cartão.|
-|`payment.card.brand`|Texto|20|Bandeira do cartão.|
-|`payment.card.token`|Texto|100|Token do cartão.|
-|`payment.card.holderName`|Texto|100|Nome do portador do cartão.|
-|`payment.card.saveCard`|Booleano|Sim|Configura salvar o cartão (tokenização).|
+|`tokenizationId`|Texto|36|Identificador da tokenização do GATE2all.|
+|`provider`|Texto|100|Nome da Rede Adquirente.|
+|`saveCard`|Booleano|Sim|Configura salvar o cartão (tokenização).|
+|`cardInfo.token`|Texto|100|Token do cartão.|
 
 
 ## Transação com Token
@@ -1420,23 +1877,26 @@ Para criar uma transação com token é necessário enviar um POST para o seguin
 
 ```json
 {
-   "orderId": "19893211234",
+   "referenceId": "19893211234",
    "amount": "100",
-   "softDescriptor": "Pagamento Gate2all",
    "description": "Mouse sem fio",
-   "capture": false,
-   "installments": 1,
-   "operationType": 1,
-   "authenticate": 3,
    "customer": {
       "name": "Comprador Teste",
       "document": "12345678909"
    },
    "payment": {
        "card": {
-          "token": "4b6a2aa5-de91-4d52-a4d1-f265f208e5a321",
-          "cvv": "234"
-        }
+          "type": 1,
+          "capture": false,
+          "installments": 1,
+          "interestType": 3,
+          "authenticate": 3,
+          "softDescriptor": "Pagamento Gate2all",
+          "cardInfo": {
+              "token": "4b6a2aa5-de91-4d52-a4d1-f265f208e5a321",
+              "cvv": "234"
+          }
+       }
    }
 }
 ```
@@ -1444,20 +1904,77 @@ Para criar uma transação com token é necessário enviar um POST para o seguin
 ```shell
 ```
 
+```java
+
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.Scanner;
+
+URL obj = new URL("https://api.cert.gate.2all.com.br/v1/transactions");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+
+con.setRequestMethod("POST");
+con.setRequestProperty("content-type", "application/json");
+con.setRequestProperty("authenticationapi", "demo");
+con.setRequestProperty("authenticationkey", "demo");
+
+String body = "{"
+      + "\"referenceId\": \"123456789\","
+      + "\"amount\": \"100\","
+      + "\"description\": \"TV LG 42\","
+      + "\"postBackUrl\": \"http://requestb.in/qkg1clqk\","
+      + "    \"customer\": {"
+      + "        \"name\": \"LUIS A R ROMERO\","
+      + "        \"document\": \"12345678909\""
+      + "   },"
+      + "    \"payment\": {"
+      + "        \"card\": {"
+      + "           \"type\": 1,"
+      + "           \"capture\": true,"
+      + "           \"installments\": 1,"
+      + "           \"interestType\": 3,"
+      + "           \"softDescriptor\": \"EC02\","
+      + "           \"cardInfo\": {"
+      + "               \"token\": \"7a7820d0-ff6d-484a-8b8e-988d6d0ec0cc21\""
+      + "           }"
+      + "        }"
+      + "    }"
+      + "   "
+      + "}";
+
+con.setDoOutput(true);
+DataOutputStream dos = new DataOutputStream(con.getOutputStream());
+dos.writeBytes(body);
+dos.flush();
+dos.close();
+
+Scanner scanner = new Scanner(new BufferedReader(new InputStreamReader(con.getInputStream())));
+String response = scanner.nextLine();
+scanner.close();
+
+System.out.println(response);
+
+```
+
 |Propriedade|Tipo|Tamanho|Obrigatório|Descrição|
 |-----------|----|-------|-----------|---------|
-|`orderId`|Texto|100|Sim|Número de identificação da loja.|
+|`referenceId`|Texto|100|Sim|Número de identificação da loja.|
 |`amount`|Número|16|Sim|Valor da transação sem pontuação. Os dois últimos dígitos são os centavos. (Ex: amount: 100 = R$ 1,00)|
 |`description`|Texto|300|Não|Descrição da transação.|
-|`softDescriptor`|Texto|22|Não|Texto a ser exibido na fatura do portador do cartão.|
-|`capture`|Booleano|—|Sim|**true** = Autoriza e confirma a transação . **false** = Autorização, mas não confirma a transação, necessitando realizar a confirmação ([Captura] (#captura)) noutra requisição.|
-|`installments`|Número|2|Sim|Número de parcelas.|
-|`operationType`|Número|1|Sim|Operações disponíveis: <BR /> 1. Cartão de Crédito<BR /> 2. Cartão de Débito <BR /> 3. Parcelado Loja <BR /> 4. Parcelado Administrador|
-|`authenticate`|Número|1|Não|Opções disponíveis: <BR /> 1. Autorizar só transações autenticadas <BR /> 2. Autorizar transações autenticadas ou não autenticadas <BR /> 3. Autorizar sem autenticação <BR /> |
 |`customer.name`|Texto|100|Sim|Nome do portador do cartão.|
 |`customer.document`|Texto|18|Não|Número do CPF/CNPJ do portador do cartão.|
-|`card.token`|Texto|100|Sim|Token gerado anteriormente pela operação de Tokenização.|
-|`card.cvv`|Número|4|Não|Código de segurança do cartão.|
+|`card.type`|Inteiro|—|Não|Configura as opcões disponíveis. 1 Configura cartão de crédito. 2 Configura cartão de débito.|
+|`card.capture`|Booleano|—|Sim|**true** = Autoriza e confirma a transação . **false** = Autorização, mas não confirma a transação, necessitando realizar a confirmação ([Captura] (#captura)) noutra requisição.|
+|`card.installments`|Número|2|Sim|Número de parcelas.|
+|`card.interestType`|Número|1|Sim|Operações disponíveis: <BR /> 3. Parcelado Loja <BR /> 4. Parcelado Administrador|
+|`card.authenticate`|Número|1|Não|Opções disponíveis: <BR /> 1. Autorizar só transações autenticadas <BR /> 2. Autorizar transações autenticadas ou não autenticadas <BR /> 3. Autorizar sem autenticação <BR /> |
+|`card.softDescriptor`|Texto|22|Não|Texto a ser exibido na fatura do portador do cartão.|
+|`cardInfo.token`|Texto|100|Sim|Token gerado anteriormente pela operação de Tokenização.|
+|`cardInfo.cvv`|Número|4|Não|Código de segurança do cartão.|
 
 ### RESPOSTA
 
@@ -1466,30 +1983,33 @@ Para criar uma transação com token é necessário enviar um POST para o seguin
 ```json
 {
   "transactionId": "5a51ae6b-e91e-4b38-b596-e2acb77dca43",
-  "orderId": "1489093308860",
+  "referenceId": "1489093308860",
   "description": "Mouse sem fio",
-  "softDescriptor": "Pagamento Gate2all",
-  "operationType": 1,
-  "integrationType": 1,
   "amount": "100",
-  "installments": 1,
-  "capture": false,
-  "authenticate": 3,
   "status": 5,
   "dtTransaction": "2017-03-09T18:01:17",
   "payment": {
-    "provider": "Cielo",
-    "authenticationECI": 7,
-    "codAuthorization": "123456",
-    "providerReference": "10069930690009510E9A",
-    "providerCode": "00",
-    "providerMessage": "Transação autorizada",
     "card": {
-      "number": "402400******2927",
-      "cvv": "***",
-      "brand": "VISA",
-      "token": "4b6a2aa5-de91-4d52-a4d1-f265f208e5a321",
-      "saveCard": true
+      "type": 1,
+      "installments": 1,
+      "capture": false,
+      "authenticate": 3,
+      "softDescriptor": "Pagamento Gate2all",
+      "interestType": 3,
+      "integrationType": 1,
+      "provider": "Cielo",
+      "authenticationECI": 7,
+      "codAuthorization": "123456",
+      "providerReference": "10069930690009510E9A",
+      "providerCode": "00",
+      "providerMessage": "Transação autorizada",
+      "saveCard": true,
+      "cardInfo": {
+        "number": "402400******2927",
+        "cvv": "***",
+        "brand": "VISA",
+        "token": "4b6a2aa5-de91-4d52-a4d1-f265f208e5a321"
+      }
     }
   },
   "customer": {
@@ -1507,10 +2027,12 @@ Para criar uma transação com token é necessário enviar um POST para o seguin
 |-----------|----|-------|-----------|---------|
 |`transactionId`|Texto|150|Identificador da transação do GATE2all.|
 |`dtTransaction`|DataHora|19|Data e hora da transação.|
-|`payment.provider`|Texto|100|Nome da instituição financeira.|
-|`payment.providerReference`|Texto|100|Referência da instituição.|
-|`payment.providerMessage`|Texto|100|Mensagem da instituição.|
-|`payment.providerCode`|Texto|100|Codigo de resposta da instituição.|
-|`payment.codAuthorization`|Texto|100|Codigo de autorização da instituição.|
-|`payment.authenticationECI`|Texto|100|Indicador de autenticação da transação.[Códigos ECI](#status-eci)|
+|`card.provider`|Texto|100|Nome da instituição financeira.|
+|`card.providerReference`|Texto|100|Referência da instituição.|
+|`card.providerMessage`|Texto|100|Mensagem da instituição.|
+|`card.providerCode`|Texto|100|Codigo de resposta da instituição.|
+|`card.codAuthorization`|Texto|100|Codigo de autorização da instituição.|
+|`card.authenticationECI`|Texto|100|Indicador de autenticação da transação.[Códigos ECI](#status-eci)|
+|`cardInfo.number`|Texto|20|Número do cartão truncado.|
+|`cardInfo.brand`|Texto|20|Bandeira do cartão.|
 |`status`|Número|2|Status da transação retornado pelo GATE2all [catálogo](#status).|
