@@ -91,7 +91,7 @@
       <script src="javascripts/all.js"></script>
   </head>
 
-  <body class="index" data-languages="[&quot;json&quot;,&quot;shell&quot;]">
+  <body class="index" data-languages="[&quot;json&quot;,&quot;shell&quot;,&quot;java&quot;]">
     <a href="#" id="nav-button">
       <span>
         NAV
@@ -103,6 +103,7 @@
         <div class="lang-selector">
               <a href="#" data-language-name="json">JSON</a>
               <a href="#" data-language-name="shell">cURL</a>
+              <a href="#" data-language-name="java">JAVA</a>
         </div>
         <div class="search">
           <input type="text" class="search" id="input-search" placeholder="Search">
@@ -458,11 +459,11 @@ O valor do resultante da divisão do valor do pedido pelo número de parcelas n�
 
 <aside class="request"><span class="method post">POST</span> <span class="endpoint">/v1/intention</span></aside>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-    </span><span class="nt">"orderId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"19893211234"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"referenceId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"19893211234"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"100"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Mouse sem fio"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"postBackUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://url-notificacao"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"redirectUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://url-redirect"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"redirectUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://url-redirect"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"dhExpiration"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-08-25T18:10:53"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"customer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Comprador Teste"</span><span class="p">,</span><span class="w">
@@ -483,7 +484,7 @@ O valor do resultante da divisão do valor do pedido pelo número de parcelas n�
             </span><span class="nt">"capture"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
             </span><span class="nt">"installments"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2"</span><span class="p">,</span><span class="w">
             </span><span class="nt">"fixedInstallments"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"operationType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"interestType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3"</span><span class="p">,</span><span class="w">
             </span><span class="nt">"authenticate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3"</span><span class="p">,</span><span class="w">
             </span><span class="nt">"softDescriptor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Gate2@all"</span><span class="p">,</span><span class="w">
             </span><span class="nt">"saveCard"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
@@ -500,6 +501,80 @@ O valor do resultante da divisão do valor do pedido pelo número de parcelas n�
     </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
+<pre class="highlight shell"><code></code></pre>
+<pre class="highlight java"><code>
+<span class="kn">import</span> <span class="nn">java.io.BufferedReader</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.io.DataOutputStream</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.io.IOException</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.io.InputStreamReader</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.net.HttpURLConnection</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.net.URL</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.Scanner</span><span class="o">;</span>
+
+<span class="n">URL</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="s">"https://api.cert.gate.2all.com.br/v1/intention"</span><span class="o">);</span>
+<span class="n">HttpURLConnection</span> <span class="n">con</span> <span class="o">=</span> <span class="o">(</span><span class="n">HttpURLConnection</span><span class="o">)</span> <span class="n">obj</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
+
+<span class="n">con</span><span class="o">.</span><span class="na">setRequestMethod</span><span class="o">(</span><span class="s">"POST"</span><span class="o">);</span>
+<span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"content-type"</span><span class="o">,</span> <span class="s">"application/json"</span><span class="o">);</span>
+<span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"authenticationapi"</span><span class="o">,</span> <span class="s">"demo"</span><span class="o">);</span>
+<span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"authenticationkey"</span><span class="o">,</span> <span class="s">"demo"</span><span class="o">);</span>
+
+<span class="n">String</span> <span class="n">body</span> <span class="o">=</span> <span class="s">"{"</span>
+        <span class="o">+</span> <span class="s">"\"referenceId\": \"19893211234\","</span>
+        <span class="o">+</span> <span class="s">"\"amount\": \"100\","</span>
+        <span class="o">+</span> <span class="s">"\"description\": \"Mouse sem fio\","</span>
+        <span class="o">+</span> <span class="s">"\"postBackUrl\": \"http://url-notificacao\","</span>
+        <span class="o">+</span> <span class="s">"\"redirectUrl\": \"http://url-redirect\","</span>
+        <span class="o">+</span> <span class="s">"\"dhExpiration\": \"2017-08-25T18:10:53\","</span>
+        <span class="o">+</span> <span class="s">"    \"customer\": {"</span>
+        <span class="o">+</span> <span class="s">"       \"name\": \"Comprador Teste\","</span>
+        <span class="o">+</span> <span class="s">"       \"document\": \"12345678909\","</span>
+        <span class="o">+</span> <span class="s">"       \"email\": \"compradorteste@gmail.com\","</span>
+        <span class="o">+</span> <span class="s">"       \"address\": {"</span>
+        <span class="o">+</span> <span class="s">"           \"address\": \"Endereco\","</span>
+        <span class="o">+</span> <span class="s">"           \"number\": \"100\","</span>
+        <span class="o">+</span> <span class="s">"           \"district\": \"Vila Olimpia\","</span>
+        <span class="o">+</span> <span class="s">"           \"zipcode\": \"09878675\","</span>
+        <span class="o">+</span> <span class="s">"           \"city\": \"Sao Paulo\","</span>
+        <span class="o">+</span> <span class="s">"           \"state\": \"SP\""</span>
+        <span class="o">+</span> <span class="s">"        }"</span>
+        <span class="o">+</span> <span class="s">"    },"</span>
+        <span class="o">+</span> <span class="s">"   \"payment\": {"</span>
+        <span class="o">+</span> <span class="s">"        \"card\": {"</span>
+        <span class="o">+</span> <span class="s">"            \"type\": 0,"</span>
+        <span class="o">+</span> <span class="s">"            \"capture\": false,"</span>
+        <span class="o">+</span> <span class="s">"            \"installments\": \"2\","</span>
+        <span class="o">+</span> <span class="s">"            \"fixedInstallments\": false,"</span>
+        <span class="o">+</span> <span class="s">"            \"interestType\": \"4\","</span>
+        <span class="o">+</span> <span class="s">"            \"authenticate\": \"3\","</span>
+        <span class="o">+</span> <span class="s">"            \"softDescriptor\": \"Gate2@all\","</span>
+        <span class="o">+</span> <span class="s">"            \"saveCard\": true"</span>
+        <span class="o">+</span> <span class="s">"        },"</span>
+        <span class="o">+</span> <span class="s">"        \"electronicTransfer\": {"</span>
+        <span class="o">+</span> <span class="s">"            \"provider\": \"Bradesco\""</span>
+        <span class="o">+</span> <span class="s">"        },"</span>
+        <span class="o">+</span> <span class="s">"        \"bankSlip\": {"</span>
+        <span class="o">+</span> <span class="s">"            \"expirationDate\": \"2017-12-30\","</span>
+        <span class="o">+</span> <span class="s">"            \"instructions\": \"Aceitar somente ate a data de vencimento, apes essa data juros de 1% dia\","</span>
+        <span class="o">+</span> <span class="s">"            \"guarantor\": \"Comprador Teste\","</span>
+        <span class="o">+</span> <span class="s">"            \"provider\": \"Bradesco\""</span>
+        <span class="o">+</span> <span class="s">"        }"</span>
+        <span class="o">+</span> <span class="s">"    }"</span>
+        <span class="o">+</span> <span class="s">"}"</span><span class="o">;</span>
+
+<span class="n">con</span><span class="o">.</span><span class="na">setDoOutput</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
+<span class="n">DataOutputStream</span> <span class="n">dos</span> <span class="o">=</span> <span class="k">new</span> <span class="n">DataOutputStream</span><span class="o">(</span><span class="n">con</span><span class="o">.</span><span class="na">getOutputStream</span><span class="o">());</span>
+<span class="n">dos</span><span class="o">.</span><span class="na">writeBytes</span><span class="o">(</span><span class="n">body</span><span class="o">);</span>
+<span class="n">dos</span><span class="o">.</span><span class="na">flush</span><span class="o">();</span>
+<span class="n">dos</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+
+<span class="n">Scanner</span> <span class="n">scanner</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Scanner</span><span class="o">(</span><span class="k">new</span> <span class="n">BufferedReader</span><span class="o">(</span><span class="k">new</span> <span class="n">InputStreamReader</span><span class="o">(</span><span class="n">con</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">())));</span>
+<span class="n">String</span> <span class="n">response</span> <span class="o">=</span> <span class="n">scanner</span><span class="o">.</span><span class="na">nextLine</span><span class="o">();</span>
+<span class="n">scanner</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+
+<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">response</span><span class="o">);</span>
+
+</code></pre>
 
 <table><thead>
 <tr>
@@ -511,7 +586,7 @@ O valor do resultante da divisão do valor do pedido pelo número de parcelas n�
 </tr>
 </thead><tbody>
 <tr>
-<td><code class="prettyprint">orderId</code></td>
+<td><code class="prettyprint">referenceId</code></td>
 <td>Texto</td>
 <td>100</td>
 <td>Sim</td>
@@ -644,11 +719,11 @@ O valor do resultante da divisão do valor do pedido pelo número de parcelas n�
 <td><strong>True</strong> = não permite que o comprador selecione a quantidade de parcelas no formulário de pagamento.</td>
 </tr>
 <tr>
-<td><code class="prettyprint">card.operationType</code></td>
+<td><code class="prettyprint">card.interestType</code></td>
 <td>Número</td>
 <td>1</td>
 <td>Sim</td>
-<td>Operações disponíveis: <BR /> 1. Cartão de Crédito<BR /> 2. Cartão de Débito <BR /> 3. Parcelado Loja <BR /> 4. Parcelado Administrador</td>
+<td>Operações disponíveis: <BR /> 3. Parcelado Loja <BR /> 4. Parcelado Administrador</td>
 </tr>
 <tr>
 <td><code class="prettyprint">card.authenticate</code></td>
@@ -679,28 +754,28 @@ O valor do resultante da divisão do valor do pedido pelo número de parcelas n�
 <td>Nome da instituição responsável pela transferência.</td>
 </tr>
 <tr>
-<td><code class="prettyprint">boleto.expirationDate</code></td>
+<td><code class="prettyprint">bankSlip.expirationDate</code></td>
 <td>Texto</td>
 <td>20</td>
 <td>Sim</td>
 <td>Data de vencimento do boleto. formato <strong>YYYY-MM-DD</strong></td>
 </tr>
 <tr>
-<td><code class="prettyprint">boleto.instructions</code></td>
+<td><code class="prettyprint">bankSlip.instructions</code></td>
 <td>Texto</td>
 <td>300</td>
 <td>Sim</td>
 <td>Instruções do boleto.</td>
 </tr>
 <tr>
-<td><code class="prettyprint">boleto.guarantor</code></td>
+<td><code class="prettyprint">bankSlip.guarantor</code></td>
 <td>Texto</td>
 <td>45</td>
 <td>Sim</td>
 <td>Nome do avalista.</td>
 </tr>
 <tr>
-<td><code class="prettyprint">boleto.provider</code></td>
+<td><code class="prettyprint">bankSlip.provider</code></td>
 <td>Texto</td>
 <td>20</td>
 <td>Sim</td>
@@ -763,7 +838,7 @@ Redirecione o comprador para a URL da resposta.
 
 <p><img src="images/intencao02.png" /></p>
 
-<p>Após a conclusão do preenchimento do formulário o GATE2all enviará uma notificação contendo o <code class="prettyprint">transactionId</code> e o <code class="prettyprint">orderId</code> para o sistema do lojista realizar a <a href="#consulta">consulta</a> da transação notificada.</p>
+<p>Após a conclusão do preenchimento do formulário o GATE2all enviará uma notificação contendo o <code class="prettyprint">transactionId</code> e o <code class="prettyprint">referenceId</code> para o sistema do lojista realizar a <a href="#consulta">consulta</a> da transação notificada.</p>
 
 <p>Caso a forma de pagamento escolhida pelo usuário for boleto, aparecerá a seguinte tela:</p>
 
@@ -798,39 +873,99 @@ maiores informações consulte o site https://www.pcisecuritystandards.org</p>
 <p>Para criar uma autorização é necessário enviar um POST para o seguinte recurso:</p>
 
 <aside class="notice">
-Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendamos a consulta pelo número do pedido `orderId` ou criando uma [intenção](#inteno-de-venda) e informando o mesmo `transactionId` na requisição com os dados do cartão. Desta maneira é possível realizar uma consulta para verificar o status da transação. 
+Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendamos a consulta pelo número do pedido `referenceId` ou criando uma [intenção](#inteno-de-venda) e informando o mesmo `transactionId` na requisição com os dados do cartão. Desta maneira é possível realizar uma consulta para verificar o status da transação. 
 </aside>
 
 <h3 id="requisi-o">REQUISIÇÃO</h3>
 
 <aside class="request"><span class="method post">POST</span> <span class="endpoint">/v1/transactions</span></aside>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-   </span><span class="nt">"orderId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"19893211234"</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"referenceId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"19893211234"</span><span class="p">,</span><span class="w">
    </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"100"</span><span class="p">,</span><span class="w">
-   </span><span class="nt">"softDescriptor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Pagamento Gate2all"</span><span class="p">,</span><span class="w">
    </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Mouse sem fio"</span><span class="p">,</span><span class="w">
-   </span><span class="nt">"capture"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-   </span><span class="nt">"installments"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-   </span><span class="nt">"operationType"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-   </span><span class="nt">"authenticate"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
    </span><span class="nt">"customer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Comprador Teste"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"document"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12345678909"</span><span class="w">
    </span><span class="p">},</span><span class="w">
    </span><span class="nt">"payment"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
        </span><span class="nt">"card"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="nt">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4539708473330561"</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"expirationMonth"</span><span class="p">:</span><span class="w"> </span><span class="s2">"04"</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"expirationYear"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019"</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"cvv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"234"</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"brand"</span><span class="p">:</span><span class="w"> </span><span class="s2">"VISA"</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"holderName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"HOLDER NAME"</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"saveCard"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+          </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"capture"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"installments"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"interestType"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"authenticate"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"softDescriptor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Pagamento Gate2all"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"saveCard"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"cardInfo"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+              </span><span class="nt">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4539708473330561"</span><span class="p">,</span><span class="w">
+              </span><span class="nt">"expirationMonth"</span><span class="p">:</span><span class="w"> </span><span class="s2">"04"</span><span class="p">,</span><span class="w">
+              </span><span class="nt">"expirationYear"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019"</span><span class="p">,</span><span class="w">
+              </span><span class="nt">"cvv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"234"</span><span class="p">,</span><span class="w">
+              </span><span class="nt">"brand"</span><span class="p">:</span><span class="w"> </span><span class="s2">"VISA"</span><span class="p">,</span><span class="w">
+              </span><span class="nt">"holderName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"HOLDER NAME"</span><span class="w">
+            </span><span class="p">}</span><span class="w">
         </span><span class="p">}</span><span class="w">
    </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <pre class="highlight shell"><code></code></pre>
+<pre class="highlight java"><code>
+<span class="kn">import</span> <span class="nn">java.io.*</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.net.HttpURLConnection</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.net.URL</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.Scanner</span><span class="o">;</span>
+
+<span class="n">URL</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="s">"https://api.cert.gate.2all.com.br/v1/transactions"</span><span class="o">);</span>
+<span class="n">HttpURLConnection</span> <span class="n">con</span> <span class="o">=</span> <span class="o">(</span><span class="n">HttpURLConnection</span><span class="o">)</span> <span class="n">obj</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
+
+<span class="n">con</span><span class="o">.</span><span class="na">setRequestMethod</span><span class="o">(</span><span class="s">"POST"</span><span class="o">);</span>
+<span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"content-type"</span><span class="o">,</span> <span class="s">"application/json"</span><span class="o">);</span>
+<span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"authenticationapi"</span><span class="o">,</span> <span class="s">"demo"</span><span class="o">);</span>
+<span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"authenticationkey"</span><span class="o">,</span> <span class="s">"demo"</span><span class="o">);</span>
+
+<span class="n">String</span> <span class="n">body</span> <span class="o">=</span> <span class="s">"{"</span>
+        <span class="o">+</span> <span class="s">"\"referenceId\": \"123456\","</span>
+        <span class="o">+</span> <span class="s">"\"amount\": \"100\","</span>
+        <span class="o">+</span> <span class="s">"\"description\": \"Venda Teste\","</span>
+        <span class="o">+</span> <span class="s">"\"postBackUrl\": \"http://url-notificacao\","</span>
+        <span class="o">+</span> <span class="s">"\"customer\": {"</span>
+        <span class="o">+</span> <span class="s">"    \"name\": \"COMPRADOR TESTE\","</span>
+        <span class="o">+</span> <span class="s">"     \"document\": \"23650403811\""</span>
+        <span class="o">+</span> <span class="s">"},"</span>
+        <span class="o">+</span> <span class="s">" \"payment\": {"</span>
+        <span class="o">+</span> <span class="s">"    \"card\": {"</span>
+        <span class="o">+</span> <span class="s">"        \"type\": 1,"</span>
+        <span class="o">+</span> <span class="s">"        \"capture\": false,"</span>
+        <span class="o">+</span> <span class="s">"        \"installments\": 1,"</span>
+        <span class="o">+</span> <span class="s">"        \"interestType\": 3,"</span>
+        <span class="o">+</span> <span class="s">"        \"authenticate\": 3,"</span>
+        <span class="o">+</span> <span class="s">"        \"saveCard\": false,"</span>
+        <span class="o">+</span> <span class="s">"        \"softDescriptor\": \"Gate2All\","</span>
+        <span class="o">+</span> <span class="s">"        \"cardInfo\": {"</span>
+        <span class="o">+</span> <span class="s">"           \"number\": \"4556326359707410\","</span>
+        <span class="o">+</span> <span class="s">"           \"expirationMonth\": \"04\","</span>
+        <span class="o">+</span> <span class="s">"           \"expirationYear\": \"2018\","</span>
+        <span class="o">+</span> <span class="s">"           \"cvv\": \"6434\","</span>
+        <span class="o">+</span> <span class="s">"           \"brand\": \"VISA\","</span>
+        <span class="o">+</span> <span class="s">"           \"holderName\": \"COMPRADOR TESTE\""</span>
+        <span class="o">+</span> <span class="s">"        }"</span>
+        <span class="o">+</span> <span class="s">"      }"</span>
+        <span class="o">+</span> <span class="s">"   }"</span>
+        <span class="o">+</span> <span class="s">"}"</span><span class="o">;</span>
+
+<span class="n">con</span><span class="o">.</span><span class="na">setDoOutput</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
+<span class="n">DataOutputStream</span> <span class="n">dos</span> <span class="o">=</span> <span class="k">new</span> <span class="n">DataOutputStream</span><span class="o">(</span><span class="n">con</span><span class="o">.</span><span class="na">getOutputStream</span><span class="o">());</span>
+<span class="n">dos</span><span class="o">.</span><span class="na">writeBytes</span><span class="o">(</span><span class="n">body</span><span class="o">);</span>
+<span class="n">dos</span><span class="o">.</span><span class="na">flush</span><span class="o">();</span>
+<span class="n">dos</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+
+<span class="n">Scanner</span> <span class="n">scanner</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Scanner</span><span class="o">(</span><span class="k">new</span> <span class="n">BufferedReader</span><span class="o">(</span><span class="k">new</span> <span class="n">InputStreamReader</span><span class="o">(</span><span class="n">con</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">())));</span>
+<span class="n">String</span> <span class="n">response</span> <span class="o">=</span> <span class="n">scanner</span><span class="o">.</span><span class="na">nextLine</span><span class="o">();</span>
+<span class="n">scanner</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+
+<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">response</span><span class="o">);</span>
+
+</code></pre>
 
 <table><thead>
 <tr>
@@ -849,7 +984,7 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
 <td>Identificador da transação do GATE2all.</td>
 </tr>
 <tr>
-<td><code class="prettyprint">orderId</code></td>
+<td><code class="prettyprint">referenceId</code></td>
 <td>Texto</td>
 <td>100</td>
 <td>Sim</td>
@@ -861,13 +996,6 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
 <td>16</td>
 <td>Sim</td>
 <td>Valor da transação sem pontuação. Os dois últimos dígitos são os centavos. (Ex: amount: 100 = R$ 1,00)</td>
-</tr>
-<tr>
-<td><code class="prettyprint">softDescriptor</code></td>
-<td>Texto</td>
-<td>22</td>
-<td>Não</td>
-<td>Texto a ser exibido na fatura do portador do cartão.</td>
 </tr>
 <tr>
 <td><code class="prettyprint">description</code></td>
@@ -884,41 +1012,6 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
 <td>URL onde o GATE2all notificará eventuais status da trancação para o lojista.</td>
 </tr>
 <tr>
-<td><code class="prettyprint">capture</code></td>
-<td>Booleano</td>
-<td>—</td>
-<td>Sim</td>
-<td><strong>true</strong> = Autoriza e confirma a transação . <strong>false</strong> = Autorização, mas não confirma a transação, necessitando realizar a confirmação (<a href="#captura">Captura</a>) noutra requisição.</td>
-</tr>
-<tr>
-<td><code class="prettyprint">installments</code></td>
-<td>Número</td>
-<td>2</td>
-<td>Sim</td>
-<td>Número de parcelas.</td>
-</tr>
-<tr>
-<td><code class="prettyprint">operationType</code></td>
-<td>Número</td>
-<td>1</td>
-<td>Sim</td>
-<td>Operações disponíveis: <BR /> 1. Cartão de Crédito<BR /> 2. Cartão de Débito <BR /> 3. Parcelado Loja <BR /> 4. Parcelado Administrador</td>
-</tr>
-<tr>
-<td><code class="prettyprint">authenticate</code></td>
-<td>Número</td>
-<td>1</td>
-<td>Não</td>
-<td>Opções disponíveis: <BR /> 1. Autorizar só transações autenticadas <BR /> 2. Autorizar transações autenticadas ou não autenticadas <BR /> 3. Autorizar sem autenticação <BR /></td>
-</tr>
-<tr>
-<td><code class="prettyprint">provider</code></td>
-<td>Número</td>
-<td>—</td>
-<td>Não</td>
-<td>Nome do Meio de Pagamento - (OBS: funcionalidade ainda não disponível)</td>
-</tr>
-<tr>
 <td><code class="prettyprint">customer.name</code></td>
 <td>Texto</td>
 <td>100</td>
@@ -933,46 +1026,53 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
 <td>Número do CPF/CNPJ do portador do cartão.</td>
 </tr>
 <tr>
-<td><code class="prettyprint">card.number</code></td>
-<td>Texto</td>
-<td>19</td>
+<td><code class="prettyprint">card.type</code></td>
+<td>Inteiro</td>
+<td>—</td>
 <td>Sim</td>
-<td>Número do cartão.</td>
+<td>Configura as opcões disponíveis. 1 Configura cartão de crédito. 2</td>
 </tr>
 <tr>
-<td><code class="prettyprint">card.expirationMonth</code></td>
+<td><code class="prettyprint">card.softDescriptor</code></td>
+<td>Texto</td>
+<td>22</td>
+<td>Não</td>
+<td>Texto a ser exibido na fatura do portador do cartão.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">card.capture</code></td>
+<td>Booleano</td>
+<td>—</td>
+<td>Sim</td>
+<td><strong>true</strong> = Autoriza e confirma a transação . <strong>false</strong> = Autorização, mas não confirma a transação, necessitando realizar a confirmação (<a href="#captura">Captura</a>) noutra requisição.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">card.installments</code></td>
 <td>Número</td>
 <td>2</td>
 <td>Sim</td>
-<td>Mês da validade do cartão.</td>
+<td>Número de parcelas.</td>
 </tr>
 <tr>
-<td><code class="prettyprint">card.expirationYear</code></td>
+<td><code class="prettyprint">card.interestType</code></td>
 <td>Número</td>
-<td>2</td>
+<td>1</td>
 <td>Sim</td>
-<td>Ano da validade do cartão.</td>
+<td>Operações disponíveis: <BR /> 3. Parcelado Loja <BR /> 4. Parcelado Administrador</td>
 </tr>
 <tr>
-<td><code class="prettyprint">card.cvv</code></td>
+<td><code class="prettyprint">card.authenticate</code></td>
 <td>Número</td>
-<td>4</td>
+<td>1</td>
 <td>Não</td>
-<td>Código de segurança do cartão.</td>
+<td>Opções disponíveis: <BR /> 1. Autorizar só transações autenticadas <BR /> 2. Autorizar transações autenticadas ou não autenticadas <BR /> 3. Autorizar sem autenticação <BR /></td>
 </tr>
 <tr>
-<td><code class="prettyprint">card.brand</code></td>
-<td>Texto</td>
-<td>20</td>
-<td>Sim</td>
-<td>Bandeira do cartão.</td>
-</tr>
-<tr>
-<td><code class="prettyprint">card.holderName</code></td>
-<td>Texto</td>
-<td>20</td>
+<td><code class="prettyprint">card.provider</code></td>
+<td>Número</td>
+<td>—</td>
 <td>Não</td>
-<td>Nome do portador do cartão.</td>
+<td>Nome do Meio de Pagamento - (OBS: funcionalidade ainda não disponível)</td>
 </tr>
 <tr>
 <td><code class="prettyprint">card.saveCard</code></td>
@@ -980,6 +1080,48 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
 <td>—</td>
 <td>Sim</td>
 <td>Configura salvar o cartão (tokenização).</td>
+</tr>
+<tr>
+<td><code class="prettyprint">cardInfo.number</code></td>
+<td>Texto</td>
+<td>19</td>
+<td>Sim</td>
+<td>Número do cartão.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">cardInfo.expirationMonth</code></td>
+<td>Número</td>
+<td>2</td>
+<td>Sim</td>
+<td>Mês da validade do cartão.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">cardInfo.expirationYear</code></td>
+<td>Número</td>
+<td>2</td>
+<td>Sim</td>
+<td>Ano da validade do cartão.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">cardInfo.cvv</code></td>
+<td>Número</td>
+<td>4</td>
+<td>Não</td>
+<td>Código de segurança do cartão.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">cardInfo.brand</code></td>
+<td>Texto</td>
+<td>20</td>
+<td>Sim</td>
+<td>Bandeira do cartão.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">cardInfo.holderName</code></td>
+<td>Texto</td>
+<td>20</td>
+<td>Não</td>
+<td>Nome do portador do cartão.</td>
 </tr>
 </tbody></table>
 
@@ -990,32 +1132,35 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"transactionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"92d50ba4-5d93-4ee5-90e8-9884b250310a"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"orderId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1463697571584"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"referenceId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1463697571584"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TV LG 42"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"softDescriptor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EC02"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"operationType"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"integrationType"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
   </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"100"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"installments"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"capture"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"authenticate"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
   </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
   </span><span class="nt">"dtTransaction"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-03-05T12:04:20"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"payment"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"provider"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Cielo"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"authenticationECI"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"codAuthorization"</span><span class="p">:</span><span class="w"> </span><span class="s2">"123456"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"providerReference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1006993069000834928A"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"providerCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"providerMessage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Transação autorizada"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"card"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"453970******0561"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"expirationMonth"</span><span class="p">:</span><span class="w"> </span><span class="s2">"04"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"expirationYear"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"cvv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"***"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"brand"</span><span class="p">:</span><span class="w"> </span><span class="s2">"VISA"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"holderName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"HOLDER NAME"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"saveCard"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+      </span><span class="nt">"provider"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Cielo"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"authenticationECI"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"codAuthorization"</span><span class="p">:</span><span class="w"> </span><span class="s2">"123456"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"providerReference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1006993069000834928A"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"providerCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"providerMessage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Transação autorizada"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"softDescriptor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EC02"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"interestType"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"integrationType"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"installments"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"capture"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"authenticate"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"saveCard"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"cardInfo"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"453970******0561"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"expirationMonth"</span><span class="p">:</span><span class="w"> </span><span class="s2">"04"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"expirationYear"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"cvv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"***"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"brand"</span><span class="p">:</span><span class="w"> </span><span class="s2">"VISA"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"holderName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"HOLDER NAME"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="nt">"customer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -1058,37 +1203,37 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
 <td>Data e hora da transação.</td>
 </tr>
 <tr>
-<td><code class="prettyprint">payment.provider</code></td>
+<td><code class="prettyprint">card.provider</code></td>
 <td>Texto</td>
 <td>100</td>
 <td>Nome da instituição financeira.</td>
 </tr>
 <tr>
-<td><code class="prettyprint">payment.providerReference</code></td>
+<td><code class="prettyprint">card.providerReference</code></td>
 <td>Texto</td>
 <td>100</td>
 <td>Referência da instituição.</td>
 </tr>
 <tr>
-<td><code class="prettyprint">payment.providerMessage</code></td>
+<td><code class="prettyprint">card.providerMessage</code></td>
 <td>Texto</td>
 <td>100</td>
 <td>Mensagem da instituição.</td>
 </tr>
 <tr>
-<td><code class="prettyprint">payment.providerCode</code></td>
+<td><code class="prettyprint">card.providerCode</code></td>
 <td>Texto</td>
 <td>100</td>
 <td>Codigo de resposta da instituição.</td>
 </tr>
 <tr>
-<td><code class="prettyprint">payment.codAuthorization</code></td>
+<td><code class="prettyprint">card.codAuthorization</code></td>
 <td>Texto</td>
 <td>100</td>
 <td>Codigo de autorização da instituição.</td>
 </tr>
 <tr>
-<td><code class="prettyprint">payment.authenticationECI</code></td>
+<td><code class="prettyprint">card.authenticationECI</code></td>
 <td>Texto</td>
 <td>100</td>
 <td>Indicador de autenticação da transação.<a href="#status-eci">Códigos ECI</a></td>
@@ -1120,7 +1265,7 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
 
 <aside class="request"><span class="method post">POST</span> <span class="endpoint">/v1/transactions</span></aside>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-   </span><span class="nt">"orderId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"19893211234"</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"referenceId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"19893211234"</span><span class="p">,</span><span class="w">
    </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"100"</span><span class="p">,</span><span class="w">
    </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Produto ou serviço"</span><span class="p">,</span><span class="w">
    </span><span class="nt">"customer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -1147,6 +1292,65 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <pre class="highlight shell"><code></code></pre>
+<pre class="highlight java"><code>
+<span class="kn">import</span> <span class="nn">java.io.BufferedReader</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.io.DataOutputStream</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.io.IOException</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.io.InputStreamReader</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.net.HttpURLConnection</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.net.URL</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.Scanner</span><span class="o">;</span>
+
+<span class="n">URL</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="s">"https://api.cert.gate.2all.com.br/v1/transactions"</span><span class="o">);</span>
+<span class="n">HttpURLConnection</span> <span class="n">con</span> <span class="o">=</span> <span class="o">(</span><span class="n">HttpURLConnection</span><span class="o">)</span> <span class="n">obj</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
+
+<span class="n">con</span><span class="o">.</span><span class="na">setRequestMethod</span><span class="o">(</span><span class="s">"POST"</span><span class="o">);</span>
+<span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"content-type"</span><span class="o">,</span> <span class="s">"application/json"</span><span class="o">);</span>
+<span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"authenticationapi"</span><span class="o">,</span> <span class="s">"demo"</span><span class="o">);</span>
+<span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"authenticationkey"</span><span class="o">,</span> <span class="s">"demo"</span><span class="o">);</span>
+
+<span class="n">String</span> <span class="n">body</span> <span class="o">=</span> <span class="s">"{"</span>
+        <span class="o">+</span> <span class="s">"\"referenceId\": \"123456789\","</span>
+        <span class="o">+</span> <span class="s">"\"amount\": \"100\","</span>
+        <span class="o">+</span> <span class="s">"\"description\": \"TV LG 42\","</span>
+        <span class="o">+</span> <span class="s">"\"postBackUrl\": \"http://url-notificacao\","</span>
+        <span class="o">+</span> <span class="s">"\"customer\": {"</span>
+        <span class="o">+</span> <span class="s">"    \"name\": \"COMPRADOR TEST\","</span>
+        <span class="o">+</span> <span class="s">"    \"document\": \"12345678909\","</span>
+        <span class="o">+</span> <span class="s">"    \"email\" : \"comprador@ntk.com\","</span>
+        <span class="o">+</span> <span class="s">"    \"address\" : {"</span>
+        <span class="o">+</span> <span class="s">"        \"address\" : \"Rua Fidencio Ramos\","</span>
+        <span class="o">+</span> <span class="s">"        \"number\": \" 100\","</span>
+        <span class="o">+</span> <span class="s">"        \"district\" : \"Vila Olimpia\","</span>
+        <span class="o">+</span> <span class="s">"        \"zipcode\" : \"05890090\","</span>
+        <span class="o">+</span> <span class="s">"        \"city\" : \"Sao Paulo\","</span>
+        <span class="o">+</span> <span class="s">"        \"state\" : \"SP\""</span>
+        <span class="o">+</span> <span class="s">"        }"</span>
+        <span class="o">+</span> <span class="s">"    },"</span>
+        <span class="o">+</span> <span class="s">"    \"payment\": {"</span>
+        <span class="o">+</span> <span class="s">"        \"bankSlip\" : {"</span>
+        <span class="o">+</span> <span class="s">"            \"expirationDate\" :\"2017-12-01\","</span>
+        <span class="o">+</span> <span class="s">"            \"instructions\" : \"Aceitar somente ate a data de vencimento, apos essa data juros de 1% dia\","</span>
+        <span class="o">+</span> <span class="s">"            \"guarantor\" : \"Joao da Silva\","</span>
+        <span class="o">+</span> <span class="s">"            \"provider\":\"Itau\""</span>
+        <span class="o">+</span> <span class="s">"        }"</span>
+        <span class="o">+</span> <span class="s">"    }"</span>
+        <span class="o">+</span> <span class="s">"}"</span><span class="o">;</span>
+
+<span class="n">con</span><span class="o">.</span><span class="na">setDoOutput</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
+<span class="n">DataOutputStream</span> <span class="n">dos</span> <span class="o">=</span> <span class="k">new</span> <span class="n">DataOutputStream</span><span class="o">(</span><span class="n">con</span><span class="o">.</span><span class="na">getOutputStream</span><span class="o">());</span>
+<span class="n">dos</span><span class="o">.</span><span class="na">writeBytes</span><span class="o">(</span><span class="n">body</span><span class="o">);</span>
+<span class="n">dos</span><span class="o">.</span><span class="na">flush</span><span class="o">();</span>
+<span class="n">dos</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+
+<span class="n">Scanner</span> <span class="n">scanner</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Scanner</span><span class="o">(</span><span class="k">new</span> <span class="n">BufferedReader</span><span class="o">(</span><span class="k">new</span> <span class="n">InputStreamReader</span><span class="o">(</span><span class="n">con</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">())));</span>
+<span class="n">String</span> <span class="n">response</span> <span class="o">=</span> <span class="n">scanner</span><span class="o">.</span><span class="na">nextLine</span><span class="o">();</span>
+<span class="n">scanner</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+
+<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">response</span><span class="o">);</span>
+
+
+</code></pre>
 
 <table><thead>
 <tr>
@@ -1165,7 +1369,7 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
 <td>Utilize somente para intenções de venda previamente configuradas</td>
 </tr>
 <tr>
-<td><code class="prettyprint">orderId</code></td>
+<td><code class="prettyprint">referenceId</code></td>
 <td style="text-align: center">Texto</td>
 <td style="text-align: center">100</td>
 <td style="text-align: center">Sim</td>
@@ -1249,28 +1453,28 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
 <td>Sigla do estado do comprador.</td>
 </tr>
 <tr>
-<td><code class="prettyprint">payment.bankSlip.expirationDate</code></td>
+<td><code class="prettyprint">bankSlip.expirationDate</code></td>
 <td style="text-align: center">Texto</td>
 <td style="text-align: center">20</td>
 <td style="text-align: center">Sim</td>
 <td>Data de vencimento do boleto. formato <strong>YYYY-MM-DD</strong></td>
 </tr>
 <tr>
-<td><code class="prettyprint">payment.bankSlip.instructions</code></td>
+<td><code class="prettyprint">bankSlip.instructions</code></td>
 <td style="text-align: center">Texto</td>
 <td style="text-align: center">300</td>
 <td style="text-align: center">Sim</td>
 <td>Instruções do boleto.</td>
 </tr>
 <tr>
-<td><code class="prettyprint">payment.bankSlip.guarantor</code></td>
+<td><code class="prettyprint">bankSlip.guarantor</code></td>
 <td style="text-align: center">Texto</td>
 <td style="text-align: center">45</td>
 <td style="text-align: center">Sim</td>
 <td>Nome do avalista.</td>
 </tr>
 <tr>
-<td><code class="prettyprint">payment.bankSlip.provider</code></td>
+<td><code class="prettyprint">bankSlip.provider</code></td>
 <td style="text-align: center">Texto</td>
 <td style="text-align: center">20</td>
 <td style="text-align: center">Sim</td>
@@ -1281,7 +1485,7 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
 <h3 id="resposta">RESPOSTA</h3>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"transactionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7365ca65-70d4-4d7c-ac3d-a20f5730c241"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"orderId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"19893211234"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"referenceId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"19893211234"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"100"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Produto ou serviço"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"dtTransaction"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-03-08T10:46:31-0300"</span><span class="p">,</span><span class="w">
@@ -1299,10 +1503,10 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
     </span><span class="p">}</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="nt">"payment"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"providerReference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"20575112"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"providerCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"providerMessage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Transação iniciada"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"bankSlip"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"providerReference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"20575112"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"providerCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"providerMessage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Transação iniciada"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"emissionDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-03-08"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"expirationDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-03-10"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"instructions"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Aceitar somente até a data de vencimento, após essa data juros de 1% dia"</span><span class="p">,</span><span class="w">
@@ -1339,46 +1543,46 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
 <td>Data e hora da transação.</td>
 </tr>
 <tr>
-<td><code class="prettyprint">payment.providerReference</code></td>
-<td style="text-align: center">Texto</td>
-<td style="text-align: center">100</td>
-<td>Referência da instituição.</td>
-</tr>
-<tr>
-<td><code class="prettyprint">payment.providerCode</code></td>
-<td style="text-align: center">Texto</td>
-<td style="text-align: center">100</td>
-<td>Codigo de resposta da instituição.</td>
-</tr>
-<tr>
-<td><code class="prettyprint">payment.providerMessage</code></td>
-<td style="text-align: center">Texto</td>
-<td style="text-align: center">100</td>
-<td>Mensagem da instituição.</td>
-</tr>
-<tr>
-<td><code class="prettyprint">payment.bankSlip.emissionDate</code></td>
+<td><code class="prettyprint">bankSlip.emissionDate</code></td>
 <td style="text-align: center">Texto</td>
 <td style="text-align: center">20</td>
 <td>Data de emissão do boleto. formato <strong>YYYY-MM-DD</strong></td>
 </tr>
 <tr>
-<td><code class="prettyprint">payment.bankSlip.paymentDate</code></td>
+<td><code class="prettyprint">bankSlip.paymentDate</code></td>
 <td style="text-align: center">Texto</td>
 <td style="text-align: center">20</td>
 <td>Data de pagamento do boleto. formato <strong>YYYY-MM-DD</strong></td>
 </tr>
 <tr>
-<td><code class="prettyprint">payment.bankSlip.paymentAmount</code></td>
+<td><code class="prettyprint">bankSlip.paymentAmount</code></td>
 <td style="text-align: center">Número</td>
 <td style="text-align: center">16</td>
 <td>Valor de pagamento do boleto sem pontuação. Os dois últimos dígitos são os centavos. (Ex: amount: 100 = R$ 1,00)</td>
 </tr>
 <tr>
-<td><code class="prettyprint">payment.bankSlip.url</code></td>
+<td><code class="prettyprint">bankSlip.url</code></td>
 <td style="text-align: center">Texto</td>
 <td style="text-align: center">300</td>
 <td>Endereço de acesso da transação.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">bankSlip.providerReference</code></td>
+<td style="text-align: center">Texto</td>
+<td style="text-align: center">100</td>
+<td>Referência da instituição.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">bankSlip.providerCode</code></td>
+<td style="text-align: center">Texto</td>
+<td style="text-align: center">100</td>
+<td>Codigo de resposta da instituição.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">bankSlip.providerMessage</code></td>
+<td style="text-align: center">Texto</td>
+<td style="text-align: center">100</td>
+<td>Mensagem da instituição.</td>
 </tr>
 <tr>
 <td><code class="prettyprint">status</code></td>
@@ -1398,7 +1602,7 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
 
 <aside class="request"><span class="method post">POST</span> <span class="endpoint">/v1/transactions</span></aside>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-    </span><span class="nt">"orderId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"19893211234"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"referenceId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"19893211234"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"100"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Produto ou serviço"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"customer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -1422,6 +1626,60 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <pre class="highlight shell"><code></code></pre>
+<pre class="highlight java"><code>
+<span class="kn">import</span> <span class="nn">java.io.BufferedReader</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.io.DataOutputStream</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.io.IOException</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.io.InputStreamReader</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.net.HttpURLConnection</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.net.URL</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.Scanner</span><span class="o">;</span>
+
+<span class="n">URL</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="s">"https://api.cert.gate.2all.com.br/v1/transactions"</span><span class="o">);</span>
+<span class="n">HttpURLConnection</span> <span class="n">con</span> <span class="o">=</span> <span class="o">(</span><span class="n">HttpURLConnection</span><span class="o">)</span> <span class="n">obj</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
+
+<span class="n">con</span><span class="o">.</span><span class="na">setRequestMethod</span><span class="o">(</span><span class="s">"POST"</span><span class="o">);</span>
+<span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"content-type"</span><span class="o">,</span> <span class="s">"application/json"</span><span class="o">);</span>
+<span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"authenticationapi"</span><span class="o">,</span> <span class="s">"demo"</span><span class="o">);</span>
+<span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"authenticationkey"</span><span class="o">,</span> <span class="s">"demo"</span><span class="o">);</span>
+
+<span class="n">String</span> <span class="n">body</span> <span class="o">=</span> <span class="s">"{"</span>
+        <span class="o">+</span> <span class="s">"\"referenceId\": \"123456789\","</span>
+        <span class="o">+</span> <span class="s">"\"amount\": \"100\","</span>
+        <span class="o">+</span> <span class="s">"\"description\": \"TV LG 42\","</span>
+        <span class="o">+</span> <span class="s">"    \"customer\": {"</span>
+        <span class="o">+</span> <span class="s">"       \"name\": \"COMPRADOR TESTE\","</span>
+        <span class="o">+</span> <span class="s">"       \"document\": \"12345678909\","</span>
+        <span class="o">+</span> <span class="s">"       \"email\" : \"comprador@ntk.com\","</span>
+        <span class="o">+</span> <span class="s">"           \"address\" : {"</span>
+        <span class="o">+</span> <span class="s">"               \"address\" : \"Rua Fidencio Ramos 100\","</span>
+        <span class="o">+</span> <span class="s">"               \"district\" : \"Vila Olimpia\","</span>
+        <span class="o">+</span> <span class="s">"               \"zipcode\" : \"05890090\","</span>
+        <span class="o">+</span> <span class="s">"               \"city\" : \"Sao Paulo\","</span>
+        <span class="o">+</span> <span class="s">"               \"state\" : \"SP\""</span>
+        <span class="o">+</span> <span class="s">"      }"</span>
+        <span class="o">+</span> <span class="s">"   },"</span>
+        <span class="o">+</span> <span class="s">"   \"payment\": {"</span>
+        <span class="o">+</span> <span class="s">"       \"electronicTransfer\" : {"</span>
+        <span class="o">+</span> <span class="s">"          \"provider\" : \"Itau\""</span>
+        <span class="o">+</span> <span class="s">"       }"</span>
+        <span class="o">+</span> <span class="s">"    }"</span>
+        <span class="o">+</span> <span class="s">"}"</span><span class="o">;</span>
+
+<span class="n">con</span><span class="o">.</span><span class="na">setDoOutput</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
+<span class="n">DataOutputStream</span> <span class="n">dos</span> <span class="o">=</span> <span class="k">new</span> <span class="n">DataOutputStream</span><span class="o">(</span><span class="n">con</span><span class="o">.</span><span class="na">getOutputStream</span><span class="o">());</span>
+<span class="n">dos</span><span class="o">.</span><span class="na">writeBytes</span><span class="o">(</span><span class="n">body</span><span class="o">);</span>
+<span class="n">dos</span><span class="o">.</span><span class="na">flush</span><span class="o">();</span>
+<span class="n">dos</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+
+<span class="n">Scanner</span> <span class="n">scanner</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Scanner</span><span class="o">(</span><span class="k">new</span> <span class="n">BufferedReader</span><span class="o">(</span><span class="k">new</span> <span class="n">InputStreamReader</span><span class="o">(</span><span class="n">con</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">())));</span>
+<span class="n">String</span> <span class="n">response</span> <span class="o">=</span> <span class="n">scanner</span><span class="o">.</span><span class="na">nextLine</span><span class="o">();</span>
+<span class="n">scanner</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+
+<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">response</span><span class="o">);</span>
+
+
+</code></pre>
 
 <table><thead>
 <tr>
@@ -1440,7 +1698,7 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
 <td>Utilize somente para intenções de venda previamente configuradas</td>
 </tr>
 <tr>
-<td><code class="prettyprint">orderId</code></td>
+<td><code class="prettyprint">referenceId</code></td>
 <td style="text-align: center">Texto</td>
 <td style="text-align: center">100</td>
 <td style="text-align: center">Sim</td>
@@ -1524,7 +1782,7 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
 <td>Sigla do estado do comprador.</td>
 </tr>
 <tr>
-<td><code class="prettyprint">payment.electronicTransfer.provider</code></td>
+<td><code class="prettyprint">electronicTransfer.provider</code></td>
 <td style="text-align: center">Texto</td>
 <td style="text-align: center">20</td>
 <td style="text-align: center">Sim</td>
@@ -1535,7 +1793,7 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
 <h3 id="resposta">RESPOSTA</h3>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
     </span><span class="nt">"transactionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6400d988-cc4b-4084-80ee-d5575dbbed4d"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"orderId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"19893211234"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"referenceId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"19893211234"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"100"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Produto ou serviço"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"dtTransaction"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-03-05T16:16:14-0200"</span><span class="p">,</span><span class="w">
@@ -1553,8 +1811,8 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
       </span><span class="p">}</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nt">"payment"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"providerReference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"20518839"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"electronicTransfer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"providerReference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"20518839"</span><span class="p">,</span><span class="w">
             </span><span class="nt">"provider"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Itau"</span><span class="p">,</span><span class="w">
             </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.gate.2all.com.br/v1/url-payment/6400d988-cc4b-4084-80ee-d5575dbbed4d"</span><span class="w">
         </span><span class="p">}</span><span class="w">
@@ -1585,22 +1843,22 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
 <td>Data e hora da transação.</td>
 </tr>
 <tr>
-<td><code class="prettyprint">payment.providerReference</code></td>
-<td style="text-align: center">Texto</td>
-<td style="text-align: center">100</td>
-<td>Referência da instituição.</td>
-</tr>
-<tr>
-<td><code class="prettyprint">payment.electronicTransfer.provider</code></td>
+<td><code class="prettyprint">electronicTransfer.provider</code></td>
 <td style="text-align: center">Texto</td>
 <td style="text-align: center">20</td>
 <td>Nome da instituição financeira :<ul><li><strong>BRADESCO</strong></li><li><strong>ITAU</strong></li></ul></td>
 </tr>
 <tr>
-<td><code class="prettyprint">payment.electronicTransfer.url</code></td>
+<td><code class="prettyprint">electronicTransfer.url</code></td>
 <td style="text-align: center">Texto</td>
 <td style="text-align: center">300</td>
 <td>Endereço de acesso da transação.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">electronicTransfer.providerReference</code></td>
+<td style="text-align: center">Texto</td>
+<td style="text-align: center">100</td>
+<td>Referência da instituição.</td>
 </tr>
 <tr>
 <td><code class="prettyprint">status</code></td>
@@ -1648,6 +1906,26 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
 <h3 id="requisi-o">Requisição</h3>
 
 <aside class="request"><span class="method put">PUT</span> <span class="endpoint">/v1/transactions/{{transactionId}}/capture</span></aside>
+<pre class="highlight java"><code>
+<span class="kn">import</span> <span class="nn">java.io.*</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.net.HttpURLConnection</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.net.URL</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.Scanner</span><span class="o">;</span>
+
+<span class="n">URL</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="s">"https://api.cert.gate.2all.com.br/v1/transactions/{{transactionId}}/capture"</span><span class="o">);</span>
+<span class="n">HttpURLConnection</span> <span class="n">con</span> <span class="o">=</span> <span class="o">(</span><span class="n">HttpURLConnection</span><span class="o">)</span> <span class="n">obj</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
+<span class="n">con</span><span class="o">.</span><span class="na">setRequestMethod</span><span class="o">(</span><span class="s">"PUT"</span><span class="o">);</span>
+<span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"content-type"</span><span class="o">,</span> <span class="s">"application/json"</span><span class="o">);</span>
+<span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"authenticationapi"</span><span class="o">,</span> <span class="s">"demo"</span><span class="o">);</span>
+<span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"authenticationkey"</span><span class="o">,</span> <span class="s">"demo"</span><span class="o">);</span>
+
+<span class="n">Scanner</span> <span class="n">scanner</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Scanner</span><span class="o">(</span><span class="k">new</span> <span class="n">BufferedReader</span><span class="o">(</span><span class="k">new</span> <span class="n">InputStreamReader</span><span class="o">(</span><span class="n">con</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">())));</span>
+<span class="n">String</span> <span class="n">response</span> <span class="o">=</span> <span class="n">scanner</span><span class="o">.</span><span class="na">nextLine</span><span class="o">();</span>
+<span class="n">scanner</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+
+<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">response</span><span class="o">);</span>
+
+</code></pre>
 
 <table><thead>
 <tr>
@@ -1674,26 +1952,29 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
     </span><span class="nt">"transactionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"62f5a0b2-c632-4e4e-bc51-3b6681a54a3c"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"orderId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1488917347840"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"operationType"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"integrationType"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"referenceId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1488917347840"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"100"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"installments"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"capture"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"authenticate"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
     </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
     </span><span class="nt">"dtTransaction"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-03-07T17:09:07"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"payment"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"provider"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Cielo"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"authenticationECI"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"codAuthorization"</span><span class="p">:</span><span class="w"> </span><span class="s2">"123456"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"providerReference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"100699306900094D905A"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"providerCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"providerMessage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Transacao capturada com sucesso"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"card"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nt">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"421847******1234"</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"brand"</span><span class="p">:</span><span class="w"> </span><span class="s2">"VISA"</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"saveCard"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+          </span><span class="nt">"provider"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Cielo"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"authenticationECI"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"codAuthorization"</span><span class="p">:</span><span class="w"> </span><span class="s2">"123456"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"providerReference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"100699306900094D905A"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"providerCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"providerMessage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Transacao capturada com sucesso"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"installments"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"capture"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"authenticate"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"interestType"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"integrationType"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"saveCard"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"cardInfo"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+              </span><span class="nt">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"421847******1234"</span><span class="p">,</span><span class="w">
+              </span><span class="nt">"brand"</span><span class="p">:</span><span class="w"> </span><span class="s2">"VISA"</span><span class="w">
+          </span><span class="p">}</span><span class="w">
         </span><span class="p">}</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nt">"customer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -1711,6 +1992,26 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
 <h3 id="requisi-o">Requisição</h3>
 
 <aside class="request"><span class="method put">PUT</span> <span class="endpoint">/v1/transactions/{{transactionId}}/capture?amount=100</span></aside>
+<pre class="highlight java"><code>
+<span class="kn">import</span> <span class="nn">java.io.*</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.net.HttpURLConnection</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.net.URL</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.Scanner</span><span class="o">;</span>
+
+<span class="n">URL</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="s">"https://api.cert.gate.2all.com.br/v1/transactions/{{transactionId}}/capture?amount=100"</span><span class="o">);</span>
+<span class="n">HttpURLConnection</span> <span class="n">con</span> <span class="o">=</span> <span class="o">(</span><span class="n">HttpURLConnection</span><span class="o">)</span> <span class="n">obj</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
+<span class="n">con</span><span class="o">.</span><span class="na">setRequestMethod</span><span class="o">(</span><span class="s">"PUT"</span><span class="o">);</span>
+<span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"content-type"</span><span class="o">,</span> <span class="s">"application/json"</span><span class="o">);</span>
+<span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"authenticationapi"</span><span class="o">,</span> <span class="s">"demo"</span><span class="o">);</span>
+<span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"authenticationkey"</span><span class="o">,</span> <span class="s">"demo"</span><span class="o">);</span>
+
+<span class="n">Scanner</span> <span class="n">scanner</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Scanner</span><span class="o">(</span><span class="k">new</span> <span class="n">BufferedReader</span><span class="o">(</span><span class="k">new</span> <span class="n">InputStreamReader</span><span class="o">(</span><span class="n">con</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">())));</span>
+<span class="n">String</span> <span class="n">response</span> <span class="o">=</span> <span class="n">scanner</span><span class="o">.</span><span class="na">nextLine</span><span class="o">();</span>
+<span class="n">scanner</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+
+<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">response</span><span class="o">);</span>
+
+</code></pre>
 
 <table><thead>
 <tr>
@@ -1744,26 +2045,29 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
     </span><span class="nt">"transactionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"62f5a0b2-c632-4e4e-bc51-3b6681a54a3c"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"orderId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1488917347840"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"operationType"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"integrationType"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"referenceId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1488917347840"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"100"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"installments"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"capture"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"authenticate"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
     </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
     </span><span class="nt">"dtTransaction"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-03-07T17:09:07"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"payment"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"provider"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Cielo"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"authenticationECI"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"codAuthorization"</span><span class="p">:</span><span class="w"> </span><span class="s2">"123456"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"providerReference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"100699306900094D905A"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"providerCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"providerMessage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Transacao capturada com sucesso"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"card"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nt">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"421847******1234"</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"brand"</span><span class="p">:</span><span class="w"> </span><span class="s2">"VISA"</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"saveCard"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+          </span><span class="nt">"provider"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Cielo"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"authenticationECI"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"codAuthorization"</span><span class="p">:</span><span class="w"> </span><span class="s2">"123456"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"providerReference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"100699306900094D905A"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"providerCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"providerMessage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Transacao capturada com sucesso"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"installments"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"capture"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"authenticate"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"interestType"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"integrationType"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"saveCard"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"cardInfo"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+              </span><span class="nt">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"421847******1234"</span><span class="p">,</span><span class="w">
+              </span><span class="nt">"brand"</span><span class="p">:</span><span class="w"> </span><span class="s2">"VISA"</span><span class="w">
+          </span><span class="p">}</span><span class="w">
         </span><span class="p">}</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nt">"customer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -1803,6 +2107,26 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
 <h3 id="requisi-o">Requisição</h3>
 
 <aside class="request"><span class="method put">PUT</span> <span class="endpoint">/v1/transactions/{{transactionId}}/void</span></aside>
+<pre class="highlight java"><code>
+<span class="kn">import</span> <span class="nn">java.io.*</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.net.HttpURLConnection</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.net.URL</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.Scanner</span><span class="o">;</span>
+
+<span class="n">URL</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="s">"https://api.cert.gate.2all.com.br/v1/transactions/957221f5-d08b-4445-9896-52152f31b846/void"</span><span class="o">);</span>
+<span class="n">HttpURLConnection</span> <span class="n">con</span> <span class="o">=</span> <span class="o">(</span><span class="n">HttpURLConnection</span><span class="o">)</span> <span class="n">obj</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
+<span class="n">con</span><span class="o">.</span><span class="na">setRequestMethod</span><span class="o">(</span><span class="s">"PUT"</span><span class="o">);</span>
+<span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"content-type"</span><span class="o">,</span> <span class="s">"application/json"</span><span class="o">);</span>
+<span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"authenticationapi"</span><span class="o">,</span> <span class="s">"demo"</span><span class="o">);</span>
+<span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"authenticationkey"</span><span class="o">,</span> <span class="s">"demo"</span><span class="o">);</span>
+
+<span class="n">Scanner</span> <span class="n">scanner</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Scanner</span><span class="o">(</span><span class="k">new</span> <span class="n">BufferedReader</span><span class="o">(</span><span class="k">new</span> <span class="n">InputStreamReader</span><span class="o">(</span><span class="n">con</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">())));</span>
+<span class="n">String</span> <span class="n">response</span> <span class="o">=</span> <span class="n">scanner</span><span class="o">.</span><span class="na">nextLine</span><span class="o">();</span>
+<span class="n">scanner</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+
+<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">response</span><span class="o">);</span>
+
+</code></pre>
 
 <table><thead>
 <tr>
@@ -1829,26 +2153,29 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
     </span><span class="nt">"transactionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"62f5a0b2-c632-4e4e-bc51-3b6681a54a3c"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"orderId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1488917347840"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"operationType"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"integrationType"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"referenceId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1488917347840"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"100"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"installments"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"capture"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"authenticate"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
     </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span><span class="w">
     </span><span class="nt">"dtTransaction"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-03-07T17:09:07"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"payment"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"provider"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Cielo"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"authenticationECI"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"codAuthorization"</span><span class="p">:</span><span class="w"> </span><span class="s2">"123456"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"providerReference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"100699306900094D905A"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"providerCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"providerMessage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Transacao cancelada com sucesso"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"card"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nt">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"421847******1234"</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"brand"</span><span class="p">:</span><span class="w"> </span><span class="s2">"VISA"</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"saveCard"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+            </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"interestType"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"integrationType"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"installments"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"capture"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"authenticate"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"provider"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Cielo"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"authenticationECI"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"codAuthorization"</span><span class="p">:</span><span class="w"> </span><span class="s2">"123456"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"providerReference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"100699306900094D905A"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"providerCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"providerMessage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Transacao cancelada com sucesso"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"saveCard"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"cardInfo"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="nt">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"421847******1234"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"brand"</span><span class="p">:</span><span class="w"> </span><span class="s2">"VISA"</span><span class="w">
+            </span><span class="p">}</span><span class="w">
         </span><span class="p">}</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nt">"customer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -1866,6 +2193,26 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
 <h3 id="requisi-o">Requisição</h3>
 
 <aside class="request"><span class="method get">GET</span> <span class="endpoint">/v1/transactions/{{transactionId}}</span></aside>
+<pre class="highlight java"><code>
+<span class="kn">import</span> <span class="nn">java.io.*</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.net.HttpURLConnection</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.net.URL</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.Scanner</span><span class="o">;</span>
+
+<span class="n">URL</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="s">"https://api.cert.gate.2all.com.br/v1/transactions/d31dcd70-6666-40af-85ba-ed1ff23bc293"</span><span class="o">);</span>
+<span class="n">HttpURLConnection</span> <span class="n">con</span> <span class="o">=</span> <span class="o">(</span><span class="n">HttpURLConnection</span><span class="o">)</span> <span class="n">obj</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
+<span class="n">con</span><span class="o">.</span><span class="na">setRequestMethod</span><span class="o">(</span><span class="s">"GET"</span><span class="o">);</span>
+<span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"content-type"</span><span class="o">,</span> <span class="s">"application/json"</span><span class="o">);</span>
+<span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"authenticationapi"</span><span class="o">,</span> <span class="s">"demo"</span><span class="o">);</span>
+<span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"authenticationkey"</span><span class="o">,</span> <span class="s">"demo"</span><span class="o">);</span>
+
+<span class="n">Scanner</span> <span class="n">scanner</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Scanner</span><span class="o">(</span><span class="k">new</span> <span class="n">BufferedReader</span><span class="o">(</span><span class="k">new</span> <span class="n">InputStreamReader</span><span class="o">(</span><span class="n">con</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">())));</span>
+<span class="n">String</span> <span class="n">response</span> <span class="o">=</span> <span class="n">scanner</span><span class="o">.</span><span class="na">nextLine</span><span class="o">();</span>
+<span class="n">scanner</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+
+<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">response</span><span class="o">);</span>
+
+</code></pre>
 
 <table><thead>
 <tr>
@@ -1892,22 +2239,25 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"transactionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"62f5a0b2-c632-4e4e-bc51-3b6681a54a3c"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"orderId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1488917347840"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"operationType"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"integrationType"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"referenceId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1488917347840"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"100"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"installments"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"capture"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"authenticate"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
   </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span><span class="w">
   </span><span class="nt">"dtTransaction"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-03-07T17:09:07"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"payment"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"codAuthorization"</span><span class="p">:</span><span class="w"> </span><span class="s2">"123456"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"providerReference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"100699306900094D905A"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"card"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"421847******1234"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"brand"</span><span class="p">:</span><span class="w"> </span><span class="s2">"VISA"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"saveCard"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"interestType"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"integrationType"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"installments"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"capture"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"authenticate"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"codAuthorization"</span><span class="p">:</span><span class="w"> </span><span class="s2">"123456"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"providerReference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"100699306900094D905A"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"saveCard"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"cardInfo"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"421847******1234"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"brand"</span><span class="p">:</span><span class="w"> </span><span class="s2">"VISA"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="nt">"customer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -1922,7 +2272,7 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"transactionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7365ca65-70d4-4d7c-ac3d-a20f5730c241"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"orderId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"19893211234"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"referenceId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"19893211234"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"100"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Produto ou serviço"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"dtTransaction"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-03-08T10:46:31-0300"</span><span class="p">,</span><span class="w">
@@ -1940,8 +2290,8 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
     </span><span class="p">}</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="nt">"payment"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"providerReference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"20575112"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"bankSlip"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"providerReference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"20575112"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"emissionDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-03-08"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"expirationDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-03-10"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"instructions"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Aceitar somente até a data de vencimento, após essa data juros de 1% dia"</span><span class="p">,</span><span class="w">
@@ -1961,7 +2311,7 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
     </span><span class="nt">"transactionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6400d988-cc4b-4084-80ee-d5575dbbed4d"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"orderId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"19893211234"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"referenceId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"19893211234"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"100"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Produto ou serviço"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"dtTransaction"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-03-05T16:16:14-0200"</span><span class="p">,</span><span class="w">
@@ -1979,8 +2329,8 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
       </span><span class="p">}</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nt">"payment"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"providerReference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"20518839"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"electronicTransfer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"providerReference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"20518839"</span><span class="p">,</span><span class="w">
             </span><span class="nt">"provider"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Itau"</span><span class="p">,</span><span class="w">
             </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.gate.2all.com.br/v1/url-payment/6400d988-cc4b-4084-80ee-d5575dbbed4d"</span><span class="w">
         </span><span class="p">}</span><span class="w">
@@ -2000,25 +2350,11 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
 </tr>
 </thead><tbody>
 <tr>
-<td><code class="prettyprint">orderId</code></td>
+<td><code class="prettyprint">referenceId</code></td>
 <td>Texto</td>
 <td>100</td>
 <td>Sim</td>
 <td>Número de identificação da loja.</td>
-</tr>
-<tr>
-<td><code class="prettyprint">operationType</code></td>
-<td>Número</td>
-<td>1</td>
-<td>Sim</td>
-<td>Operações disponíveis: <BR /> 1. Cartão de Crédito<BR /> 2. Cartão de Débito <BR /> 3. Parcelado Loja <BR /> 4. Parcelado Administrador</td>
-</tr>
-<tr>
-<td><code class="prettyprint">integrationType</code></td>
-<td>Número</td>
-<td>1</td>
-<td>Sim</td>
-<td>Tipo de integração disponível pelo Gate2All: <BR /> 1. Integrado<BR /> 2. Loja <BR /> 3. Direto</td>
 </tr>
 <tr>
 <td><code class="prettyprint">amount</code></td>
@@ -2028,67 +2364,11 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
 <td>Valor da transação sem pontuação. Os dois últimos dígitos são os centavos. (Ex: amount: 100 = R$ 1,00)</td>
 </tr>
 <tr>
-<td><code class="prettyprint">installments</code></td>
-<td>Número</td>
-<td>2</td>
-<td>Sim</td>
-<td>Número de parcelas.</td>
-</tr>
-<tr>
-<td><code class="prettyprint">capture</code></td>
-<td>Booleano</td>
-<td>—</td>
-<td>Sim</td>
-<td><strong>true</strong> = Autoriza e confirma a transação . <strong>false</strong> = Autorização, mas não confirma a transação, necessitando realizar a confirmação (<a href="#captura">Captura</a>) noutra requisição.</td>
-</tr>
-<tr>
-<td><code class="prettyprint">authenticate</code></td>
-<td>Número</td>
-<td>1</td>
-<td>Não</td>
-<td>Opções disponíveis: <BR /> 1. Autorizar só transações autenticadas <BR /> 2. Autorizar transações autenticadas ou não autenticadas <BR /> 3. Autorizar sem autenticação <BR /></td>
-</tr>
-<tr>
 <td><code class="prettyprint">status</code></td>
 <td>Número</td>
 <td>2</td>
 <td>Não</td>
 <td>Status da transação retornado pelo gateway. <a href="#status">catálogo</a></td>
-</tr>
-<tr>
-<td><code class="prettyprint">payment.codAuthorization</code></td>
-<td>Texto</td>
-<td>100</td>
-<td>Codigo de autorização da instituição.</td>
-<td></td>
-</tr>
-<tr>
-<td><code class="prettyprint">payment.providerReference</code></td>
-<td>Texto</td>
-<td>100</td>
-<td>Referência da instituição.</td>
-<td></td>
-</tr>
-<tr>
-<td><code class="prettyprint">card.number</code></td>
-<td>Texto</td>
-<td>19</td>
-<td>Sim</td>
-<td>Número do cartão.</td>
-</tr>
-<tr>
-<td><code class="prettyprint">card.brand</code></td>
-<td>Texto</td>
-<td>20</td>
-<td>Sim</td>
-<td>Bandeira do cartão.</td>
-</tr>
-<tr>
-<td><code class="prettyprint">card.saveCard</code></td>
-<td>Booleano</td>
-<td>—</td>
-<td>Sim</td>
-<td>Configura salvar o cartão (tokenização).</td>
 </tr>
 <tr>
 <td><code class="prettyprint">customer.name</code></td>
@@ -2154,73 +2434,164 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
 <td>Sigla do estado do comprador.</td>
 </tr>
 <tr>
-<td><code class="prettyprint">payment.bankSlip.emissionDate</code></td>
+<td><code class="prettyprint">card.type</code></td>
+<td>Inteiro</td>
+<td>—</td>
+<td>Não</td>
+<td>Configura as opcões disponíveis. 1 Configura cartão de crédito. 2 Configura cartão de débito.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">card.installments</code></td>
+<td>Número</td>
+<td>2</td>
+<td>Sim</td>
+<td>Número de parcelas.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">card.capture</code></td>
+<td>Booleano</td>
+<td>—</td>
+<td>Sim</td>
+<td><strong>true</strong> = Autoriza e confirma a transação . <strong>false</strong> = Autorização, mas não confirma a transação, necessitando realizar a confirmação (<a href="#captura">Captura</a>) noutra requisição.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">card.authenticate</code></td>
+<td>Número</td>
+<td>1</td>
+<td>Não</td>
+<td>Opções disponíveis: <BR /> 1. Autorizar só transações autenticadas <BR /> 2. Autorizar transações autenticadas ou não autenticadas <BR /> 3. Autorizar sem autenticação <BR /></td>
+</tr>
+<tr>
+<td><code class="prettyprint">card.interestType</code></td>
+<td>Número</td>
+<td>1</td>
+<td>Sim</td>
+<td>Operações disponíveis: <BR /> 3. Parcelado Loja <BR /> 4. Parcelado Administrador</td>
+</tr>
+<tr>
+<td><code class="prettyprint">card.integrationType</code></td>
+<td>Número</td>
+<td>1</td>
+<td>Sim</td>
+<td>Tipo de integração disponível pelo Gate2All: <BR /> 1. Integrado<BR /> 2. Loja <BR /> 3. Direto</td>
+</tr>
+<tr>
+<td><code class="prettyprint">card.saveCard</code></td>
+<td>Booleano</td>
+<td>—</td>
+<td>Sim</td>
+<td>Configura salvar o cartão (tokenização).</td>
+</tr>
+<tr>
+<td><code class="prettyprint">card.codAuthorization</code></td>
+<td>Texto</td>
+<td>100</td>
+<td>Codigo de autorização da instituição.</td>
+<td></td>
+</tr>
+<tr>
+<td><code class="prettyprint">card.providerReference</code></td>
+<td>Texto</td>
+<td>100</td>
+<td>Referência da instituição.</td>
+<td></td>
+</tr>
+<tr>
+<td><code class="prettyprint">cardInfo.number</code></td>
+<td>Texto</td>
+<td>19</td>
+<td>Sim</td>
+<td>Número do cartão.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">cardInfo.brand</code></td>
+<td>Texto</td>
+<td>20</td>
+<td>Sim</td>
+<td>Bandeira do cartão.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">bankSlip.emissionDate</code></td>
 <td>Texto</td>
 <td>20</td>
 <td>Sim</td>
 <td>Data de emissão do boleto. formato <strong>YYYY-MM-DD</strong></td>
 </tr>
 <tr>
-<td><code class="prettyprint">payment.bankSlip.expirationDate</code></td>
+<td><code class="prettyprint">bankSlip.expirationDate</code></td>
 <td>Texto</td>
 <td>20</td>
 <td>Sim</td>
 <td>Data de vencimento do boleto. formato <strong>YYYY-MM-DD</strong></td>
 </tr>
 <tr>
-<td><code class="prettyprint">payment.bankSlip.instructions</code></td>
+<td><code class="prettyprint">bankSlip.instructions</code></td>
 <td>Texto</td>
 <td>300</td>
 <td>Sim</td>
 <td>Instruções do boleto.</td>
 </tr>
 <tr>
-<td><code class="prettyprint">payment.bankSlip.guarantor</code></td>
+<td><code class="prettyprint">bankSlip.guarantor</code></td>
 <td>Texto</td>
 <td>45</td>
 <td>Sim</td>
 <td>Nome do avalista.</td>
 </tr>
 <tr>
-<td><code class="prettyprint">payment.bankSlip.provider</code></td>
+<td><code class="prettyprint">bankSlip.provider</code></td>
 <td>Texto</td>
 <td>20</td>
 <td>Sim</td>
 <td>Nome da instituição financeira :<ul><li><strong>BRADESCO</strong></li><li><strong>ITAU</strong></li></ul></td>
 </tr>
 <tr>
-<td><code class="prettyprint">payment.bankSlip.paymentDate</code></td>
+<td><code class="prettyprint">bankSlip.paymentDate</code></td>
 <td>Texto</td>
 <td>20</td>
 <td>Data de pagamento do boleto. formato <strong>YYYY-MM-DD</strong></td>
 <td></td>
 </tr>
 <tr>
-<td><code class="prettyprint">payment.bankSlip.paymentAmount</code></td>
+<td><code class="prettyprint">bankSlip.paymentAmount</code></td>
 <td>Número</td>
 <td>16</td>
 <td>Valor de pagamento do boleto sem pontuação. Os dois últimos dígitos são os centavos. (Ex: amount: 100 = R$ 1,00)</td>
 <td></td>
 </tr>
 <tr>
-<td><code class="prettyprint">payment.bankSlip.url</code></td>
+<td><code class="prettyprint">bankSlip.url</code></td>
 <td>Texto</td>
 <td>300</td>
 <td>Endereço de acesso da transação.</td>
 <td></td>
 </tr>
 <tr>
-<td><code class="prettyprint">payment.electronicTransfer.provider</code></td>
+<td><code class="prettyprint">bankSlip.providerReference</code></td>
+<td>Texto</td>
+<td>100</td>
+<td>Referência da instituição.</td>
+<td></td>
+</tr>
+<tr>
+<td><code class="prettyprint">electronicTransfer.provider</code></td>
 <td>Texto</td>
 <td>20</td>
 <td>Nome da instituição financeira :<ul><li><strong>BRADESCO</strong></li><li><strong>ITAU</strong></li></ul></td>
 <td></td>
 </tr>
 <tr>
-<td><code class="prettyprint">payment.electronicTransfer.url</code></td>
+<td><code class="prettyprint">electronicTransfer.url</code></td>
 <td>Texto</td>
 <td>300</td>
 <td>Endereço de acesso da transação.</td>
+<td></td>
+</tr>
+<tr>
+<td><code class="prettyprint">electronicTransfer.providerReference</code></td>
+<td>Texto</td>
+<td>100</td>
+<td>Referência da instituição.</td>
 <td></td>
 </tr>
 </tbody></table>
@@ -2231,7 +2602,27 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
 
 <h3 id="requisi-o">Requisição</h3>
 
-<aside class="request"><span class="method get">GET</span> <span class="endpoint">/v1/transactions/?orderId={{orderId}}</span></aside>
+<aside class="request"><span class="method get">GET</span> <span class="endpoint">/v1/transactions/?referenceId={{referenceId}}</span></aside>
+<pre class="highlight java"><code>
+<span class="kn">import</span> <span class="nn">java.io.*</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.net.HttpURLConnection</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.net.URL</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.Scanner</span><span class="o">;</span>
+
+<span class="n">URL</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="s">"https://api.cert.gate.2all.com.br/v1/transactions/?referenceId=1493321061725"</span><span class="o">);</span>
+<span class="n">HttpURLConnection</span> <span class="n">con</span> <span class="o">=</span> <span class="o">(</span><span class="n">HttpURLConnection</span><span class="o">)</span> <span class="n">obj</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
+<span class="n">con</span><span class="o">.</span><span class="na">setRequestMethod</span><span class="o">(</span><span class="s">"GET"</span><span class="o">);</span>
+<span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"content-type"</span><span class="o">,</span> <span class="s">"application/json"</span><span class="o">);</span>
+<span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"authenticationapi"</span><span class="o">,</span> <span class="s">"demo"</span><span class="o">);</span>
+<span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"authenticationkey"</span><span class="o">,</span> <span class="s">"demo"</span><span class="o">);</span>
+
+<span class="n">Scanner</span> <span class="n">scanner</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Scanner</span><span class="o">(</span><span class="k">new</span> <span class="n">BufferedReader</span><span class="o">(</span><span class="k">new</span> <span class="n">InputStreamReader</span><span class="o">(</span><span class="n">con</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">())));</span>
+<span class="n">String</span> <span class="n">response</span> <span class="o">=</span> <span class="n">scanner</span><span class="o">.</span><span class="na">nextLine</span><span class="o">();</span>
+<span class="n">scanner</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+
+<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">response</span><span class="o">);</span>
+
+</code></pre>
 
 <table><thead>
 <tr>
@@ -2243,7 +2634,7 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
 </tr>
 </thead><tbody>
 <tr>
-<td><code class="prettyprint">orderId</code></td>
+<td><code class="prettyprint">referenceId</code></td>
 <td>Texto</td>
 <td>100</td>
 <td>Sim</td>
@@ -2322,7 +2713,27 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
 
 <h3 id="requisi-o">Requisição</h3>
 
-<aside class="request"><span class="method get">GET</span> <span class="endpoint">/v1/transactions/?orderId={{orderId}}&limit=2</span></aside>
+<aside class="request"><span class="method get">GET</span> <span class="endpoint">/v1/transactions/?referenceId={{referenceId}}&limit=2</span></aside>
+<pre class="highlight java"><code>
+<span class="kn">import</span> <span class="nn">java.io.*</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.net.HttpURLConnection</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.net.URL</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.Scanner</span><span class="o">;</span>
+
+<span class="n">URL</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="s">"https://api.cert.gate.2all.com.br/v1/transactions/?referenceId=1493321061725&amp;limit=2"</span><span class="o">);</span>
+<span class="n">HttpURLConnection</span> <span class="n">con</span> <span class="o">=</span> <span class="o">(</span><span class="n">HttpURLConnection</span><span class="o">)</span> <span class="n">obj</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
+<span class="n">con</span><span class="o">.</span><span class="na">setRequestMethod</span><span class="o">(</span><span class="s">"GET"</span><span class="o">);</span>
+<span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"content-type"</span><span class="o">,</span> <span class="s">"application/json"</span><span class="o">);</span>
+<span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"authenticationapi"</span><span class="o">,</span> <span class="s">"demo"</span><span class="o">);</span>
+<span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"authenticationkey"</span><span class="o">,</span> <span class="s">"demo"</span><span class="o">);</span>
+
+<span class="n">Scanner</span> <span class="n">scanner</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Scanner</span><span class="o">(</span><span class="k">new</span> <span class="n">BufferedReader</span><span class="o">(</span><span class="k">new</span> <span class="n">InputStreamReader</span><span class="o">(</span><span class="n">con</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">())));</span>
+<span class="n">String</span> <span class="n">response</span> <span class="o">=</span> <span class="n">scanner</span><span class="o">.</span><span class="na">nextLine</span><span class="o">();</span>
+<span class="n">scanner</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+
+<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">response</span><span class="o">);</span>
+
+</code></pre>
 
 <table><thead>
 <tr>
@@ -2334,7 +2745,7 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
 </tr>
 </thead><tbody>
 <tr>
-<td><code class="prettyprint">orderId</code></td>
+<td><code class="prettyprint">referenceId</code></td>
 <td>Texto</td>
 <td>100</td>
 <td>Sim</td>
@@ -2462,12 +2873,49 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
 
 <aside class="request"><span class="method post">POST</span> <span class="endpoint">/v1/tokenization/intention</span></aside>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"referenceId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"19893211234"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"postBackUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://url-notificacao"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"redirectUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://url-redirect"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"redirectUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://url-redirect"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"brand"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"VISA"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <pre class="highlight shell"><code></code></pre>
+<pre class="highlight java"><code>
+<span class="kn">import</span> <span class="nn">java.io.BufferedReader</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.io.DataOutputStream</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.io.IOException</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.io.InputStreamReader</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.net.HttpURLConnection</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.net.URL</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.Scanner</span><span class="o">;</span>
+
+<span class="n">URL</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="s">"https://api.cert.gate.2all.com.br/v1/tokenization/intention"</span><span class="o">);</span>
+<span class="n">HttpURLConnection</span> <span class="n">con</span> <span class="o">=</span> <span class="o">(</span><span class="n">HttpURLConnection</span><span class="o">)</span> <span class="n">obj</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
+
+<span class="n">con</span><span class="o">.</span><span class="na">setRequestMethod</span><span class="o">(</span><span class="s">"POST"</span><span class="o">);</span>
+<span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"content-type"</span><span class="o">,</span> <span class="s">"application/json"</span><span class="o">);</span>
+<span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"authenticationapi"</span><span class="o">,</span> <span class="s">"demo"</span><span class="o">);</span>
+<span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"authenticationkey"</span><span class="o">,</span> <span class="s">"demo"</span><span class="o">);</span>
+
+<span class="n">String</span> <span class="n">body</span> <span class="o">=</span> <span class="s">"{"</span>
+        <span class="o">+</span> <span class="s">"\"postBackUrl\": \"http://requestb.in/qkg1clqk\","</span>
+        <span class="o">+</span> <span class="s">"\"redirectUrl\": \"http://requestb.in/qkg1clqk\","</span>
+        <span class="o">+</span> <span class="s">"\"brand\" : \"VISA\""</span>
+        <span class="o">+</span> <span class="s">"}"</span><span class="o">;</span>
+
+<span class="n">con</span><span class="o">.</span><span class="na">setDoOutput</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
+<span class="n">DataOutputStream</span> <span class="n">dos</span> <span class="o">=</span> <span class="k">new</span> <span class="n">DataOutputStream</span><span class="o">(</span><span class="n">con</span><span class="o">.</span><span class="na">getOutputStream</span><span class="o">());</span>
+<span class="n">dos</span><span class="o">.</span><span class="na">writeBytes</span><span class="o">(</span><span class="n">body</span><span class="o">);</span>
+<span class="n">dos</span><span class="o">.</span><span class="na">flush</span><span class="o">();</span>
+<span class="n">dos</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+
+<span class="n">Scanner</span> <span class="n">scanner</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Scanner</span><span class="o">(</span><span class="k">new</span> <span class="n">BufferedReader</span><span class="o">(</span><span class="k">new</span> <span class="n">InputStreamReader</span><span class="o">(</span><span class="n">con</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">())));</span>
+<span class="n">String</span> <span class="n">response</span> <span class="o">=</span> <span class="n">scanner</span><span class="o">.</span><span class="na">nextLine</span><span class="o">();</span>
+<span class="n">scanner</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+
+<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">response</span><span class="o">);</span>
+
+</code></pre>
 
 <table><thead>
 <tr>
@@ -2478,6 +2926,13 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
 <th>Descrição</th>
 </tr>
 </thead><tbody>
+<tr>
+<td><code class="prettyprint">referenceId</code></td>
+<td>Texto</td>
+<td>100</td>
+<td>Sim</td>
+<td>Número de identificação da loja.</td>
+</tr>
 <tr>
 <td><code class="prettyprint">postBackUrl</code></td>
 <td>Texto</td>
@@ -2503,6 +2958,7 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
 
 <h3 id="resposta">RESPOSTA</h3>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"referenceId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"19893211234"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"transactionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9477f767-f037-45f4-93ce-a40d10b49e86"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.gate.2all.com.br/v1/save-card/9477f767-f037-45f4-93ce-a40d10b49e86"</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -2561,36 +3017,59 @@ Caso não seja seja passado nenhuma bandeira como paramêtro, será disponibiliz
 
 <aside class="request"><span class="method post">POST</span> <span class="endpoint">/v1/tokenization</span></aside>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-   </span><span class="nt">"payment"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-       </span><span class="nt">"card"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="nt">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4024007148992927"</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"expirationMonth"</span><span class="p">:</span><span class="w"> </span><span class="s2">"04"</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"expirationYear"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017"</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"brand"</span><span class="p">:</span><span class="w"> </span><span class="s2">"VISA"</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"holderName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Comprador"</span><span class="w">
-        </span><span class="p">}</span><span class="w">
-   </span><span class="p">}</span><span class="w">
+    </span><span class="nt">"referenceId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"19893211234"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"postBackUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://url-notificacao"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"cardInfo"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4024007148992927"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"expirationMonth"</span><span class="p">:</span><span class="w"> </span><span class="s2">"04"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"expirationYear"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"brand"</span><span class="p">:</span><span class="w"> </span><span class="s2">"VISA"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"holderName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Comprador"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<pre class="highlight shell"><code>curl --request POST
-  --url /v1/transactions/tokenization
-  --header <span class="s1">'content-type: application/json'</span>
-  --header <span class="s1">'authenticationApi: XXXXXX'</span>
-  --header <span class="s1">'authenticationKey: XXXXXX'</span>
+<pre class="highlight shell"><code></code></pre>
+<pre class="highlight java"><code>
+<span class="kn">import</span> <span class="nn">java.io.BufferedReader</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.io.DataOutputStream</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.io.IOException</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.io.InputStreamReader</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.net.HttpURLConnection</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.net.URL</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.Scanner</span><span class="o">;</span>
 
-  --data-binary
-  <span class="o">{</span>
-   <span class="s2">"payment"</span>: <span class="o">{</span>
-       <span class="s2">"card"</span>: <span class="o">{</span>
-          <span class="s2">"number"</span>: <span class="s2">"4024007148992927"</span>,
-          <span class="s2">"expirationMonth"</span>: <span class="s2">"04"</span>,
-          <span class="s2">"expirationYear"</span>: <span class="s2">"2017"</span>,
-          <span class="s2">"brand"</span>: <span class="s2">"VISA"</span>,
-          <span class="s2">"holderName"</span>: <span class="s2">"Comprador"</span>
-        <span class="o">}</span>
-    <span class="o">}</span>
-  <span class="o">}</span>
---verbose
+<span class="n">URL</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="s">"https://api.cert.gate.2all.com.br/v1/tokenization"</span><span class="o">);</span>
+<span class="n">HttpURLConnection</span> <span class="n">con</span> <span class="o">=</span> <span class="o">(</span><span class="n">HttpURLConnection</span><span class="o">)</span> <span class="n">obj</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
+
+<span class="n">con</span><span class="o">.</span><span class="na">setRequestMethod</span><span class="o">(</span><span class="s">"POST"</span><span class="o">);</span>
+<span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"content-type"</span><span class="o">,</span> <span class="s">"application/json"</span><span class="o">);</span>
+<span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"authenticationapi"</span><span class="o">,</span> <span class="s">"demo"</span><span class="o">);</span>
+<span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"authenticationkey"</span><span class="o">,</span> <span class="s">"demo"</span><span class="o">);</span>
+
+<span class="n">String</span> <span class="n">body</span> <span class="o">=</span> <span class="s">"{"</span>
+    <span class="o">+</span> <span class="s">"\"referenceId\": \"123456789\","</span>
+    <span class="o">+</span> <span class="s">"\"postBackUrl\": \"http://url-notificacao\","</span>
+    <span class="o">+</span> <span class="s">"    \"cardInfo\": {"</span>
+    <span class="o">+</span> <span class="s">"        \"number\": \"4556326359707410\","</span>
+    <span class="o">+</span> <span class="s">"        \"expirationMonth\": \"04\","</span>
+    <span class="o">+</span> <span class="s">"        \"expirationYear\": \"2017\","</span>
+    <span class="o">+</span> <span class="s">"        \"brand\": \"VISA\","</span>
+    <span class="o">+</span> <span class="s">"        \"holderName\": \"Comprador\""</span>
+    <span class="o">+</span> <span class="s">"      }"</span>
+    <span class="o">+</span> <span class="s">"}"</span><span class="o">;</span>
+
+<span class="n">con</span><span class="o">.</span><span class="na">setDoOutput</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
+<span class="n">DataOutputStream</span> <span class="n">dos</span> <span class="o">=</span> <span class="k">new</span> <span class="n">DataOutputStream</span><span class="o">(</span><span class="n">con</span><span class="o">.</span><span class="na">getOutputStream</span><span class="o">());</span>
+<span class="n">dos</span><span class="o">.</span><span class="na">writeBytes</span><span class="o">(</span><span class="n">body</span><span class="o">);</span>
+<span class="n">dos</span><span class="o">.</span><span class="na">flush</span><span class="o">();</span>
+<span class="n">dos</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+
+<span class="n">Scanner</span> <span class="n">scanner</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Scanner</span><span class="o">(</span><span class="k">new</span> <span class="n">BufferedReader</span><span class="o">(</span><span class="k">new</span> <span class="n">InputStreamReader</span><span class="o">(</span><span class="n">con</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">())));</span>
+<span class="n">String</span> <span class="n">response</span> <span class="o">=</span> <span class="n">scanner</span><span class="o">.</span><span class="na">nextLine</span><span class="o">();</span>
+<span class="n">scanner</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+
+<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">response</span><span class="o">);</span>
+
 </code></pre>
 
 <table><thead>
@@ -2602,31 +3081,43 @@ Caso não seja seja passado nenhuma bandeira como paramêtro, será disponibiliz
 </tr>
 </thead><tbody>
 <tr>
-<td><code class="prettyprint">payment.card.number</code></td>
+<td><code class="prettyprint">referenceId</code></td>
+<td style="text-align: center">Texto</td>
+<td style="text-align: center">100</td>
+<td>Sim</td>
+</tr>
+<tr>
+<td><code class="prettyprint">postBackUrl</code></td>
+<td style="text-align: center">Texto</td>
+<td style="text-align: center">—</td>
+<td>Sim</td>
+</tr>
+<tr>
+<td><code class="prettyprint">cardInfo.number</code></td>
 <td style="text-align: center">Texto</td>
 <td style="text-align: center">20</td>
 <td>Número do cartão truncado.</td>
 </tr>
 <tr>
-<td><code class="prettyprint">payment.card.expirationMonth</code></td>
+<td><code class="prettyprint">cardInfo.expirationMonth</code></td>
 <td style="text-align: center">Número</td>
 <td style="text-align: center">2</td>
 <td>Mês da validade do cartão.</td>
 </tr>
 <tr>
-<td><code class="prettyprint">payment.card.expirationYear</code></td>
+<td><code class="prettyprint">cardInfo.expirationYear</code></td>
 <td style="text-align: center">Número</td>
 <td style="text-align: center">4</td>
 <td>Ano da validade do cartão.</td>
 </tr>
 <tr>
-<td><code class="prettyprint">payment.card.brand</code></td>
+<td><code class="prettyprint">cardInfo.brand</code></td>
 <td style="text-align: center">Texto</td>
 <td style="text-align: center">20</td>
 <td>Bandeira do cartão.</td>
 </tr>
 <tr>
-<td><code class="prettyprint">payment.card.holderName</code></td>
+<td><code class="prettyprint">cardInfo.holderName</code></td>
 <td style="text-align: center">Texto</td>
 <td style="text-align: center">100</td>
 <td>Nome do portador do cartão.</td>
@@ -2639,39 +3130,22 @@ Caso não seja seja passado nenhuma bandeira como paramêtro, será disponibiliz
 <p>Tokenização gerada</p>
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"integrationType"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"payment"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"provider"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Cielo"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"card"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"402400******2927"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"expirationMonth"</span><span class="p">:</span><span class="w"> </span><span class="s2">"04"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"expirationYear"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"brand"</span><span class="p">:</span><span class="w"> </span><span class="s2">"VISA"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"be4cbeb1-abb2-4913-8165-f86962143fa021"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"holderName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Comprador"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"saveCard"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
-    </span><span class="p">}</span><span class="w">
+  </span><span class="nt">"tokenizationId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"f414a0b8-f5de-4245-aae5-733f10c1963d"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"referenceId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"19893211234"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"postBackUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://url-notificacao"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"provider"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CIELO"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"saveCard"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"cardInfo"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"402400******2927"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"expirationMonth"</span><span class="p">:</span><span class="w"> </span><span class="s2">"04"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"expirationYear"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"brand"</span><span class="p">:</span><span class="w"> </span><span class="s2">"VISA"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"be4cbeb1-abb2-4913-8165-f86962143fa021"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"holderName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Comprador"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<pre class="highlight shell"><code> <span class="o">{</span>
-  <span class="s2">"integrationType"</span>: 1,
-  <span class="s2">"status"</span>: 0,
-  <span class="s2">"payment"</span>: <span class="o">{</span>
-    <span class="s2">"provider"</span>: <span class="s2">"Cielo"</span>,
-    <span class="s2">"card"</span>: <span class="o">{</span>
-      <span class="s2">"number"</span>: <span class="s2">"402400******2927"</span>,
-      <span class="s2">"expirationMonth"</span>: <span class="s2">"04"</span>,
-      <span class="s2">"expirationYear"</span>: <span class="s2">"2017"</span>,
-      <span class="s2">"brand"</span>: <span class="s2">"VISA"</span>,
-      <span class="s2">"token"</span>: <span class="s2">"be4cbeb1-abb2-4913-8165-f86962143fa021"</span>,
-      <span class="s2">"holderName"</span>: <span class="s2">"USUARIO TESTE"</span>,
-      <span class="s2">"saveCard"</span>: <span class="nb">true</span>
-    <span class="o">}</span>
-  <span class="o">}</span>
-<span class="o">}</span>
-</code></pre>
+<pre class="highlight shell"><code></code></pre>
 
 <table><thead>
 <tr>
@@ -2682,64 +3156,28 @@ Caso não seja seja passado nenhuma bandeira como paramêtro, será disponibiliz
 </tr>
 </thead><tbody>
 <tr>
-<td><code class="prettyprint">integrationType</code></td>
-<td style="text-align: center">Número</td>
-<td style="text-align: center">1</td>
-<td>Sim</td>
+<td><code class="prettyprint">tokenizationId</code></td>
+<td style="text-align: center">Texto</td>
+<td style="text-align: center">36</td>
+<td>Identificador da tokenização do GATE2all.</td>
 </tr>
 <tr>
-<td><code class="prettyprint">status</code></td>
-<td style="text-align: center">Número</td>
-<td style="text-align: center">2</td>
-<td>Status da transação retornado pelo GATE2all <a href="#status">catálogo</a>.</td>
-</tr>
-<tr>
-<td><code class="prettyprint">payment.provider</code></td>
+<td><code class="prettyprint">provider</code></td>
 <td style="text-align: center">Texto</td>
 <td style="text-align: center">100</td>
 <td>Nome da Rede Adquirente.</td>
 </tr>
 <tr>
-<td><code class="prettyprint">payment.card.number</code></td>
-<td style="text-align: center">Texto</td>
-<td style="text-align: center">20</td>
-<td>Número do cartão truncado.</td>
-</tr>
-<tr>
-<td><code class="prettyprint">payment.card.expirationMonth</code></td>
-<td style="text-align: center">Número</td>
-<td style="text-align: center">2</td>
-<td>Mês da validade do cartão.</td>
-</tr>
-<tr>
-<td><code class="prettyprint">payment.card.expirationYear</code></td>
-<td style="text-align: center">Número</td>
-<td style="text-align: center">4</td>
-<td>Ano da validade do cartão.</td>
-</tr>
-<tr>
-<td><code class="prettyprint">payment.card.brand</code></td>
-<td style="text-align: center">Texto</td>
-<td style="text-align: center">20</td>
-<td>Bandeira do cartão.</td>
-</tr>
-<tr>
-<td><code class="prettyprint">payment.card.token</code></td>
-<td style="text-align: center">Texto</td>
-<td style="text-align: center">100</td>
-<td>Token do cartão.</td>
-</tr>
-<tr>
-<td><code class="prettyprint">payment.card.holderName</code></td>
-<td style="text-align: center">Texto</td>
-<td style="text-align: center">100</td>
-<td>Nome do portador do cartão.</td>
-</tr>
-<tr>
-<td><code class="prettyprint">payment.card.saveCard</code></td>
+<td><code class="prettyprint">saveCard</code></td>
 <td style="text-align: center">Booleano</td>
 <td style="text-align: center">Sim</td>
 <td>Configura salvar o cartão (tokenização).</td>
+</tr>
+<tr>
+<td><code class="prettyprint">cardInfo.token</code></td>
+<td style="text-align: center">Texto</td>
+<td style="text-align: center">100</td>
+<td>Token do cartão.</td>
 </tr>
 </tbody></table>
 
@@ -2751,27 +3189,84 @@ Caso não seja seja passado nenhuma bandeira como paramêtro, será disponibiliz
 
 <aside class="request"><span class="method post">POST</span> <span class="endpoint">/v1/transactions</span></aside>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-   </span><span class="nt">"orderId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"19893211234"</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"referenceId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"19893211234"</span><span class="p">,</span><span class="w">
    </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"100"</span><span class="p">,</span><span class="w">
-   </span><span class="nt">"softDescriptor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Pagamento Gate2all"</span><span class="p">,</span><span class="w">
    </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Mouse sem fio"</span><span class="p">,</span><span class="w">
-   </span><span class="nt">"capture"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-   </span><span class="nt">"installments"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-   </span><span class="nt">"operationType"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-   </span><span class="nt">"authenticate"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
    </span><span class="nt">"customer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Comprador Teste"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"document"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12345678909"</span><span class="w">
    </span><span class="p">},</span><span class="w">
    </span><span class="nt">"payment"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
        </span><span class="nt">"card"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="nt">"token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4b6a2aa5-de91-4d52-a4d1-f265f208e5a321"</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"cvv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"234"</span><span class="w">
-        </span><span class="p">}</span><span class="w">
+          </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"capture"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"installments"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"interestType"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"authenticate"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"softDescriptor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Pagamento Gate2all"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"cardInfo"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+              </span><span class="nt">"token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4b6a2aa5-de91-4d52-a4d1-f265f208e5a321"</span><span class="p">,</span><span class="w">
+              </span><span class="nt">"cvv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"234"</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+       </span><span class="p">}</span><span class="w">
    </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <pre class="highlight shell"><code></code></pre>
+<pre class="highlight java"><code>
+<span class="kn">import</span> <span class="nn">java.io.BufferedReader</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.io.DataOutputStream</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.io.IOException</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.io.InputStreamReader</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.net.HttpURLConnection</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.net.URL</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.Scanner</span><span class="o">;</span>
+
+<span class="n">URL</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="s">"https://api.cert.gate.2all.com.br/v1/transactions"</span><span class="o">);</span>
+<span class="n">HttpURLConnection</span> <span class="n">con</span> <span class="o">=</span> <span class="o">(</span><span class="n">HttpURLConnection</span><span class="o">)</span> <span class="n">obj</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
+
+<span class="n">con</span><span class="o">.</span><span class="na">setRequestMethod</span><span class="o">(</span><span class="s">"POST"</span><span class="o">);</span>
+<span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"content-type"</span><span class="o">,</span> <span class="s">"application/json"</span><span class="o">);</span>
+<span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"authenticationapi"</span><span class="o">,</span> <span class="s">"demo"</span><span class="o">);</span>
+<span class="n">con</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"authenticationkey"</span><span class="o">,</span> <span class="s">"demo"</span><span class="o">);</span>
+
+<span class="n">String</span> <span class="n">body</span> <span class="o">=</span> <span class="s">"{"</span>
+      <span class="o">+</span> <span class="s">"\"referenceId\": \"123456789\","</span>
+      <span class="o">+</span> <span class="s">"\"amount\": \"100\","</span>
+      <span class="o">+</span> <span class="s">"\"description\": \"TV LG 42\","</span>
+      <span class="o">+</span> <span class="s">"\"postBackUrl\": \"http://requestb.in/qkg1clqk\","</span>
+      <span class="o">+</span> <span class="s">"    \"customer\": {"</span>
+      <span class="o">+</span> <span class="s">"        \"name\": \"LUIS A R ROMERO\","</span>
+      <span class="o">+</span> <span class="s">"        \"document\": \"12345678909\""</span>
+      <span class="o">+</span> <span class="s">"   },"</span>
+      <span class="o">+</span> <span class="s">"    \"payment\": {"</span>
+      <span class="o">+</span> <span class="s">"        \"card\": {"</span>
+      <span class="o">+</span> <span class="s">"           \"type\": 1,"</span>
+      <span class="o">+</span> <span class="s">"           \"capture\": true,"</span>
+      <span class="o">+</span> <span class="s">"           \"installments\": 1,"</span>
+      <span class="o">+</span> <span class="s">"           \"interestType\": 3,"</span>
+      <span class="o">+</span> <span class="s">"           \"softDescriptor\": \"EC02\","</span>
+      <span class="o">+</span> <span class="s">"           \"cardInfo\": {"</span>
+      <span class="o">+</span> <span class="s">"               \"token\": \"7a7820d0-ff6d-484a-8b8e-988d6d0ec0cc21\""</span>
+      <span class="o">+</span> <span class="s">"           }"</span>
+      <span class="o">+</span> <span class="s">"        }"</span>
+      <span class="o">+</span> <span class="s">"    }"</span>
+      <span class="o">+</span> <span class="s">"   "</span>
+      <span class="o">+</span> <span class="s">"}"</span><span class="o">;</span>
+
+<span class="n">con</span><span class="o">.</span><span class="na">setDoOutput</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
+<span class="n">DataOutputStream</span> <span class="n">dos</span> <span class="o">=</span> <span class="k">new</span> <span class="n">DataOutputStream</span><span class="o">(</span><span class="n">con</span><span class="o">.</span><span class="na">getOutputStream</span><span class="o">());</span>
+<span class="n">dos</span><span class="o">.</span><span class="na">writeBytes</span><span class="o">(</span><span class="n">body</span><span class="o">);</span>
+<span class="n">dos</span><span class="o">.</span><span class="na">flush</span><span class="o">();</span>
+<span class="n">dos</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+
+<span class="n">Scanner</span> <span class="n">scanner</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Scanner</span><span class="o">(</span><span class="k">new</span> <span class="n">BufferedReader</span><span class="o">(</span><span class="k">new</span> <span class="n">InputStreamReader</span><span class="o">(</span><span class="n">con</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">())));</span>
+<span class="n">String</span> <span class="n">response</span> <span class="o">=</span> <span class="n">scanner</span><span class="o">.</span><span class="na">nextLine</span><span class="o">();</span>
+<span class="n">scanner</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+
+<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">response</span><span class="o">);</span>
+
+</code></pre>
 
 <table><thead>
 <tr>
@@ -2783,7 +3278,7 @@ Caso não seja seja passado nenhuma bandeira como paramêtro, será disponibiliz
 </tr>
 </thead><tbody>
 <tr>
-<td><code class="prettyprint">orderId</code></td>
+<td><code class="prettyprint">referenceId</code></td>
 <td>Texto</td>
 <td>100</td>
 <td>Sim</td>
@@ -2804,41 +3299,6 @@ Caso não seja seja passado nenhuma bandeira como paramêtro, será disponibiliz
 <td>Descrição da transação.</td>
 </tr>
 <tr>
-<td><code class="prettyprint">softDescriptor</code></td>
-<td>Texto</td>
-<td>22</td>
-<td>Não</td>
-<td>Texto a ser exibido na fatura do portador do cartão.</td>
-</tr>
-<tr>
-<td><code class="prettyprint">capture</code></td>
-<td>Booleano</td>
-<td>—</td>
-<td>Sim</td>
-<td><strong>true</strong> = Autoriza e confirma a transação . <strong>false</strong> = Autorização, mas não confirma a transação, necessitando realizar a confirmação (<a href="#captura">Captura</a>) noutra requisição.</td>
-</tr>
-<tr>
-<td><code class="prettyprint">installments</code></td>
-<td>Número</td>
-<td>2</td>
-<td>Sim</td>
-<td>Número de parcelas.</td>
-</tr>
-<tr>
-<td><code class="prettyprint">operationType</code></td>
-<td>Número</td>
-<td>1</td>
-<td>Sim</td>
-<td>Operações disponíveis: <BR /> 1. Cartão de Crédito<BR /> 2. Cartão de Débito <BR /> 3. Parcelado Loja <BR /> 4. Parcelado Administrador</td>
-</tr>
-<tr>
-<td><code class="prettyprint">authenticate</code></td>
-<td>Número</td>
-<td>1</td>
-<td>Não</td>
-<td>Opções disponíveis: <BR /> 1. Autorizar só transações autenticadas <BR /> 2. Autorizar transações autenticadas ou não autenticadas <BR /> 3. Autorizar sem autenticação <BR /></td>
-</tr>
-<tr>
 <td><code class="prettyprint">customer.name</code></td>
 <td>Texto</td>
 <td>100</td>
@@ -2853,14 +3313,56 @@ Caso não seja seja passado nenhuma bandeira como paramêtro, será disponibiliz
 <td>Número do CPF/CNPJ do portador do cartão.</td>
 </tr>
 <tr>
-<td><code class="prettyprint">card.token</code></td>
+<td><code class="prettyprint">card.type</code></td>
+<td>Inteiro</td>
+<td>—</td>
+<td>Não</td>
+<td>Configura as opcões disponíveis. 1 Configura cartão de crédito. 2 Configura cartão de débito.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">card.capture</code></td>
+<td>Booleano</td>
+<td>—</td>
+<td>Sim</td>
+<td><strong>true</strong> = Autoriza e confirma a transação . <strong>false</strong> = Autorização, mas não confirma a transação, necessitando realizar a confirmação (<a href="#captura">Captura</a>) noutra requisição.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">card.installments</code></td>
+<td>Número</td>
+<td>2</td>
+<td>Sim</td>
+<td>Número de parcelas.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">card.interestType</code></td>
+<td>Número</td>
+<td>1</td>
+<td>Sim</td>
+<td>Operações disponíveis: <BR /> 3. Parcelado Loja <BR /> 4. Parcelado Administrador</td>
+</tr>
+<tr>
+<td><code class="prettyprint">card.authenticate</code></td>
+<td>Número</td>
+<td>1</td>
+<td>Não</td>
+<td>Opções disponíveis: <BR /> 1. Autorizar só transações autenticadas <BR /> 2. Autorizar transações autenticadas ou não autenticadas <BR /> 3. Autorizar sem autenticação <BR /></td>
+</tr>
+<tr>
+<td><code class="prettyprint">card.softDescriptor</code></td>
+<td>Texto</td>
+<td>22</td>
+<td>Não</td>
+<td>Texto a ser exibido na fatura do portador do cartão.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">cardInfo.token</code></td>
 <td>Texto</td>
 <td>100</td>
 <td>Sim</td>
 <td>Token gerado anteriormente pela operação de Tokenização.</td>
 </tr>
 <tr>
-<td><code class="prettyprint">card.cvv</code></td>
+<td><code class="prettyprint">cardInfo.cvv</code></td>
 <td>Número</td>
 <td>4</td>
 <td>Não</td>
@@ -2875,30 +3377,33 @@ Caso não seja seja passado nenhuma bandeira como paramêtro, será disponibiliz
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"transactionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5a51ae6b-e91e-4b38-b596-e2acb77dca43"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"orderId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1489093308860"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"referenceId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1489093308860"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Mouse sem fio"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"softDescriptor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Pagamento Gate2all"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"operationType"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"integrationType"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
   </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"100"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"installments"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"capture"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"authenticate"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
   </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
   </span><span class="nt">"dtTransaction"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-03-09T18:01:17"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"payment"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"provider"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Cielo"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"authenticationECI"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"codAuthorization"</span><span class="p">:</span><span class="w"> </span><span class="s2">"123456"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"providerReference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10069930690009510E9A"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"providerCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"providerMessage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Transação autorizada"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"card"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"402400******2927"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"cvv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"***"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"brand"</span><span class="p">:</span><span class="w"> </span><span class="s2">"VISA"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4b6a2aa5-de91-4d52-a4d1-f265f208e5a321"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"saveCard"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"installments"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"capture"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"authenticate"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"softDescriptor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Pagamento Gate2all"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"interestType"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"integrationType"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"provider"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Cielo"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"authenticationECI"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"codAuthorization"</span><span class="p">:</span><span class="w"> </span><span class="s2">"123456"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"providerReference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10069930690009510E9A"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"providerCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"providerMessage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Transação autorizada"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"saveCard"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"cardInfo"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"402400******2927"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"cvv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"***"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"brand"</span><span class="p">:</span><span class="w"> </span><span class="s2">"VISA"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4b6a2aa5-de91-4d52-a4d1-f265f208e5a321"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="nt">"customer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -2930,40 +3435,52 @@ Caso não seja seja passado nenhuma bandeira como paramêtro, será disponibiliz
 <td>Data e hora da transação.</td>
 </tr>
 <tr>
-<td><code class="prettyprint">payment.provider</code></td>
+<td><code class="prettyprint">card.provider</code></td>
 <td>Texto</td>
 <td>100</td>
 <td>Nome da instituição financeira.</td>
 </tr>
 <tr>
-<td><code class="prettyprint">payment.providerReference</code></td>
+<td><code class="prettyprint">card.providerReference</code></td>
 <td>Texto</td>
 <td>100</td>
 <td>Referência da instituição.</td>
 </tr>
 <tr>
-<td><code class="prettyprint">payment.providerMessage</code></td>
+<td><code class="prettyprint">card.providerMessage</code></td>
 <td>Texto</td>
 <td>100</td>
 <td>Mensagem da instituição.</td>
 </tr>
 <tr>
-<td><code class="prettyprint">payment.providerCode</code></td>
+<td><code class="prettyprint">card.providerCode</code></td>
 <td>Texto</td>
 <td>100</td>
 <td>Codigo de resposta da instituição.</td>
 </tr>
 <tr>
-<td><code class="prettyprint">payment.codAuthorization</code></td>
+<td><code class="prettyprint">card.codAuthorization</code></td>
 <td>Texto</td>
 <td>100</td>
 <td>Codigo de autorização da instituição.</td>
 </tr>
 <tr>
-<td><code class="prettyprint">payment.authenticationECI</code></td>
+<td><code class="prettyprint">card.authenticationECI</code></td>
 <td>Texto</td>
 <td>100</td>
 <td>Indicador de autenticação da transação.<a href="#status-eci">Códigos ECI</a></td>
+</tr>
+<tr>
+<td><code class="prettyprint">cardInfo.number</code></td>
+<td>Texto</td>
+<td>20</td>
+<td>Número do cartão truncado.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">cardInfo.brand</code></td>
+<td>Texto</td>
+<td>20</td>
+<td>Bandeira do cartão.</td>
 </tr>
 <tr>
 <td><code class="prettyprint">status</code></td>
@@ -3156,6 +3673,7 @@ Caso não seja seja passado nenhuma bandeira como paramêtro, será disponibiliz
           <div class="lang-selector">
                 <a href="#" data-language-name="json">JSON</a>
                 <a href="#" data-language-name="shell">cURL</a>
+                <a href="#" data-language-name="java">JAVA</a>
           </div>
       </div>
     </div>
