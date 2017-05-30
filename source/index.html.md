@@ -16,6 +16,7 @@ includes:
   - status_http
   - errors_api
   - status_eci
+  - brands
 
 search: true
 ---
@@ -117,24 +118,7 @@ Para que o lojista possa utilizar as funcionalidades do **GATE2all**, este deve 
 
 **GetNet**
 
-
-### Bandeiras suportadas por adquirente
-
-
-Adquirente | Cielo | REDE | GetNet |
--------------- | -------------- | -------------- | --------------
-Visa |  <input type="checkbox" checked disabled readonly> |  <input type="checkbox" checked disabled readonly> | <input type="checkbox" checked disabled readonly>
-Mastercard |  <input type="checkbox" checked disabled readonly> |  <input type="checkbox" checked disabled readonly> |  <input type="checkbox" checked disabled readonly> 
-Diners Club |  <input type="checkbox" checked disabled readonly> |  <input type="checkbox" checked disabled readonly> | <input type="checkbox" disabled readonly> 
-American Express |  <input type="checkbox" checked disabled readonly> | <input type="checkbox" disabled readonly> | <input type="checkbox" disabled readonly> 
-Elo |  <input type="checkbox" checked disabled readonly> | <input type="checkbox" disabled readonly> | <input type="checkbox" disabled readonly> 
-Hipercard | <input type="checkbox" disabled readonly> |  <input type="checkbox" checked disabled readonly> | <input type="checkbox" disabled readonly> 
-Hiper | <input type="checkbox" disabled readonly> |  <input type="checkbox" checked disabled readonly> | <input type="checkbox" disabled readonly>
-Aura |  <input type="checkbox" checked disabled readonly> | <input type="checkbox" disabled readonly> | <input type="checkbox" disabled readonly> 
-Discover |  <input type="checkbox" checked disabled readonly> | <input type="checkbox" disabled readonly> | <input type="checkbox" disabled readonly> 
-JCB |  <input type="checkbox" checked disabled readonly> | <input type="checkbox" disabled readonly> | <input type="checkbox" disabled readonly> 
-Visa Electron |  <input type="checkbox" checked disabled readonly> | <input type="checkbox" disabled readonly> | <input type="checkbox" disabled readonly> 
-Mastercard Maestro |  <input type="checkbox" checked disabled readonly> | <input type="checkbox" disabled readonly> | <input type="checkbox" disabled readonly> 
+[Bandeiras suportadas](#bandeiras) 
 
 <aside class="warning">
 As transações de cartão de débito (Visa Electron e Mastercard Maestro) só são processadas se houver autenticação pelo mecanismo Verified by Visa ou Mastercard Secure Code.
@@ -206,11 +190,11 @@ Para utilizar nosso ambiente de testes envie um e-mail informando os dados abaix
 
 ### Ambiente Produção
 
-**Requisição de transação**: https://api.gate.2all.com.br/
+**Requisição de transação**: https://api.gate2all.com.br/
 
 ### Ambiente de testes (Sandbox)
 
-**Requisição de transação**: https://api.cert.gate.2all.com.br/
+**Requisição de transação**: https://apidemo.gate2all.com.br/
 
 ## Cartões de Testes
 
@@ -235,9 +219,6 @@ Todas as requisições são autenticadas através das credenciais de acesso (USU
 * `authenticationApi: USUÁRIO`
 * `authenticarionKey: CHAVE`
 
-```curl
-curl -X POST -H "authenticationApi: USUÁRIO" -H "authenticationKey: CHAVE" -H "Content-Type: application/json"
-```
 **Exemplo de configuração no POSTMAN:**
 
 <img src='images/authenticationApi.png' />
@@ -316,7 +297,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Scanner;
 
-URL obj = new URL("https://api.cert.gate.2all.com.br/v1/intention");
+URL obj = new URL("https://api.2all.com.br/v1/intention");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 
 con.setRequestMethod("POST");
@@ -420,7 +401,7 @@ Status : 201
 ```json
 {
   "transactionId": "b9bb32a8-401e-41a0-a9ee-af9e8ab0de92",
-  "url": "https://api.gate.2all.com.br/v1/payment/b9bb32a8-401e-41a0-a9ee-af9e8ab0de92"
+  "url": "https://api.2all.com.br.com.br/v1/payment/b9bb32a8-401e-41a0-a9ee-af9e8ab0de92"
 }
 ```
 
@@ -538,7 +519,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Scanner;
 
-URL obj = new URL("https://api.cert.gate.2all.com.br/v1/transactions");
+URL obj = new URL("https://api.2all.com.br/v1/transactions");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 
 con.setRequestMethod("POST");
@@ -611,7 +592,7 @@ System.out.println(response);
 |`cardInfo.expirationMonth`|Número|2|Sim|Mês da validade do cartão.|
 |`cardInfo.expirationYear`|Número|2|Sim|Ano da validade do cartão.|
 |`cardInfo.cvv`|Número|4|Não|Código de segurança do cartão.|
-|`cardInfo.brand`|Texto|20|Sim|Bandeira do cartão.|
+|`cardInfo.brand`|Texto|20|Sim|Bandeira do cartão.[Bandeiras](#bandeiras).|
 |`cardInfo.holderName`|Texto|20|Não|Nome do portador do cartão.|
 
 ### RESPOSTA
@@ -628,7 +609,7 @@ System.out.println(response);
   "dtTransaction": "2017-03-05T12:04:20",
   "payment": {
     "card": {
-      "provider": "Cielo",
+      "provider": "CIELO",
       "authenticationECI": 7,
       "codAuthorization": "123456",
       "providerReference": "1006993069000834928A",
@@ -748,7 +729,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Scanner;
 
-URL obj = new URL("https://api.cert.gate.2all.com.br/v1/transactions");
+URL obj = new URL("https://api.2all.com.br/v1/transactions");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 
 con.setRequestMethod("POST");
@@ -854,7 +835,7 @@ System.out.println(response);
       "provider": "ITAU",
       "paymentDate": "2017-03-10",
       "paymentAmount": "100",
-      "url": "https://api.gate.2all.com.br/v1/url-payment/6400d988-cc4b-4084-80ee-d5575dbbed4d"
+      "url": "https://api.2all.com.br.com.br/v1/url-payment/6400d988-cc4b-4084-80ee-d5575dbbed4d"
     }
   },
   "status": 0
@@ -929,7 +910,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Scanner;
 
-URL obj = new URL("https://api.cert.gate.2all.com.br/v1/transactions");
+URL obj = new URL("https://api.2all.com.br/v1/transactions");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 
 con.setRequestMethod("POST");
@@ -1018,7 +999,7 @@ System.out.println(response);
         "electronicTransfer": {
             "providerReference": "20518839",
             "provider": "Itau",
-            "url": "https://api.gate.2all.com.br/v1/url-payment/6400d988-cc4b-4084-80ee-d5575dbbed4d"
+            "url": "https://api.2all.com.br.com.br/v1/url-payment/6400d988-cc4b-4084-80ee-d5575dbbed4d"
         }
     },
     "status": 0
@@ -1067,7 +1048,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Scanner;
 
-URL obj = new URL("https://api.cert.gate.2all.com.br/v1/transactions/{{transactionId}}/capture");
+URL obj = new URL("https://api.2all.com.br/v1/transactions/{{transactionId}}/capture");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("PUT");
 con.setRequestProperty("content-type", "application/json");
@@ -1099,7 +1080,7 @@ System.out.println(response);
     "dtTransaction": "2017-03-07T17:09:07",
     "payment": {
         "card": {
-          "provider": "Cielo",
+          "provider": "CIELO",
           "authenticationECI": 7,
           "codAuthorization": "123456",
           "providerReference": "100699306900094D905A",
@@ -1144,7 +1125,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Scanner;
 
-URL obj = new URL("https://api.cert.gate.2all.com.br/v1/transactions/{{transactionId}}/capture?amount=100");
+URL obj = new URL("https://api.2all.com.br/v1/transactions/{{transactionId}}/capture?amount=100");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("PUT");
 con.setRequestProperty("content-type", "application/json");
@@ -1177,7 +1158,7 @@ System.out.println(response);
     "dtTransaction": "2017-03-07T17:09:07",
     "payment": {
         "card": {
-          "provider": "Cielo",
+          "provider": "CIELO",
           "authenticationECI": 7,
           "codAuthorization": "123456",
           "providerReference": "100699306900094D905A",
@@ -1230,7 +1211,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Scanner;
 
-URL obj = new URL("https://api.cert.gate.2all.com.br/v1/transactions/957221f5-d08b-4445-9896-52152f31b846/void");
+URL obj = new URL("https://api.2all.com.br/v1/transactions/957221f5-d08b-4445-9896-52152f31b846/void");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("PUT");
 con.setRequestProperty("content-type", "application/json");
@@ -1268,7 +1249,7 @@ System.out.println(response);
             "installments": 1,
             "capture": false,
             "authenticate": 3,
-            "provider": "Cielo",
+            "provider": "CIELO",
             "authenticationECI": 7,
             "codAuthorization": "123456",
             "providerReference": "100699306900094D905A",
@@ -1307,7 +1288,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Scanner;
 
-URL obj = new URL("https://api.cert.gate.2all.com.br/v1/transactions/d31dcd70-6666-40af-85ba-ed1ff23bc293");
+URL obj = new URL("https://api.2all.com.br/v1/transactions/d31dcd70-6666-40af-85ba-ed1ff23bc293");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 con.setRequestProperty("content-type", "application/json");
@@ -1394,7 +1375,7 @@ System.out.println(response);
       "provider": "ITAU",
       "paymentDate": "2017-03-10",
       "paymentAmount": "100",
-      "url": "https://api.gate.2all.com.br/v1/url-payment/6400d988-cc4b-4084-80ee-d5575dbbed4d"
+      "url": "https://api.2all.com.br.com.br/v1/url-payment/6400d988-cc4b-4084-80ee-d5575dbbed4d"
     }
   },
   "status": 0
@@ -1427,7 +1408,7 @@ System.out.println(response);
         "electronicTransfer": {
             "providerReference": "20518839",
             "provider": "Itau",
-            "url": "https://api.gate.2all.com.br/v1/url-payment/6400d988-cc4b-4084-80ee-d5575dbbed4d"
+            "url": "https://api.2all.com.br.com.br/v1/url-payment/6400d988-cc4b-4084-80ee-d5575dbbed4d"
         }
     },
     "status": 0
@@ -1461,7 +1442,7 @@ System.out.println(response);
 |`card.codAuthorization`|Texto|100|Codigo de autorização da instituição.|
 |`card.providerReference`|Texto|100|Referência da instituição.|
 |`cardInfo.number`|Texto|19|Sim|Número do cartão.|
-|`cardInfo.brand`|Texto|20|Sim|Bandeira do cartão.|
+|`cardInfo.brand`|Texto|20|Sim|Bandeira do cartão. [Bandeiras](#bandeiras).|
 |`bankSlip.emissionDate`|Texto|20|Sim|Data de emissão do boleto. formato **YYYY-MM-DD**|
 |`bankSlip.expirationDate`|Texto|20|Sim|Data de vencimento do boleto. formato **YYYY-MM-DD**|
 |`bankSlip.instructions`|Texto|300|Sim|Instruções do boleto.|
@@ -1481,7 +1462,7 @@ System.out.println(response);
 
 ### Requisição
 
-<aside class="request"><span class="method get">GET</span> <span class="endpoint">/v1/transactions/?referenceId={{referenceId}}</span></aside>
+<aside class="request"><span class="method get">GET</span> <span class="endpoint">/v1/transactions?referenceId={{referenceId}}</span></aside>
 
 ```java
 
@@ -1490,7 +1471,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Scanner;
 
-URL obj = new URL("https://api.cert.gate.2all.com.br/v1/transactions/?referenceId=1493321061725");
+URL obj = new URL("https://api.2all.com.br/v1/transactions?referenceId=1493321061725");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 con.setRequestProperty("content-type", "application/json");
@@ -1522,7 +1503,7 @@ System.out.println(response);
     "status": 7,
     "dtTransaction": "2017-03-15T11:17:40",
     "payment": {
-      "provider": "Cielo"
+      "provider": "CIELO"
     }
   }
 ]
@@ -1547,7 +1528,7 @@ Também é possível realizar uma consulta pelo número do pedido passando um li
 
 ### Requisição
 
-<aside class="request"><span class="method get">GET</span> <span class="endpoint">/v1/transactions/?referenceId={{referenceId}}&limit=2</span></aside>
+<aside class="request"><span class="method get">GET</span> <span class="endpoint">/v1/transactions?referenceId={{referenceId}}&limit=2</span></aside>
 
 ```java
 
@@ -1556,7 +1537,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Scanner;
 
-URL obj = new URL("https://api.cert.gate.2all.com.br/v1/transactions/?referenceId=1493321061725&limit=2");
+URL obj = new URL("https://api.2all.com.br/v1/transactions?referenceId=1493321061725&limit=2");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 con.setRequestProperty("content-type", "application/json");
@@ -1589,7 +1570,7 @@ System.out.println(response);
     "status": 5,
     "dtTransaction": "2017-03-16T07:37:23",
     "payment": {
-      "provider": "Cielo"
+      "provider": "CIELO"
     }
   },
   {
@@ -1598,7 +1579,7 @@ System.out.println(response);
     "status": 5,
     "dtTransaction": "2017-03-16T07:37:00",
     "payment": {
-      "provider": "Cielo"
+      "provider": "CIELO"
     }
   }
 ]
@@ -1656,7 +1637,9 @@ Para criar um formulário que capturá os dados do cartão para gerar um token �
     "referenceId": "19893211234",
     "postBackUrl": "http://url-notificacao",
     "redirectUrl": "http://url-redirect",
-    "brand" : "VISA"
+    "cardInfo": {
+      "brand" : "VISA"  
+    }
 }
 ```
 
@@ -1673,7 +1656,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Scanner;
 
-URL obj = new URL("https://api.cert.gate.2all.com.br/v1/tokenization/intention");
+URL obj = new URL("https://api.2all.com.br/v1/tokenization/intention");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 
 con.setRequestMethod("POST");
@@ -1682,9 +1665,11 @@ con.setRequestProperty("authenticationapi", "demo");
 con.setRequestProperty("authenticationkey", "demo");
 
 String body = "{"
-        + "\"postBackUrl\": \"http://requestb.in/qkg1clqk\","
-        + "\"redirectUrl\": \"http://requestb.in/qkg1clqk\","
+        + "\"postBackUrl\": \"http://url-notificacao\","
+        + "\"redirectUrl\": \"http://url-redirect\","
+        + "\"cardInfo\": {"
         + "\"brand\" : \"VISA\""
+        + "}",
         + "}";
 
 con.setDoOutput(true);
@@ -1706,7 +1691,7 @@ System.out.println(response);
 |`referenceId`|Texto|100|Sim|Número de identificação da loja.|
 |`postBackUrl`|Texto|—|Sim|URL onde o GATE2all notificará eventuais status da tokenização para o lojista.|
 |`redirectUrl`|Texto|—|Sim|URL onde o GATE2all redirecionará o comprador após o processamento da tokenização.|
-|`brand`|Texto|20|Não|Bandeira do cartão.|
+|`brand`|Texto|20|Não|Bandeira do cartão.[Bandeiras](#bandeiras).|
 
 
 ### RESPOSTA
@@ -1714,9 +1699,15 @@ System.out.println(response);
 
 ```json
 {
-  "referenceId": "19893211234",
-  "transactionId": "9477f767-f037-45f4-93ce-a40d10b49e86",
-  "url": "https://api.gate.2all.com.br/v1/save-card/9477f767-f037-45f4-93ce-a40d10b49e86"
+  "tokenizationId": "b303e861-37d3-4d11-866b-735c6ff58989",
+  "referenceId": "1495660823910",
+  "postBackUrl": "http://url-notificacao",
+  "redirectUrl": "http://url-redirect",
+  "url": "http://api.2all.com.br/v1/save-card/b303e861-37d3-4d11-866b-735c6ff58989",
+  "saveCard": true,
+  "cardInfo": {
+    "brand": "VISA"
+  }
 }
 ```
 
@@ -1726,8 +1717,9 @@ System.out.println(response);
 
 |Propriedade|Tipo|Tamanho|Descrição|
 |-----------|----|-------|-----------|---------|
-|`transactionId`|Texto|150|Identificador da transação do GATE2all.|
+|`tokenizationId`|Texto|36|Identificador da tokenização do GATE2all.|
 |`url`|Texto|150|URL disponível para acesso a tokenização.|
+|`cardInfo.saveCard`|Booleano|—|Sim|Configura salvar o cartão (tokenização). |
 
 <aside class="success">
 Redirecione o comprador para a URL da resposta.
@@ -1787,7 +1779,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Scanner;
 
-URL obj = new URL("https://api.cert.gate.2all.com.br/v1/tokenization");
+URL obj = new URL("https://api.2all.com.br/v1/tokenization");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 
 con.setRequestMethod("POST");
@@ -1828,7 +1820,7 @@ System.out.println(response);
 |`cardInfo.number`|Texto|20|Número do cartão truncado.|
 |`cardInfo.expirationMonth`|Número|2|Mês da validade do cartão.|
 |`cardInfo.expirationYear`|Número|4|Ano da validade do cartão.|
-|`cardInfo.brand`|Texto|20|Bandeira do cartão.|
+|`cardInfo.brand`|Texto|20|Bandeira do cartão.[Bandeiras](#bandeiras).|
 |`cardInfo.holderName`|Texto|100|Nome do portador do cartão.|
 
 ### RESPOSTA
@@ -1845,7 +1837,7 @@ System.out.println(response);
   "cardInfo": {
     "number": "402400******2927",
     "expirationMonth": "04",
-    "expirationYear": "2017",
+    "expirationYear": "2018",
     "brand": "VISA",
     "token": "be4cbeb1-abb2-4913-8165-f86962143fa021",
     "holderName": "Comprador"
@@ -1863,6 +1855,153 @@ System.out.println(response);
 |`tokenizationId`|Texto|36|Identificador da tokenização do GATE2all.|
 |`provider`|Texto|100|Nome da Rede Adquirente.|
 |`saveCard`|Booleano|Sim|Configura salvar o cartão (tokenização).|
+|`cardInfo.token`|Texto|100|Token do cartão.|
+
+> Consulta Token
+
+Para realizar uma consulta de token é necessário enviar um GET para o seguinte recurso:
+
+### Requisição
+
+<aside class="request"><span class="method get">GET</span> <span class="endpoint">/v1/tokenization/{{token}}</span></aside>
+
+```java
+
+import java.io.*;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.Scanner;
+
+URL obj = new URL("https://api.2all.com.br/v1/tokenization/be4cbeb1-abb2-4913-8165-f86962143fa021");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+con.setRequestProperty("content-type", "application/json");
+con.setRequestProperty("authenticationapi", "demo");
+con.setRequestProperty("authenticationkey", "demo");
+
+Scanner scanner = new Scanner(new BufferedReader(new InputStreamReader(con.getInputStream())));
+String response = scanner.nextLine();
+scanner.close();
+
+System.out.println(response);
+
+```
+
+|Propriedade|Tipo|Tamanho|Obrigatório|Descrição|
+|-----------|----|-------|-----------|---------|
+|`token`|Texto|150|Sim|Token NTK retornado na tokenização do cartão.|
+
+
+### RESPOSTA
+
+> Retorno Consulta Token .
+
+```json
+{
+  "tokenizationId": "7c6785d9-4922-4b0d-986e-9bb5e624c613",
+  "referenceId": "1496173577825",
+  "postBackUrl": "",
+  "saveCard": true,
+  "provider": "CIELO",
+  "cardInfo": {
+    "number": "402400******2927",
+    "expirationMonth": "04",
+    "expirationYear": "2018",
+    "brand": "VISA",
+    "token": "be4cbeb1-abb2-4913-8165-f86962143fa021",
+    "holderName": "Comprador"
+  }
+}
+```
+
+|Propriedade|Tipo|Tamanho|Descrição|
+|-----------|:----:|:-------:|---------|
+|`tokenizationId`|Texto|36|Identificador da tokenização do GATE2all.|
+|`referenceId`|Texto|100|Sim|Número de identificação da loja.|
+|`postBackUrl`|Texto|—|Sim|URL onde o GATE2all notificará eventuais status da trancação para o lojista.|
+|`provider`|Texto|100|Nome da Rede Adquirente.|
+|`saveCard`|Booleano|Sim|Default true|
+|`cardInfo.number`|Texto|20|Número do cartão truncado.|
+|`cardInfo.expirationMonth`|Número|2|Mês da validade do cartão.|
+|`cardInfo.expirationYear`|Número|4|Ano da validade do cartão.|
+|`cardInfo.brand`|Texto|20|Bandeira do cartão.[Bandeiras](#bandeiras).|
+|`cardInfo.token`|Texto|100|Token do cartão.|
+|`cardInfo.holderName`|Texto|100|Nome do portador do cartão.|
+
+## Consulta do token pelo Número de Referencia com Limite
+
+Também é possível realizar uma consulta pelo número de referência passando ou não um limite.
+
+### Requisição
+
+<aside class="request"><span class="method get">GET</span> <span class="endpoint">/v1/tokenization?referenceId={{referenceId}}&limit=2</span></aside>
+
+```java
+
+import java.io.*;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.Scanner;
+
+URL obj = new URL("https://api.2all.com.br/v1/tokenization?referenceId=1496173577825&limit=2");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+con.setRequestProperty("content-type", "application/json");
+con.setRequestProperty("authenticationapi", "demo");
+con.setRequestProperty("authenticationkey", "demo");
+
+Scanner scanner = new Scanner(new BufferedReader(new InputStreamReader(con.getInputStream())));
+String response = scanner.nextLine();
+scanner.close();
+
+System.out.println(response);
+
+```
+
+|Propriedade|Tipo|Tamanho|Obrigatório|Descrição|
+|-----------|----|-------|-----------|---------|
+|`referenceId`|Texto|100|Sim|Número de identificação da loja.|
+|`limit`|Número|10|Não|Limite Máximo de referências 10.|
+
+
+### RESPOSTA
+
+> Retorno da Transação.
+
+```json
+[
+  {
+    "tokenizationId": "7c6785d9-4922-4b0d-986e-9bb5e624c613",
+    "referenceId": "1496173577825",
+    "postBackUrl": "",
+    "saveCard": true,
+    "provider": "CIELO",
+    "cardInfo": {
+      "number": "402400******2927",
+      "expirationMonth": "04",
+      "expirationYear": "2018",
+      "brand": "VISA",
+      "token": "be4cbeb1-abb2-4913-8165-f86962143fa021"
+    }
+  }
+]
+```
+
+
+```shell  
+```
+
+|Propriedade|Tipo|Tamanho|Descrição|
+|-----------|:----:|:-------:|---------|
+|`tokenizationId`|Texto|36|Identificador da tokenização do GATE2all.|
+|`referenceId`|Texto|100|Sim|Número de identificação da loja.|
+|`postBackUrl`|Texto|—|Sim|URL onde o GATE2all notificará eventuais status da trancação para o lojista.|
+|`provider`|Texto|100|Nome da Rede Adquirente.|
+|`saveCard`|Booleano|Sim|Default true|
+|`cardInfo.number`|Texto|20|Número do cartão truncado.|
+|`cardInfo.expirationMonth`|Número|2|Mês da validade do cartão.|
+|`cardInfo.expirationYear`|Número|4|Ano da validade do cartão.|
+|`cardInfo.brand`|Texto|20|Bandeira do cartão. [Bandeiras](#bandeiras).|
 |`cardInfo.token`|Texto|100|Token do cartão.|
 
 
@@ -1893,8 +2032,7 @@ Para criar uma transação com token é necessário enviar um POST para o seguin
           "authenticate": 3,
           "softDescriptor": "Pagamento Gate2all",
           "cardInfo": {
-              "token": "4b6a2aa5-de91-4d52-a4d1-f265f208e5a321",
-              "cvv": "234"
+              "token": "4b6a2aa5-de91-4d52-a4d1-f265f208e5a321"
           }
        }
    }
@@ -1914,7 +2052,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Scanner;
 
-URL obj = new URL("https://api.cert.gate.2all.com.br/v1/transactions");
+URL obj = new URL("https://api.2all.com.br/v1/transactions");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 
 con.setRequestMethod("POST");
@@ -1974,7 +2112,6 @@ System.out.println(response);
 |`card.authenticate`|Número|1|Não|Opções disponíveis: <BR /> 1. Autorizar só transações autenticadas <BR /> 2. Autorizar transações autenticadas ou não autenticadas <BR /> 3. Autorizar sem autenticação <BR /> |
 |`card.softDescriptor`|Texto|22|Não|Texto a ser exibido na fatura do portador do cartão.|
 |`cardInfo.token`|Texto|100|Sim|Token gerado anteriormente pela operação de Tokenização.|
-|`cardInfo.cvv`|Número|4|Não|Código de segurança do cartão.|
 
 ### RESPOSTA
 
@@ -1997,7 +2134,7 @@ System.out.println(response);
       "softDescriptor": "Pagamento Gate2all",
       "interestType": 3,
       "integrationType": 1,
-      "provider": "Cielo",
+      "provider": "CIELO",
       "authenticationECI": 7,
       "codAuthorization": "123456",
       "providerReference": "10069930690009510E9A",
@@ -2006,6 +2143,8 @@ System.out.println(response);
       "saveCard": true,
       "cardInfo": {
         "number": "402400******2927",
+        "expirationMonth": "04",
+        "expirationYear": "2018",
         "cvv": "***",
         "brand": "VISA",
         "token": "4b6a2aa5-de91-4d52-a4d1-f265f208e5a321"
@@ -2034,5 +2173,8 @@ System.out.println(response);
 |`card.codAuthorization`|Texto|100|Codigo de autorização da instituição.|
 |`card.authenticationECI`|Texto|100|Indicador de autenticação da transação.[Códigos ECI](#status-eci)|
 |`cardInfo.number`|Texto|20|Número do cartão truncado.|
-|`cardInfo.brand`|Texto|20|Bandeira do cartão.|
+|`cardInfo.brand`|Texto|20|Bandeira do cartão.[Bandeiras](#bandeiras).|
+|`cardInfo.expirationMonth`|Número|2|Mês da validade do cartão.|
+|`cardInfo.expirationYear`|Número|4|Ano da validade do cartão.|
+|`cardInfo.cvv`|Número|4|Não|Código de segurança do cartão truncado|
 |`status`|Número|2|Status da transação retornado pelo GATE2all [catálogo](#status).|
