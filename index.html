@@ -146,7 +146,7 @@
 
 <p>Para importar uma coleção contendo os endpoints e mensagens de exemplos, basta clicar no botão abaixo.</p>
 
-<p><a href="https://app.getpostman.com/run-collection/0b67f050f9260847ce82" target="_blank"><img alt="Run in Postman" src="https://run.pstmn.io/button.svg" /></a></p>
+<p><a href="https://app.getpostman.com/run-collection/8ec1d4e437adde5f8e70" target="_blank"><img alt="Run in Postman" src="https://run.pstmn.io/button.svg" /></a>https://run.pstmn.io/button.svg)</a></p>
 
 <aside class="warning">
 As informações contidas neste documento estão sujeitas a alteração sem prévio aviso.
@@ -617,7 +617,7 @@ O valor do resultante da divisão do valor do pedido pelo número de parcelas n�
 <td><code class="prettyprint">card.capture</code></td>
 <td>Booleano</td>
 <td>—</td>
-<td>Sim</td>
+<td>Não</td>
 <td><strong>true</strong> = Autoriza e confirma a transação. <strong>false</strong> = Autorização, mas não confirma a transação, necessitando realizar a confirmação (<a href="#captura">Captura</a>) noutra requisição.</td>
 </tr>
 <tr>
@@ -645,7 +645,7 @@ O valor do resultante da divisão do valor do pedido pelo número de parcelas n�
 <td><code class="prettyprint">card.authenticate</code></td>
 <td>Texto</td>
 <td>20</td>
-<td>Não</td>
+<td>Sim</td>
 <td>Opções disponíveis: <BR /> 1. Autorizar só transações autenticadas <BR /> 2. Autorizar transações autenticadas ou não autenticadas <BR /> 3. Autorizar sem autenticação <BR /></td>
 </tr>
 <tr>
@@ -659,7 +659,7 @@ O valor do resultante da divisão do valor do pedido pelo número de parcelas n�
 <td><code class="prettyprint">card.saveCard</code></td>
 <td>Booleano</td>
 <td>—</td>
-<td>Sim</td>
+<td>Não</td>
 <td>Configura salvar o cartão (tokenização).</td>
 </tr>
 <tr>
@@ -980,7 +980,7 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
 <td><code class="prettyprint">card.authenticate</code></td>
 <td>Número</td>
 <td>1</td>
-<td>Não</td>
+<td>Sim</td>
 <td>Opções disponíveis: <BR /> 1. Autorizar só transações autenticadas <BR /> 2. Autorizar transações autenticadas ou não autenticadas <BR /> 3. Autorizar sem autenticação <BR /></td>
 </tr>
 <tr>
@@ -994,7 +994,7 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
 <td><code class="prettyprint">card.saveCard</code></td>
 <td>Booleano</td>
 <td>—</td>
-<td>Sim</td>
+<td>Não</td>
 <td>Configura salvar o cartão (tokenização).</td>
 </tr>
 <tr>
@@ -2568,10 +2568,7 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
     </span><span class="nt">"transactionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"b9a37a7b-5ffe-4993-82ab-a26b6f332afe"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"100"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"dtTransaction"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-03-15T11:17:40"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"payment"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"provider"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CIELO"</span><span class="w">
-    </span><span class="p">}</span><span class="w">
+    </span><span class="nt">"dtTransaction"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-03-15T11:17:40"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre>
@@ -2612,13 +2609,6 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
 <td>DataHora</td>
 <td>19</td>
 <td>Data e hora da transação.</td>
-<td></td>
-</tr>
-<tr>
-<td><code class="prettyprint">payment.provider</code></td>
-<td>Texto</td>
-<td>100</td>
-<td>Nome da instituição financeira.</td>
 <td></td>
 </tr>
 </tbody></table>
@@ -2686,19 +2676,13 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
     </span><span class="nt">"transactionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"894aa0ad-517a-435c-b95d-8f60f1a2b9f5"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"100"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"dtTransaction"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-03-16T07:37:23"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"payment"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"provider"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CIELO"</span><span class="w">
-    </span><span class="p">}</span><span class="w">
+    </span><span class="nt">"dtTransaction"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-03-16T07:37:23"</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="p">{</span><span class="w">
     </span><span class="nt">"transactionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5dbc102d-2b4b-4755-9f14-1b4c3d8a6716"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"100"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"dtTransaction"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-03-16T07:37:00"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"payment"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"provider"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CIELO"</span><span class="w">
-    </span><span class="p">}</span><span class="w">
+    </span><span class="nt">"dtTransaction"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-03-16T07:37:00"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre>
@@ -2739,13 +2723,6 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
 <td>DataHora</td>
 <td>19</td>
 <td>Data e hora da transação.</td>
-<td></td>
-</tr>
-<tr>
-<td><code class="prettyprint">payment.provider</code></td>
-<td>Texto</td>
-<td>100</td>
-<td>Nome da instituição financeira.</td>
 <td></td>
 </tr>
 </tbody></table>
