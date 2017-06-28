@@ -380,7 +380,7 @@ O valor do resultante da divisão do valor do pedido pelo número de parcelas n�
     </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Mouse sem fio"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"postBackUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://url-notificacao"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"redirectUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://url-redirect"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"dhExpiration"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-08-25T18:10:53"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"dtExpiration"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-08-25T18:10:53"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"customer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Comprador Teste"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"document"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12345678909"</span><span class="p">,</span><span class="w">
@@ -441,7 +441,7 @@ O valor do resultante da divisão do valor do pedido pelo número de parcelas n�
         <span class="o">+</span> <span class="s">"\"description\": \"Mouse sem fio\","</span>
         <span class="o">+</span> <span class="s">"\"postBackUrl\": \"http://url-notificacao\","</span>
         <span class="o">+</span> <span class="s">"\"redirectUrl\": \"http://url-redirect\","</span>
-        <span class="o">+</span> <span class="s">"\"dhExpiration\": \"2017-08-25T18:10:53\","</span>
+        <span class="o">+</span> <span class="s">"\"dtExpiration\": \"2017-08-25T18:10:53\","</span>
         <span class="o">+</span> <span class="s">"    \"customer\": {"</span>
         <span class="o">+</span> <span class="s">"       \"name\": \"Comprador Teste\","</span>
         <span class="o">+</span> <span class="s">"       \"document\": \"12345678909\","</span>
@@ -525,19 +525,19 @@ O valor do resultante da divisão do valor do pedido pelo número de parcelas n�
 <tr>
 <td><code class="prettyprint">postBackUrl</code></td>
 <td>Texto</td>
-<td>—</td>
+<td>300</td>
 <td>Sim</td>
 <td>URL onde o GATE2all notificará eventuais status da trancação para o lojista.</td>
 </tr>
 <tr>
 <td><code class="prettyprint">redirectUrl</code></td>
 <td>Texto</td>
-<td>—</td>
+<td>300</td>
 <td>Não</td>
 <td>URL onde o GATE2all redirecionará o comprador após o processamento da transação.</td>
 </tr>
 <tr>
-<td><code class="prettyprint">dhExpiration</code></td>
+<td><code class="prettyprint">dtExpiration</code></td>
 <td>Texto</td>
 <td>20</td>
 <td>Não</td>
@@ -2833,14 +2833,14 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
 <tr>
 <td><code class="prettyprint">postBackUrl</code></td>
 <td>Texto</td>
-<td>—</td>
+<td>300</td>
 <td>Sim</td>
 <td>URL onde o GATE2all notificará eventuais status da tokenização para o lojista.</td>
 </tr>
 <tr>
 <td><code class="prettyprint">redirectUrl</code></td>
 <td>Texto</td>
-<td>—</td>
+<td>300</td>
 <td>Sim</td>
 <td>URL onde o GATE2all redirecionará o comprador após o processamento da tokenização.</td>
 </tr>
