@@ -580,7 +580,7 @@ System.out.println(response);
 |`postBackUrl`|Texto|—|Não|URL onde o GATE2all notificará eventuais status da trancação para o lojista.|
 |`customer.name`|Texto|100|Sim|Nome do portador do cartão.|
 |`customer.document`|Texto|18|Não|Número do CPF/CNPJ do portador do cartão.|
-|`card.type`|Inteiro|—|Sim|Configura as opcões disponíveis. 1 Configura cartão de crédito. 2|
+|`card.type`|Inteiro|—|Sim|1 Configura cartão de crédito. 2 Configura cartão de débito.|
 |`card.softDescriptor`|Texto|22|Não|Texto a ser exibido na fatura do portador do cartão.|
 |`card.capture`|Booleano|—|Sim|**true** = Autoriza e confirma a transação . **false** = Autorização, mas não confirma a transação, necessitando realizar a confirmação ([Captura] (#captura)) noutra requisição.|
 |`card.installments`|Número|2|Sim|Número de parcelas.|
@@ -1432,7 +1432,7 @@ System.out.println(response);
 |`address.zipcode`|Número|8|Sim|CEP do comprador.|
 |`address.city`|Texto|30|Sim|Cidade do comprador.|
 |`address.state`|Texto|2|Sim|Sigla do estado do comprador.|
-|`card.type`|Inteiro|—|Não|Configura as opcões disponíveis. 1 Configura cartão de crédito. 2 Configura cartão de débito.|
+|`card.type`|Inteiro|—|Não|1 Configura cartão de crédito. 2 Configura cartão de débito.|
 |`card.installments`|Número|2|Sim|Número de parcelas.|
 |`card.capture`|Booleano|—|Sim|**true** = Autoriza e confirma a transação . **false** = Autorização, mas não confirma a transação, necessitando realizar a confirmação ([Captura] (#captura)) noutra requisição.|
 |`card.authenticate`|Número|1|Não|Opções disponíveis: <BR /> 1. Autorizar só transações autenticadas <BR /> 2. Autorizar transações autenticadas ou não autenticadas <BR /> 3. Autorizar sem autenticação <BR /> |
@@ -2094,7 +2094,7 @@ System.out.println(response);
 |`description`|Texto|300|Não|Descrição da transação.|
 |`customer.name`|Texto|100|Sim|Nome do portador do cartão.|
 |`customer.document`|Texto|18|Não|Número do CPF/CNPJ do portador do cartão.|
-|`card.type`|Inteiro|—|Não|Configura as opcões disponíveis. 1 Configura cartão de crédito. 2 Configura cartão de débito.|
+|`card.type`|Inteiro|—|Sim|1. Transação com token só disponível para cartão de crédito.|
 |`card.capture`|Booleano|—|Sim|**true** = Autoriza e confirma a transação . **false** = Autorização, mas não confirma a transação, necessitando realizar a confirmação ([Captura] (#captura)) noutra requisição.|
 |`card.installments`|Número|2|Sim|Número de parcelas.|
 |`card.interestType`|Número|1|Sim|Operações disponíveis: <BR /> 3. Parcelado Loja <BR /> 4. Parcelado Administrador|
