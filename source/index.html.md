@@ -47,7 +47,7 @@ Para instalar o client Postman, basta acessar <a href='https://www.getpostman.co
 
 Para importar uma coleção contendo os endpoints e mensagens de exemplos, basta clicar no botão abaixo.
 
-<a href="https://app.getpostman.com/run-collection/0b67f050f9260847ce82" target="_blank">![Run in Postman](https://run.pstmn.io/button.svg)</a>
+<a href="https://app.getpostman.com/run-collection/8ec1d4e437adde5f8e70" target="_blank">![Run in Postman](https://run.pstmn.io/button.svg)</a>
 
 
 <aside class="warning">
@@ -245,7 +245,7 @@ Para realizar uma intenção de venda é necessário enviar um POST para o segui
     "description": "Mouse sem fio",
     "postBackUrl": "http://url-notificacao",
     "redirectUrl": "http://url-redirect",
-    "dhExpiration": "2017-08-25T18:10:53",
+    "dtExpiration": "2017-08-25T18:10:53",
     "customer": {
         "name": "Comprador Teste",
         "document": "12345678909",
@@ -311,7 +311,7 @@ String body = "{"
         + "\"description\": \"Mouse sem fio\","
         + "\"postBackUrl\": \"http://url-notificacao\","
         + "\"redirectUrl\": \"http://url-redirect\","
-        + "\"dhExpiration\": \"2017-08-25T18:10:53\","
+        + "\"dtExpiration\": \"2017-08-25T18:10:53\","
         + "    \"customer\": {"
         + "       \"name\": \"Comprador Teste\","
         + "       \"document\": \"12345678909\","
@@ -368,9 +368,9 @@ System.out.println(response);
 |`referenceId`|Texto|100|Sim|Número de identificação da loja.|
 |`amount`|Número|16|Sim|Valor da transação sem pontuação. Os dois últimos dígitos são os centavos. (Ex: amount: 100 = R$ 1,00)|
 |`description`|Texto|300|Não|Descrição da transação.|
-|`postBackUrl`|Texto|—|Sim|URL onde o GATE2all notificará eventuais status da trancação para o lojista.|
-|`redirectUrl`|Texto|—|Não|URL onde o GATE2all redirecionará o comprador após o processamento da transação.|
-|`dhExpiration`|Texto|20|Não|Data da expiração da intenção. Formato **2017-08-25T18:10:53** |
+|`postBackUrl`|Texto|300|Sim|URL onde o GATE2all notificará eventuais status da trancação para o lojista.|
+|`redirectUrl`|Texto|300|Não|URL onde o GATE2all redirecionará o comprador após o processamento da transação.|
+|`dtExpiration`|Texto|20|Não|Data da expiração da intenção. Formato **2017-08-25T18:10:53** |
 |`customer.name`|Texto|100|Sim|Nome do portador do cartão.|
 |`customer.document`|Texto|18|Sim|Número do CPF/CNPJ do portador do cartão.|
 |`customer.email`|Texto|100|Sim|Email do portador do cartão.|
@@ -381,13 +381,13 @@ System.out.println(response);
 |`address.city`|Texto|30|Sim|Cidade do comprador.|
 |`address.state`|Texto|2|Sim|Sigla do estado do comprador.|
 |`card.type`|Inteiro|—|Não|0 Default, configura as opcões disponíveis. 1 Configura cartão de crédito. 2 Configura cartão de débito.|
-|`card.capture`|Booleano|—|Sim|**true** = Autoriza e confirma a transação. **false** = Autorização, mas não confirma a transação, necessitando realizar a confirmação ([Captura](#captura)) noutra requisição.|
+|`card.capture`|Booleano|—|Não|**true** = Autoriza e confirma a transação. **false** = Autorização, mas não confirma a transação, necessitando realizar a confirmação ([Captura](#captura)) noutra requisição.|
 |`card.installments`|Número|20|Sim|Número de parcelas.|
 |`card.fixedInstallments`|Booleano|—|Não|**True** = não permite que o comprador selecione a quantidade de parcelas no formulário de pagamento.|
 |`card.interestType`|Número|1|Sim|Operações disponíveis: <BR /> 3. Parcelado Loja <BR /> 4. Parcelado Administrador|
-|`card.authenticate`|Texto|20|Não|Opções disponíveis: <BR /> 1. Autorizar só transações autenticadas <BR /> 2. Autorizar transações autenticadas ou não autenticadas <BR /> 3. Autorizar sem autenticação <BR /> |
+|`card.authenticate`|Texto|20|Sim|Opções disponíveis: <BR /> 1. Autorizar só transações autenticadas <BR /> 2. Autorizar transações autenticadas ou não autenticadas <BR /> 3. Autorizar sem autenticação <BR /> |
 |`card.softDescriptor`|Texto|22|Não|Texto a ser exibido na fatura do portador do cartão.|
-|`card.saveCard`|Booleano|—|Sim|Configura salvar o cartão (tokenização). |
+|`card.saveCard`|Booleano|—|Não|Configura salvar o cartão (tokenização). |
 |`electronicTransfer.provider`|Texto|20|Sim|Nome da instituição responsável pela transferência.|
 |`bankSlip.expirationDate`|Texto|20|Sim|Data de vencimento do boleto. formato **YYYY-MM-DD**|
 |`bankSlip.instructions`|Texto|300|Sim|Instruções do boleto.|
@@ -585,9 +585,9 @@ System.out.println(response);
 |`card.capture`|Booleano|—|Sim|**true** = Autoriza e confirma a transação . **false** = Autorização, mas não confirma a transação, necessitando realizar a confirmação ([Captura] (#captura)) noutra requisição.|
 |`card.installments`|Número|2|Sim|Número de parcelas.|
 |`card.interestType`|Número|1|Sim|Operações disponíveis: <BR /> 3. Parcelado Loja <BR /> 4. Parcelado Administrador|
-|`card.authenticate`|Número|1|Não|Opções disponíveis: <BR /> 1. Autorizar só transações autenticadas <BR /> 2. Autorizar transações autenticadas ou não autenticadas <BR /> 3. Autorizar sem autenticação <BR /> |
+|`card.authenticate`|Número|1|Sim|Opções disponíveis: <BR /> 1. Autorizar só transações autenticadas <BR /> 2. Autorizar transações autenticadas ou não autenticadas <BR /> 3. Autorizar sem autenticação <BR /> |
 |`card.provider`|Número|—|Não|Nome do Meio de Pagamento - (OBS: funcionalidade ainda não disponível)|
-|`card.saveCard`|Booleano|—|Sim|Configura salvar o cartão (tokenização). |
+|`card.saveCard`|Booleano|—|Não|Configura salvar o cartão (tokenização). |
 |`cardInfo.number`|Texto|19|Sim|Número do cartão.|
 |`cardInfo.expirationMonth`|Número|2|Sim|Mês da validade do cartão.|
 |`cardInfo.expirationYear`|Número|2|Sim|Ano da validade do cartão.|
@@ -1501,10 +1501,7 @@ System.out.println(response);
     "transactionId": "b9a37a7b-5ffe-4993-82ab-a26b6f332afe",
     "amount": "100",
     "status": 7,
-    "dtTransaction": "2017-03-15T11:17:40",
-    "payment": {
-      "provider": "CIELO"
-    }
+    "dtTransaction": "2017-03-15T11:17:40"
   }
 ]
 ```
@@ -1519,7 +1516,6 @@ System.out.println(response);
 |`amount`|Número|16|Sim|Valor da transação sem pontuação. Os dois últimos dígitos são os centavos. (Ex: amount: 100 = R$ 1,00)|
 |`status`|Número|2|Não|Status da transação retornado pelo gateway. [catálogo](#status)|
 |`dtTransaction`|DataHora|19|Data e hora da transação.|
-|`payment.provider`|Texto|100|Nome da instituição financeira.|
 
 
 ## Consulta pelo número do Pedido com Limite
@@ -1568,19 +1564,13 @@ System.out.println(response);
     "transactionId": "894aa0ad-517a-435c-b95d-8f60f1a2b9f5",
     "amount": "100",
     "status": 5,
-    "dtTransaction": "2017-03-16T07:37:23",
-    "payment": {
-      "provider": "CIELO"
-    }
+    "dtTransaction": "2017-03-16T07:37:23"
   },
   {
     "transactionId": "5dbc102d-2b4b-4755-9f14-1b4c3d8a6716",
     "amount": "100",
     "status": 5,
-    "dtTransaction": "2017-03-16T07:37:00",
-    "payment": {
-      "provider": "CIELO"
-    }
+    "dtTransaction": "2017-03-16T07:37:00"
   }
 ]
 ```
@@ -1595,7 +1585,6 @@ System.out.println(response);
 |`amount`|Número|16|Sim|Valor da transação sem pontuação. Os dois últimos dígitos são os centavos. (Ex: amount: 100 = R$ 1,00)|
 |`status`|Número|2|Não|Status da transação retornado pelo gateway. [catálogo](#status)|
 |`dtTransaction`|DataHora|19|Data e hora da transação.|
-|`payment.provider`|Texto|100|Nome da instituição financeira.|
 
 # Tokenização
 
@@ -1689,8 +1678,8 @@ System.out.println(response);
 |Propriedade|Tipo|Tamanho|Obrigatório|Descrição|
 |-----------|----|-------|-----------|---------|
 |`referenceId`|Texto|100|Sim|Número de identificação da loja.|
-|`postBackUrl`|Texto|—|Sim|URL onde o GATE2all notificará eventuais status da tokenização para o lojista.|
-|`redirectUrl`|Texto|—|Sim|URL onde o GATE2all redirecionará o comprador após o processamento da tokenização.|
+|`postBackUrl`|Texto|300|Sim|URL onde o GATE2all notificará eventuais status da tokenização para o lojista.|
+|`redirectUrl`|Texto|300|Sim|URL onde o GATE2all redirecionará o comprador após o processamento da tokenização.|
 |`brand`|Texto|20|Não|Bandeira do cartão.[Bandeiras](#bandeiras).|
 
 
