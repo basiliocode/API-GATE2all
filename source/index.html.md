@@ -217,7 +217,7 @@ Todas as requisições são autenticadas através das credenciais de acesso (USU
 
 * `Content-Type: application/json`
 * `authenticationApi: USUÁRIO`
-* `authenticarionKey: CHAVE`
+* `authenticationKey: CHAVE`
 
 **Exemplo de configuração no POSTMAN:**
 
