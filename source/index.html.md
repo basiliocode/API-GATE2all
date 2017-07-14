@@ -296,7 +296,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Scanner;
 
-URL obj = new URL("https://api.2all.com.br/v1/intention");
+URL obj = new URL("https://api.gate2all.com.br/v1/intention");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 
 con.setRequestMethod("POST");
@@ -391,7 +391,7 @@ System.out.println(response);
 |`bankSlip.expirationDate`|Texto|20|Sim|Data de vencimento do boleto. formato **YYYY-MM-DD**|
 |`bankSlip.instructions`|Texto|300|Sim|Instruções do boleto.|
 |`bankSlip.guarantor`|Texto|45|Sim|Nome do avalista.|
-|`bankSlip.provider`|Texto|20|Sim|Nome da instituição financeira :<ul><li>**BRADESCO**</li><li>**ITAU**</li></ul>|
+|`bankSlip.provider`|Texto|20|Não|Nome da instituição financeira :<ul><li>**BRADESCO**</li><li>**ITAU**</li></ul>|
 
 ### RESPOSTA SUCESSO
 
@@ -400,7 +400,7 @@ Status : 201
 ```json
 {
   "transactionId": "b9bb32a8-401e-41a0-a9ee-af9e8ab0de92",
-  "url": "https://api.2all.com.br.com.br/v1/payment/b9bb32a8-401e-41a0-a9ee-af9e8ab0de92"
+  "url": "https://api.gate2all.com.br.com.br/v1/payment/b9bb32a8-401e-41a0-a9ee-af9e8ab0de92"
 }
 ```
 
@@ -410,7 +410,7 @@ Status : 201
 ```json
 {
   "error": {
-    "message": "amount O campo amount e obrigatorio."
+    "message": "O campo amount e obrigatorio."
   }
 }
 ```
@@ -482,6 +482,8 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
    "referenceId": "19893211234",
    "amount": "100",
    "description": "Mouse sem fio",
+   "postBackUrl": "http://url-notificacao",
+   "redirectUrl": "http://url-redirect",
    "customer": {
       "name": "Comprador Teste",
       "document": "12345678909"
@@ -518,7 +520,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Scanner;
 
-URL obj = new URL("https://api.2all.com.br/v1/transactions");
+URL obj = new URL("https://api.gate2all.com.br/v1/transactions");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 
 con.setRequestMethod("POST");
@@ -531,6 +533,7 @@ String body = "{"
         + "\"amount\": \"100\","
         + "\"description\": \"Venda Teste\","
         + "\"postBackUrl\": \"http://url-notificacao\","
+        + "\"redirectUrl\": \"http://url-redirect\","
         + "\"customer\": {"
         + "    \"name\": \"COMPRADOR TESTE\","
         + "     \"document\": \"23650403811\""
@@ -577,6 +580,7 @@ System.out.println(response);
 |`amount`|Número|16|Sim|Valor da transação sem pontuação. Os dois últimos dígitos são os centavos. (Ex: amount: 100 = R$ 1,00)|
 |`description`|Texto|300|Não|Descrição da transação.|
 |`postBackUrl`|Texto|—|Não|URL onde o GATE2all notificará eventuais status da trancação para o lojista.|
+|`redirectUrl`|Texto|—|Não|URL onde o GATE2all retornará para concluir o processo do pagamento.|
 |`customer.name`|Texto|100|Sim|Nome do portador do cartão.|
 |`customer.document`|Texto|18|Não|Número do CPF/CNPJ do portador do cartão.|
 |`card.type`|Inteiro|—|Sim|Opções disponíveis: <BR /> 1. Configura cartão de crédito. <BR /> 2. Configura cartão de débito.|
@@ -635,7 +639,9 @@ System.out.println(response);
   "customer": {
     "name": "HOLDER NAME",
     "document": "12345678909"
-  }
+  },
+  "postBackUrl": "http://url-notificacao",
+  "redirectUrl": "http://url-redirect",
 }
 ```
 
@@ -728,7 +734,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Scanner;
 
-URL obj = new URL("https://api.2all.com.br/v1/transactions");
+URL obj = new URL("https://api.gate2all.com.br/v1/transactions");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 
 con.setRequestMethod("POST");
@@ -834,7 +840,7 @@ System.out.println(response);
       "provider": "ITAU",
       "paymentDate": "2017-03-10",
       "paymentAmount": "100",
-      "url": "https://api.2all.com.br.com.br/v1/url-payment/6400d988-cc4b-4084-80ee-d5575dbbed4d"
+      "url": "https://api.gate2all.com.br.com.br/v1/url-payment/6400d988-cc4b-4084-80ee-d5575dbbed4d"
     }
   },
   "status": 0
@@ -909,7 +915,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Scanner;
 
-URL obj = new URL("https://api.2all.com.br/v1/transactions");
+URL obj = new URL("https://api.gate2all.com.br/v1/transactions");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 
 con.setRequestMethod("POST");
@@ -998,7 +1004,7 @@ System.out.println(response);
         "electronicTransfer": {
             "providerReference": "20518839",
             "provider": "Itau",
-            "url": "https://api.2all.com.br.com.br/v1/url-payment/6400d988-cc4b-4084-80ee-d5575dbbed4d"
+            "url": "https://api.gate2all.com.br.com.br/v1/url-payment/6400d988-cc4b-4084-80ee-d5575dbbed4d"
         }
     },
     "status": 0
@@ -1047,7 +1053,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Scanner;
 
-URL obj = new URL("https://api.2all.com.br/v1/transactions/{{transactionId}}/capture");
+URL obj = new URL("https://api.gate2all.com.br/v1/transactions/{{transactionId}}/capture");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("PUT");
 con.setRequestProperty("content-type", "application/json");
@@ -1124,7 +1130,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Scanner;
 
-URL obj = new URL("https://api.2all.com.br/v1/transactions/{{transactionId}}/capture?amount=100");
+URL obj = new URL("https://api.gate2all.com.br/v1/transactions/{{transactionId}}/capture?amount=100");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("PUT");
 con.setRequestProperty("content-type", "application/json");
@@ -1210,7 +1216,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Scanner;
 
-URL obj = new URL("https://api.2all.com.br/v1/transactions/957221f5-d08b-4445-9896-52152f31b846/void");
+URL obj = new URL("https://api.gate2all.com.br/v1/transactions/957221f5-d08b-4445-9896-52152f31b846/void");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("PUT");
 con.setRequestProperty("content-type", "application/json");
@@ -1287,7 +1293,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Scanner;
 
-URL obj = new URL("https://api.2all.com.br/v1/transactions/d31dcd70-6666-40af-85ba-ed1ff23bc293");
+URL obj = new URL("https://api.gate2all.com.br/v1/transactions/d31dcd70-6666-40af-85ba-ed1ff23bc293");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 con.setRequestProperty("content-type", "application/json");
@@ -1374,7 +1380,7 @@ System.out.println(response);
       "provider": "ITAU",
       "paymentDate": "2017-03-10",
       "paymentAmount": "100",
-      "url": "https://api.2all.com.br.com.br/v1/url-payment/6400d988-cc4b-4084-80ee-d5575dbbed4d"
+      "url": "https://api.gate2all.com.br.com.br/v1/url-payment/6400d988-cc4b-4084-80ee-d5575dbbed4d"
     }
   },
   "status": 0
@@ -1407,7 +1413,7 @@ System.out.println(response);
         "electronicTransfer": {
             "providerReference": "20518839",
             "provider": "Itau",
-            "url": "https://api.2all.com.br.com.br/v1/url-payment/6400d988-cc4b-4084-80ee-d5575dbbed4d"
+            "url": "https://api.gate2all.com.br.com.br/v1/url-payment/6400d988-cc4b-4084-80ee-d5575dbbed4d"
         }
     },
     "status": 0
@@ -1470,7 +1476,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Scanner;
 
-URL obj = new URL("https://api.2all.com.br/v1/transactions?referenceId=1493321061725");
+URL obj = new URL("https://api.gate2all.com.br/v1/transactions?referenceId=1493321061725");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 con.setRequestProperty("content-type", "application/json");
@@ -1532,7 +1538,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Scanner;
 
-URL obj = new URL("https://api.2all.com.br/v1/transactions?referenceId=1493321061725&limit=2");
+URL obj = new URL("https://api.gate2all.com.br/v1/transactions?referenceId=1493321061725&limit=2");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 con.setRequestProperty("content-type", "application/json");
@@ -1644,7 +1650,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Scanner;
 
-URL obj = new URL("https://api.2all.com.br/v1/tokenization/intention");
+URL obj = new URL("https://api.gate2all.com.br/v1/tokenization/intention");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 
 con.setRequestMethod("POST");
@@ -1691,7 +1697,7 @@ System.out.println(response);
   "referenceId": "1495660823910",
   "postBackUrl": "http://url-notificacao",
   "redirectUrl": "http://url-redirect",
-  "url": "http://api.2all.com.br/v1/save-card/b303e861-37d3-4d11-866b-735c6ff58989",
+  "url": "http://api.gate2all.com.br/v1/save-card/b303e861-37d3-4d11-866b-735c6ff58989",
   "saveCard": true,
   "cardInfo": {
     "brand": "VISA"
@@ -1767,7 +1773,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Scanner;
 
-URL obj = new URL("https://api.2all.com.br/v1/tokenization");
+URL obj = new URL("https://api.gate2all.com.br/v1/tokenization");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 
 con.setRequestMethod("POST");
@@ -1860,7 +1866,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Scanner;
 
-URL obj = new URL("https://api.2all.com.br/v1/tokenization/be4cbeb1-abb2-4913-8165-f86962143fa021");
+URL obj = new URL("https://api.gate2all.com.br/v1/tokenization/be4cbeb1-abb2-4913-8165-f86962143fa021");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 con.setRequestProperty("content-type", "application/json");
@@ -1931,7 +1937,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Scanner;
 
-URL obj = new URL("https://api.2all.com.br/v1/tokenization?referenceId=1496173577825&limit=2");
+URL obj = new URL("https://api.gate2all.com.br/v1/tokenization?referenceId=1496173577825&limit=2");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 con.setRequestProperty("content-type", "application/json");
@@ -2040,7 +2046,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Scanner;
 
-URL obj = new URL("https://api.2all.com.br/v1/transactions");
+URL obj = new URL("https://api.gate2all.com.br/v1/transactions");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 
 con.setRequestMethod("POST");
