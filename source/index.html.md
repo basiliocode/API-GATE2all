@@ -371,7 +371,7 @@ System.out.println(response);
 |`redirectUrl`|Texto|300|Não|URL onde o GATE2all redirecionará o comprador após o processamento da transação.|
 |`dtExpiration`|Texto|20|Não|Data da expiração da intenção. Formato **2017-08-25T18:10:53** |
 |`customer.name`|Texto|100|Sim|Nome do portador do cartão.|
-|`customer.document`|Texto|18|Sim|Número do CPF/CNPJ do portador do cartão.|
+|`customer.document`|Texto|18|Sim|Número do CPF/CNPJ do portador do cartão.Obs.: sem pontuação|
 |`customer.email`|Texto|100|Sim|Email do portador do cartão.|
 |`address.address`|Texto|60|Sim|Endereço do comprador.|
 |`address.number`|Texto|10|Sim|Número do endereço do comprador.|
