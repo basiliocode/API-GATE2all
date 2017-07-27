@@ -2989,15 +2989,65 @@ Caso não seja seja passado nenhuma bandeira como paramêtro, será disponibiliz
 
 </code></pre>
 
-<p>|Propriedade|Tipo|Tamanho|Obrigatório|Descrição|
-|&mdash;&mdash;&mdash;&ndash;|:&mdash;-:|:&mdash;&mdash;-:|&mdash;&mdash;&mdash;|
-|<code class="prettyprint">referenceId</code>|Texto|100|Sim|Número de identificação da loja.|
-|<code class="prettyprint">postBackUrl</code>|Texto|300|Não|URL onde o GATE2all notificará as informações do token gerado para o lojista.|
-|<code class="prettyprint">cardInfo.number</code>|Texto|20|Sim|Número do cartão truncado.|
-|<code class="prettyprint">cardInfo.expirationMonth</code>|Número|2|Sim|Mês da validade do cartão.|
-|<code class="prettyprint">cardInfo.expirationYear</code>|Número|4|Sim|Ano da validade do cartão.|
-|<code class="prettyprint">cardInfo.brand</code>|Texto|20|Sim|Bandeira do cartão.<a href="#bandeiras">Bandeiras</a>.|
-|<code class="prettyprint">cardInfo.holderName</code>|Texto|100|Não|Nome do portador do cartão.|</p>
+<table><thead>
+<tr>
+<th>Propriedade</th>
+<th style="text-align: center">Tipo</th>
+<th style="text-align: center">Tamanho</th>
+<th style="text-align: center">Obrigatório</th>
+<th>Descrição</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">referenceId</code></td>
+<td style="text-align: center">Texto</td>
+<td style="text-align: center">100</td>
+<td style="text-align: center">Sim</td>
+<td>Número de identificação da loja.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">postBackUrl</code></td>
+<td style="text-align: center">Texto</td>
+<td style="text-align: center">300</td>
+<td style="text-align: center">Não</td>
+<td>URL onde o GATE2all notificará as informações do token gerado para o lojista.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">cardInfo.number</code></td>
+<td style="text-align: center">Texto</td>
+<td style="text-align: center">20</td>
+<td style="text-align: center">Sim</td>
+<td>Número do cartão truncado.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">cardInfo.expirationMonth</code></td>
+<td style="text-align: center">Número</td>
+<td style="text-align: center">2</td>
+<td style="text-align: center">Sim</td>
+<td>Mês da validade do cartão.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">cardInfo.expirationYear</code></td>
+<td style="text-align: center">Número</td>
+<td style="text-align: center">4</td>
+<td style="text-align: center">Sim</td>
+<td>Ano da validade do cartão.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">cardInfo.brand</code></td>
+<td style="text-align: center">Texto</td>
+<td style="text-align: center">20</td>
+<td style="text-align: center">Sim</td>
+<td>Bandeira do cartão.<a href="#bandeiras">Bandeiras</a>.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">cardInfo.holderName</code></td>
+<td style="text-align: center">Texto</td>
+<td style="text-align: center">100</td>
+<td style="text-align: center">Não</td>
+<td>Nome do portador do cartão.</td>
+</tr>
+</tbody></table>
 
 <h3 id="resposta">RESPOSTA</h3>
 
