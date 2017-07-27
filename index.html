@@ -2853,7 +2853,7 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
 <td>URL onde o GATE2all redirecionará o comprador após o processamento da tokenização.</td>
 </tr>
 <tr>
-<td><code class="prettyprint">brand</code></td>
+<td><code class="prettyprint">cardInfo.brand</code></td>
 <td>Texto</td>
 <td>20</td>
 <td>Não</td>
@@ -2989,57 +2989,15 @@ Caso não seja seja passado nenhuma bandeira como paramêtro, será disponibiliz
 
 </code></pre>
 
-<table><thead>
-<tr>
-<th>Propriedade</th>
-<th style="text-align: center">Tipo</th>
-<th style="text-align: center">Tamanho</th>
-<th>Descrição</th>
-</tr>
-</thead><tbody>
-<tr>
-<td><code class="prettyprint">referenceId</code></td>
-<td style="text-align: center">Texto</td>
-<td style="text-align: center">100</td>
-<td>Sim</td>
-</tr>
-<tr>
-<td><code class="prettyprint">postBackUrl</code></td>
-<td style="text-align: center">Texto</td>
-<td style="text-align: center">—</td>
-<td>Sim</td>
-</tr>
-<tr>
-<td><code class="prettyprint">cardInfo.number</code></td>
-<td style="text-align: center">Texto</td>
-<td style="text-align: center">20</td>
-<td>Número do cartão truncado.</td>
-</tr>
-<tr>
-<td><code class="prettyprint">cardInfo.expirationMonth</code></td>
-<td style="text-align: center">Número</td>
-<td style="text-align: center">2</td>
-<td>Mês da validade do cartão.</td>
-</tr>
-<tr>
-<td><code class="prettyprint">cardInfo.expirationYear</code></td>
-<td style="text-align: center">Número</td>
-<td style="text-align: center">4</td>
-<td>Ano da validade do cartão.</td>
-</tr>
-<tr>
-<td><code class="prettyprint">cardInfo.brand</code></td>
-<td style="text-align: center">Texto</td>
-<td style="text-align: center">20</td>
-<td>Bandeira do cartão.<a href="#bandeiras">Bandeiras</a>.</td>
-</tr>
-<tr>
-<td><code class="prettyprint">cardInfo.holderName</code></td>
-<td style="text-align: center">Texto</td>
-<td style="text-align: center">100</td>
-<td>Nome do portador do cartão.</td>
-</tr>
-</tbody></table>
+<p>|Propriedade|Tipo|Tamanho|Obrigatório|Descrição|
+|&mdash;&mdash;&mdash;&ndash;|:&mdash;-:|:&mdash;&mdash;-:|&mdash;&mdash;&mdash;|
+|<code class="prettyprint">referenceId</code>|Texto|100|Sim|Número de identificação da loja.|
+|<code class="prettyprint">postBackUrl</code>|Texto|300|Não|URL onde o GATE2all notificará as informações do token gerado para o lojista.|
+|<code class="prettyprint">cardInfo.number</code>|Texto|20|Sim|Número do cartão truncado.|
+|<code class="prettyprint">cardInfo.expirationMonth</code>|Número|2|Sim|Mês da validade do cartão.|
+|<code class="prettyprint">cardInfo.expirationYear</code>|Número|4|Sim|Ano da validade do cartão.|
+|<code class="prettyprint">cardInfo.brand</code>|Texto|20|Sim|Bandeira do cartão.<a href="#bandeiras">Bandeiras</a>.|
+|<code class="prettyprint">cardInfo.holderName</code>|Texto|100|Não|Nome do portador do cartão.|</p>
 
 <h3 id="resposta">RESPOSTA</h3>
 
@@ -3533,7 +3491,7 @@ Caso não seja seja passado nenhuma bandeira como paramêtro, será disponibiliz
 <td>Booleano</td>
 <td>—</td>
 <td>Sim</td>
-<td><strong>true</strong> = Autoriza e confirma a transação . <strong>false</strong> = Autorização, mas não confirma a transação, necessitando realizar a confirmação (<a href="#captura">Captura</a>) noutra requisição.</td>
+<td><strong>true</strong> = Autoriza e confirma a transação . <strong>false</strong> = Autorização, mas não confirma a transação, precisando realizar a confirmação (<a href="#captura">Captura</a>) noutra requisição.</td>
 </tr>
 <tr>
 <td><code class="prettyprint">card.installments</code></td>
