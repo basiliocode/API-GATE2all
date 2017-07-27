@@ -1808,7 +1808,7 @@ System.out.println(response);
 ```
 
 |Propriedade|Tipo|Tamanho|Obrigatório|Descrição|
-|-----------|:----:|:-------:|---------|
+|-----------|:----:|:-------:|:----:|---------|
 |`referenceId`|Texto|100|Sim|Número de identificação da loja.|
 |`postBackUrl`|Texto|300|Não|URL onde o GATE2all notificará as informações do token gerado para o lojista.|
 |`cardInfo.number`|Texto|20|Sim|Número do cartão truncado.|
