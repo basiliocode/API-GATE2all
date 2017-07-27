@@ -1685,7 +1685,7 @@ System.out.println(response);
 |`referenceId`|Texto|100|Sim|Número de identificação da loja.|
 |`postBackUrl`|Texto|300|Sim|URL onde o GATE2all notificará eventuais status da tokenização para o lojista.|
 |`redirectUrl`|Texto|300|Sim|URL onde o GATE2all redirecionará o comprador após o processamento da tokenização.|
-|`brand`|Texto|20|Não|Bandeira do cartão.[Bandeiras](#bandeiras).|
+|`cardInfo.brand`|Texto|20|Não|Bandeira do cartão.[Bandeiras](#bandeiras).|
 
 
 ### RESPOSTA
@@ -1807,15 +1807,15 @@ System.out.println(response);
 
 ```
 
-|Propriedade|Tipo|Tamanho|Descrição|
+|Propriedade|Tipo|Tamanho|Obrigatório|Descrição|
 |-----------|:----:|:-------:|---------|
 |`referenceId`|Texto|100|Sim|Número de identificação da loja.|
-|`postBackUrl`|Texto|—|Sim|URL onde o GATE2all notificará eventuais status da trancação para o lojista.|
-|`cardInfo.number`|Texto|20|Número do cartão truncado.|
-|`cardInfo.expirationMonth`|Número|2|Mês da validade do cartão.|
-|`cardInfo.expirationYear`|Número|4|Ano da validade do cartão.|
-|`cardInfo.brand`|Texto|20|Bandeira do cartão.[Bandeiras](#bandeiras).|
-|`cardInfo.holderName`|Texto|100|Nome do portador do cartão.|
+|`postBackUrl`|Texto|300|Não|URL onde o GATE2all notificará as informações do token gerado para o lojista.|
+|`cardInfo.number`|Texto|20|Sim|Número do cartão truncado.|
+|`cardInfo.expirationMonth`|Número|2|Sim|Mês da validade do cartão.|
+|`cardInfo.expirationYear`|Número|4|Sim|Ano da validade do cartão.|
+|`cardInfo.brand`|Texto|20|Sim|Bandeira do cartão.[Bandeiras](#bandeiras).|
+|`cardInfo.holderName`|Texto|100|Não|Nome do portador do cartão.|
 
 ### RESPOSTA
 
@@ -2100,7 +2100,7 @@ System.out.println(response);
 |`customer.name`|Texto|100|Sim|Nome do portador do cartão.|
 |`customer.document`|Texto|18|Não|Número do CPF/CNPJ do portador do cartão.|
 |`card.type`|Inteiro|—|Sim|1. Transação com token só disponível para cartão de crédito.|
-|`card.capture`|Booleano|—|Sim|**true** = Autoriza e confirma a transação . **false** = Autorização, mas não confirma a transação, necessitando realizar a confirmação ([Captura] (#captura)) noutra requisição.|
+|`card.capture`|Booleano|—|Sim|**true** = Autoriza e confirma a transação . **false** = Autorização, mas não confirma a transação, precisando realizar a confirmação ([Captura] (#captura)) noutra requisição.|
 |`card.installments`|Número|2|Sim|Número de parcelas.|
 |`card.interestType`|Número|1|Sim|Operações disponíveis: <BR /> 3. Parcelado Loja <BR /> 4. Parcelado Administrador|
 |`card.authenticate`|Número|1|Não|Opções disponíveis: <BR /> 1. Autorizar só transações autenticadas <BR /> 2. Autorizar transações autenticadas ou não autenticadas <BR /> 3. Autorizar sem autenticação <BR /> |
