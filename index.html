@@ -359,7 +359,7 @@ O valor do resultante da divisão do valor do pedido pelo número de parcelas n�
 </tr>
 </tbody></table>
 
-<h2 id="n-mero-de-documentos-de-testes-boleto-e-transfer-ncia">Número de Documentos de Testes Boleto e Transferência</h2>
+<h2 id="n-meros-de-documentos-de-testes-boleto-e-transfer-ncia">Números de Documentos de Testes Boleto e Transferência</h2>
 
 <p>Esses números de documento devem ser usados no nosso simulador Itaú.</p>
 
@@ -708,7 +708,7 @@ O valor do resultante da divisão do valor do pedido pelo número de parcelas n�
 <td>Texto</td>
 <td>22</td>
 <td>Não</td>
-<td>Texto a ser exibido na fatura do portador do cartão.</td>
+<td>Texto a ser exibido na fatura do portador do cartão.<a href="#softdescriptor">SoftDescriptor</a></td>
 </tr>
 <tr>
 <td><code class="prettyprint">card.saveCard</code></td>
@@ -818,7 +818,7 @@ Redirecione o comprador para a URL da resposta.
 
 <p><img src="images/intencao02.png" /></p>
 
-<p>Após a conclusão do preenchimento do formulário o GATE2all enviará uma notificação <a href="#notifica-o">notificação</a> via POST contendo o <code class="prettyprint">transactionId</code> e o <code class="prettyprint">referenceId</code> para o sistema do lojista realizar a <a href="#consulta">consulta</a> da transação notificada.</p>
+<p>Após a conclusão do preenchimento do formulário o GATE2all enviará uma <a href="#notifica-o">notificação</a> via POST contendo o <code class="prettyprint">transactionId</code> e o <code class="prettyprint">referenceId</code> para o sistema do lojista realizar a <a href="#consulta">consulta</a> da transação notificada.</p>
 
 <p>Caso a forma de pagamento escolhida pelo usuário for boleto, aparecerá a seguinte tela:</p>
 
@@ -853,7 +853,7 @@ maiores informações consulte o site https://www.pcisecuritystandards.org</p>
 <p>Para criar uma autorização é necessário enviar um POST para o seguinte recurso:</p>
 
 <aside class="notice">
-Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendamos a consulta pelo número do pedido `referenceId` ou criando uma [intenção](#inteno-de-venda) e informando o mesmo `transactionId` na requisição com os dados do cartão. Desta maneira é possível realizar uma consulta para verificar o status da transação. 
+Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendamos a consulta pelo número do pedido `referenceId` ou criando uma <b>Intenção de Venda</b> e informando o mesmo `transactionId` na requisição com os dados do cartão. Desta maneira é possível realizar uma consulta para verificar o status da transação. 
 </aside>
 
 <h3 id="requisi-o">REQUISIÇÃO</h3>
@@ -1021,7 +1021,7 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
 <td>Texto</td>
 <td>22</td>
 <td>Não</td>
-<td>Texto a ser exibido na fatura do portador do cartão.</td>
+<td>Texto a ser exibido na fatura do portador do cartão.<a href="#softdescriptor">SoftDescriptor</a></td>
 </tr>
 <tr>
 <td><code class="prettyprint">card.capture</code></td>
@@ -3677,7 +3677,7 @@ Caso não seja seja passado nenhuma bandeira como paramêtro, será disponibiliz
 <td>Texto</td>
 <td>22</td>
 <td>Não</td>
-<td>Texto a ser exibido na fatura do portador do cartão.</td>
+<td>Texto a ser exibido na fatura do portador do cartão.<a href="#softdescriptor">SoftDescriptor</a></td>
 </tr>
 <tr>
 <td><code class="prettyprint">cardInfo.token</code></td>
@@ -4037,6 +4037,34 @@ Lembrando que é possível efetuar a consulta em qualquer operação, com a cons
 <td>0</td>
 <td>0</td>
 <td>7</td>
+</tr>
+</tbody></table>
+
+          <h1 id="softdescriptor">SoftDescriptor</h1>
+
+<p>As adquirentes suportam uma quantidade distinta de caracteres no Soft Descriptor, caso seja enviado mais caracteres que o suportado pela adquirente a quantidade excedente não será enviada.</p>
+
+<table><thead>
+<tr>
+<th>PROVIDER</th>
+<th>Tamanho máximo</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Cielo</td>
+<td>13</td>
+</tr>
+<tr>
+<td>Rede</td>
+<td>13</td>
+</tr>
+<tr>
+<td>GetNet</td>
+<td>22</td>
+</tr>
+<tr>
+<td>Stone</td>
+<td>22</td>
 </tr>
 </tbody></table>
 
