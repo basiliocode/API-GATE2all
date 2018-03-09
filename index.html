@@ -150,7 +150,7 @@
 <p><a href="https://app.getpostman.com/run-collection/8ec1d4e437adde5f8e70" target="_blank"><img alt="Run in Postman" src="https://run.pstmn.io/button.svg" /></a></p>
 
 <aside class="warning">
-As informações contidas neste documento estão sujeitas a alteração sem prévio aviso.
+As informações contidas neste documento estão sujeitas a alteração sem aviso prévio.
 </aside>
 
 <h3 id="p-blico">PÚBLICO</h3>
@@ -770,18 +770,6 @@ O valor do resultante da divisão do valor do pedido pelo número de parcelas n�
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<blockquote>
-<p>Falha</p>
-</blockquote>
-
-<p>Status : 400</p>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"error"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"amount nao pode ser vazio"</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-
 <table><thead>
 <tr>
 <th>Propriedade</th>
@@ -801,6 +789,32 @@ O valor do resultante da divisão do valor do pedido pelo número de parcelas n�
 <td>Texto</td>
 <td>150</td>
 <td>URL da intenção.</td>
+</tr>
+</tbody></table>
+
+<h3 id="resposta-erro">RESPOSTA ERRO</h3>
+
+<p>Status : 400</p>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"error"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"amount nao pode ser vazio"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<table><thead>
+<tr>
+<th>Propriedade</th>
+<th>Tipo</th>
+<th>Tamanho</th>
+<th>Descrição</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">error.message</code></td>
+<td>Texto</td>
+<td>50</td>
+<td>Texto informando o erro na geração da Intenção de Venda.</td>
 </tr>
 </tbody></table>
 
@@ -1119,7 +1133,7 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
 <td>Texto</td>
 <td>25</td>
 <td>Não</td>
-<td>Nome do portador do cartão, só aceita caracteres</td>
+<td>Nome do Portador impresso no cartão, <strong>só aceita caracteres</strong></td>
 </tr>
 </tbody></table>
 
@@ -2553,8 +2567,8 @@ Para se recuperar eventuais problemas com TIME OUT nas requisições, recomendam
 <td><code class="prettyprint">cardInfo.holderName</code></td>
 <td>Texto</td>
 <td>25</td>
-<td>Nome do portador do cartão.</td>
-<td></td>
+<td>Não</td>
+<td>Nome do Portador impresso no cartão, <strong>só aceita caracteres</strong></td>
 </tr>
 <tr>
 <td><code class="prettyprint">bankSlip.emissionDate</code></td>
@@ -3159,7 +3173,7 @@ Caso não seja seja passado nenhuma bandeira como paramêtro, será disponibiliz
 <td><code class="prettyprint">cardInfo.holderName</code></td>
 <td style="text-align: center">Texto</td>
 <td style="text-align: center">25</td>
-<td>Nome do portador do cartão.</td>
+<td>Nome do Portador impresso no cartão, <strong>só aceita caracteres</strong></td>
 </tr>
 </tbody></table>
 
@@ -3362,7 +3376,7 @@ Caso não seja seja passado nenhuma bandeira como paramêtro, será disponibiliz
 <td><code class="prettyprint">cardInfo.holderName</code></td>
 <td style="text-align: center">Texto</td>
 <td style="text-align: center">25</td>
-<td>Nome do portador do cartão.</td>
+<td>Nome do Portador impresso no cartão, <strong>só aceita caracteres</strong></td>
 </tr>
 </tbody></table>
 
